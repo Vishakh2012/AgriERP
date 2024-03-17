@@ -1,0 +1,11 @@
+services:
+  app:
+    build: ./server
+    ports: 
+      - 5050:5050
+
+  server:
+    build: ./app
+    ports: 
+      - 5173:5173
+
