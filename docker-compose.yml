@@ -8,4 +8,28 @@ services:
     build: ./app
     ports: 
       - 5173:5173
+    depends_on: 
+      - mongo
+    networks: 
+      - app-networks
+  mongo:
+    image: mongo
+    networks:
+      - app-networks
 
+    volumes:
+      - data-volume:/data/db
+    ports:
+      - 27017:27017
+
+networks:
+  app-networks:
+    driver: bridge
+
+volumes:
+  data-volume:
+  node-modules:
+  web-root:
+    driver: local
+                                                                    │
+  
