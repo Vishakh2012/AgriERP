@@ -4,7 +4,7 @@ import './App.css'
 function App() {
 
   function handleSubmit(){
-    fetch('/api/posts')
+    fetch('http://localhost:5050/api/posts')
     .then(res => {
       console.log(res.json())
     })

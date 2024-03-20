@@ -6,7 +6,12 @@ import path from "path"
 export default defineConfig({
     server: {
         proxy:{
-          "/api":"http://localhost:5050"
+          "/api":{
+              
+                target: 'http://server:5050', // see here
+                changeOrigin: true,
+                rewrite: (path) => path.replace('^/api','/')
+            }
         },
         host: '0.0.0.0',
         port: 5173,
