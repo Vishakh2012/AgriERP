@@ -1,11 +1,10 @@
-import { MongoClient } from "mongodb";
+import mongoose from "mongoose";
 const connectionString = "mongodb://mongo:27017";
-const client = new MongoClient(connectionString);
-let conn;
-try {
-  conn = await client.connect();
-} catch(e) {
-  console.error(e);
+
+const connectToMongo = async (connString) => {
+    return await mongoose.connect(connString)
 }
-let db = conn.db("sample");
-export default db;
+
+const db = connectToMongo(connectionString)
+
+export default db
