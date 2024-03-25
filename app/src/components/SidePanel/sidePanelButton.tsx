@@ -6,7 +6,7 @@ interface SidePanelButtonContent{
     url:string,
     icon?: ReactNode
 }
-const SidePanelButton:React.FC<SidePanelButtonContent> = (props) => {
+const SidePanelButton:React.FC<SidePanelButtonContent> = (props: SidePanelButtonContent) => {
     return (
         <>
             <div className="flex">
