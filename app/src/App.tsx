@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button"
-import './App.css'
+
+import Sidebar from "./components/SidePanel/sidePanel"
+import { Dashboard } from "./page/Dashboard/Dashboard"
 
 function App() {
 
@@ -12,7 +14,7 @@ function App() {
 
   return (
     <>
-      <Button onClick={handleSubmit}>Fetch</Button>
+    <Sidebar/>
     </>
   )
 }
