@@ -1,6 +1,6 @@
-import express from "express";
-import db from "../db/conn.mjs";
-import product from "../db/productSchema/productSchema.mjs"
+import express from "express"
+import db from "../../db/conn.mjs";
+import product from "../../db/productSchema/productSchema.mjs"
 const router = express.Router();
 
 router.post("/add", async (req, res, next) => {
@@ -26,7 +26,9 @@ router.post("/add", async (req, res, next) => {
     }
 });
 
+
 export default router;
+
 
 
 
