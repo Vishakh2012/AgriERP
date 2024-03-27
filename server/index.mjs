@@ -9,24 +9,26 @@ import staff from "./routes/staffRoutes/staff.mjs"
 import product from "./routes/productRoutes/product.mjs"
 import farmer from "./routes/farmerRoutes/farmer.mjs"
 import authJwt from "./middleware/authJwt.mjs";
+import fpo from "./routes/fpoRoutes/fpo.mjs";
 
 const PORT = process.env.PORT || 5050;
-const app = express()
-app.use(express.urlencoded({ extended: true }))
+const app = express();
+app.use(express.urlencoded({ extended: true }));
 
-app.use(cors())
-app.use(express.json())
+app.use(cors());
+app.use(express.json());
 
 // Load the /posts routes
-app.use("/api/user", auth)
+app.use("/api/user", auth);
 
-app.use(/^\/api\/(?!user(?:\/|$)).*$/, [authJwt.verifyToken])
+app.use(/^\/api\/(?!user(?:\/|$)).*$/, [authJwt.verifyToken]);
 
-app.use("/api/sales", sales)
-app.use("/api/purchase", purchase)
-app.use("/api/staff", staff)
-app.use("/api/product", product)
-app.use("/api/farmer", farmer)
+app.use("/api/sales", sales);
+app.use("/api/purchase", purchase);
+app.use("/api/staff", staff);
+app.use("/api/product", product);
+app.use("/api/farmer", farmer);
+app.use("/api/fpo", fpo);
 
 
 app.use((req, res, next) => {
