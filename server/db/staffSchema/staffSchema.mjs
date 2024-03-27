@@ -56,7 +56,7 @@ const staffSchema = new Schema({
             message: props => `${props.value} is not a valid email`
         },
 
-        required: [true, 'User Email number required'],
+        required: [true, 'User Email required'],
     },
     dateOfJoining: Date,
     basicSalary: Number,

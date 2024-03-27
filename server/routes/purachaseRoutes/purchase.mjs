@@ -1,5 +1,4 @@
 import express from "express";
-import db from "../../db/conn.mjs";
 import purchase from "../../db/purchaseSchema/purchaseSchema.mjs"
 const router = express.Router();
 
