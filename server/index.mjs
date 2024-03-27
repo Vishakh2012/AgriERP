@@ -7,6 +7,7 @@ import purchase from "./routes/purachaseRoutes/purchase.mjs"
 import auth from "./routes/authenticationRoutes/authRoutes.mjs"
 import staff from "./routes/staffRoutes/staff.mjs"
 import product from "./routes/productRoutes/product.mjs"
+import farmer from "./routes/farmerRoutes/farmer.mjs"
 import authJwt from "./middleware/authJwt.mjs";
 
 const PORT = process.env.PORT || 5050;
@@ -25,6 +26,7 @@ app.use("/api/sales", sales)
 app.use("/api/purchase", purchase)
 app.use("/api/staff", staff)
 app.use("/api/product", product)
+app.use("/api/farmer", farmer)
 
 
 app.use((req, res, next) => {
