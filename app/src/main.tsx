@@ -9,16 +9,21 @@ import {
 
 import Sidebar from './components/SidePanel/sidePanel';
 import Dashboard from './page/Dashboard/Dashboard';
+import LoginPage from './page/Login/Login';
 
 
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <LoginPage/>
+  },
+  {
+    path: '/home',
     element: <Sidebar/>,
     children: [
       {
-        path:'/',
+        path:'/home',
         element:<Dashboard/>
       },
     ],
