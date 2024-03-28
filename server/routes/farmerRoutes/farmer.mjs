@@ -90,7 +90,7 @@ Router.get("/getFarmers/:fponame", async (req, res) => {
 });
 
 
-Router.post('/editFarmer', async (req, res) => {
+Router.post('/edit', async (req, res) => {
     const { farmerId, updates } = req.body
 
     try {
