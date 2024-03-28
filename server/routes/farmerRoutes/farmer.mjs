@@ -72,7 +72,7 @@ Router.post("/add", async (req, res) => {
 });
 
 
-Router.get("/getFarmers/:fponame", async (req, res) => {
+Router.get("/getDetails/:fponame", async (req, res) => {
     try {
         const fpo_id = await getObjectId(req.params.fponame);
         if (fpo_id) {
