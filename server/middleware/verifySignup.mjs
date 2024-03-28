@@ -4,7 +4,7 @@ const User = db.User
 const checkDuplicateUsernameOrEmail = async (req, res, next) => {
     try {
         const UserExists = await User.findOne({
-            userName: req.body.userNname
+            userName: req.body.userName
         })
         if (UserExists) {
             res.status(500).send({ message: err })
