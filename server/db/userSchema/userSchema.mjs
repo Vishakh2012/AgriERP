@@ -32,7 +32,7 @@ const UserSchema = new Schema({
     fpoRegId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: fpoSchema,
-        unique: True
+        unique: true
     },
 
 })
