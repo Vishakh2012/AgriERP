@@ -12,16 +12,16 @@ const Sidebar = () => {
     <div className='flex '>
         
             <div className="h-screen w-64 bg-white text-black shadow-lg">
-                <div className="p-4">
+                <div className="p-0">
                 <h2 className="text-lg font-semibold mb-4">Sidebar</h2>
                 <ul className='mt-14 '>
-                    <li className="mb-6"><SidePanelButton text="Dashboard" url='/' icon={<FaHome/>}/></li>
-                    <li className="mb-6"><SidePanelButton text="Buying" url='/' icon={<PiHandbagFill/>}/></li>
-                    <li className="mb-6"><SidePanelButton text="Selling" url='/' icon={<PiHandbagFill/>}/></li>
-                    <li className="mb-6"><SidePanelButton text="Products and Inventory" url='/' icon={<FaBoxOpen/>}/></li>
-                    <li className="mb-6"><SidePanelButton text="Staff" url='/' icon={<IoPeople/>}/></li>
-                    <li className="mb-6"><SidePanelButton text="Stake Holders" url='/' icon={<IoPeople/>}/></li>
-                    <li className="mb-6"><SidePanelButton text="Farmers" url='/' icon={<IoPeople />}/></li>
+                    <li className="mb-7"><SidePanelButton text="Dashboard" url='/home' icon={<FaHome/>}/></li>
+                    <li className="mb-7"><SidePanelButton text="Buying" url='/purchase' icon={<PiHandbagFill/>}/></li>
+                    <li className="mb-7"><SidePanelButton text="Selling" url='/sales' icon={<PiHandbagFill/>}/></li>
+                    <li className="mb-7"><SidePanelButton text="Products and Inventory" url='/products' icon={<FaBoxOpen/>}/></li>
+                    <li className="mb-7"><SidePanelButton text="Staff" url='/staff' icon={<IoPeople/>}/></li>
+                    <li className="mb-7"><SidePanelButton text="Stake Holders" url='/stakeholders' icon={<IoPeople/>}/></li>
+                    <li className="mb-7"><SidePanelButton text="Farmers" url='/farmers' icon={<IoPeople />}/></li>
                 </ul>
                 </div>
         
