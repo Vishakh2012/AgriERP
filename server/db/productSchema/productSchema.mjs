@@ -1,26 +1,27 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
+import fpoSchema from "../fpoSchema/fpoSchema.mjs";
 const taxSchema = new Schema({
-    CGST : {
+    CGST: {
         type: Number,
         required: true
     },
-    SGST : {
+    SGST: {
         type: Number,
         required: true
     },
-    IGST : {
+    IGST: {
         type: Number,
         required: true
     }
 },
-{_id: false})
+    { _id: false })
 
 const dailySalesSchema = new Schema({
     date: {
         type: Date,
         required: true,
-        default : Date.now()
+        default: Date.now()
     },
     quantitySold: {
         type: Number,
@@ -33,10 +34,15 @@ const dailySalesSchema = new Schema({
 
 const productSchema = new Schema({
     category: {
-        type:String,
+        type: String,
     },
+    fpoRegId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: fpoSchema,
+    },
+
     name: {
-        type:String,
+        type: String,
         required: [true, 'prduct name is required']
     },
     HSN: {
@@ -57,7 +63,7 @@ const productSchema = new Schema({
         updatedDate: Date,
         unit: {
             type: String,
-            enum: ["kg", 'l', 'g', 'ml', 'mtr','units']
+            enum: ["kg", 'l', 'g', 'ml', 'mtr', 'units']
         }
     },
     tax: [taxSchema],
@@ -65,12 +71,12 @@ const productSchema = new Schema({
 })
 
 export default mongoose.model('Product', productSchema)
-  
-
-        
 
 
 
-    
+
+
+
+
 
 

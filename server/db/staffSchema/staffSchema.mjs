@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
+import fpoSchema from "../fpoSchema/fpoSchema.mjs";
 
 const addressSchema = new Schema({
     addressLine1: {
@@ -34,6 +35,11 @@ const staffSchema = new Schema({
         type: String,
         unique: true
     },
+    fpoRegId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: fpoSchema,
+    },
+
     name: String,
     blodd_group: {
         type: String,

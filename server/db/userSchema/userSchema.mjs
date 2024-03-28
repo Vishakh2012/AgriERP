@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 import { Schema } from "mongoose"
-
+import fpoSchema from "../fpoSchema/fpoSchema.mjs"
 
 const UserSchema = new Schema({
     userName: {
@@ -28,7 +28,13 @@ const UserSchema = new Schema({
     password: {
         type: String,
         minLength: 8
-    }
+    },
+    fpoRegId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: fpoSchema,
+        unique: True
+    },
+
 })
 
 export default mongoose.model('User', UserSchema);
