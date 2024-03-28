@@ -31,17 +31,17 @@ const addressSchema = new Schema({
 },
     { _id: false })
 const staffSchema = new Schema({
-    staff_id: {
+    staffId: {
         type: String,
         unique: true
     },
-    fpoRegId: {
+    fpoRegObjId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: fpoSchema,
     },
 
     name: String,
-    blodd_group: {
+    bloodGroup: {
         type: String,
         enum: ['A+', 'A-', 'B+', 'B-', 'O+', 'O-', 'AB+', 'AB-'],
     },
