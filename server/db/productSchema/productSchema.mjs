@@ -36,7 +36,7 @@ const productSchema = new Schema({
     category: {
         type: String,
     },
-    fpoRegId: {
+    fpoRegObjId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: fpoSchema,
     },
@@ -50,7 +50,6 @@ const productSchema = new Schema({
     },
     itemCode: {
         type: String,
-        unique: true,
         required: true,
     },
     price: {
@@ -69,7 +68,7 @@ const productSchema = new Schema({
     tax: [taxSchema],
     dailySalesHistory: [dailySalesSchema]
 })
-
+productSchema.index({fpoRegObjId: 1, itemCode: -1})
 export default mongoose.model('Product', productSchema)
 
 
