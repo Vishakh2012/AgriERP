@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
 const taxSchema = new Schema({
@@ -68,5 +67,5 @@ const purchaseSchema = new Schema({
     }
 })
 
-export default mongoose.model('Purchase', purchaseSchema)
+export default purchaseSchema
 

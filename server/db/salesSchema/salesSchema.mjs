@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { Schema } from "mongoose";
 const taxSchemaForSales = new Schema({
     CGST: {
@@ -72,7 +71,7 @@ const salesTransactionSchema = new Schema({
     }
 })
 
-export default mongoose.model('salesTransaction', salesTransactionSchema)
+export default salesTransactionSchema
 
 
 

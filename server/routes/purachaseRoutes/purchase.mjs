@@ -1,36 +1,46 @@
 import express from "express";
-import purchase from "../../db/purchaseSchema/purchaseSchema.mjs"
-const router = express.Router();
+import purchaseSchema from "../../db/purchaseSchema/purchaseSchema.mjs"
+import mongoose from "mongoose";
+import getCollectionForFPO from "../../controllers/getModel.mjs";
+const Router = express.Router();
 
-router.post("/add", async (req, res, next) => {
+
+
+Router.post("/add/:fpoName", async (req, res, next) => {
 
     try {
-        // Create a new Purchase document
-        const newPurchase = new purchase({
-            billNumber: req.body.billNumber,
-            farmerId: req.body.farmerId,
-            taxMode: req.body.taxMode,
-            GSTIN: req.body.GSTIN,
-            purchaseDetails: {
-                itemCode: req.body.purchaseDetails.itemCode,
-                HSN: req.body.purchaseDetails.HSN,
-                rate: req.body.purchaseDetails.rate,
-                discount: req.body.purchaseDetails.discount,
-                tax: req.body.purchaseDetails.tax
-            },
-            totalAmount: req.body.totalAmount
-        });        // Save the new Purchase document to the database
-
-        const savedPurchase = await newPurchase.save();
-
-        res.status(201).json(savedPurchase);
+        const purchase_details = req.body
+        const fpoName = req.params.fpoName
+        const PurchaseFPO = await getCollectionForFPO(fpoName, purchaseSchema, "Purchase")
+        const purchase = new PurchaseFPO({ ...purchase_details })
+        await purchase.save()
+        res.status(201).send(purchase)
     } catch (error) {
-        console.error("Error adding purchase:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+        if (error.name === "ValidationError") {
+            res.status(400).json({ error: error.message });
+        } else {
+            console.error("Error creating purchase:", error);
+            res.status(500).json({ error: "Internal Server Error" });
+        }
+    }
+})
+
+Router.get("/getDetails/:fpoName", async (req, res) => {
+    try {
+        const fpoName = req.params.fpoName
+        const PurchaseFPO = await getCollectionForFPO(fpoName, purchaseSchema, "Purchase")
+
+        const purchase = await PurchaseFPO.find({})
+        if (!purchase)
+            return res.status(500).send({ message: "FPO not found" })
+        return res.status(200).json(purchase)
+    } catch (error) {
+        res.status(404).send("internal server error");
+        return
     }
 });
 
-export default router;
+export default Router;
 
 
 
