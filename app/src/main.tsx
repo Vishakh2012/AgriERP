@@ -10,21 +10,23 @@ import {
 import Sidebar from './components/SidePanel/sidePanel';
 import Dashboard from './page/Dashboard/Dashboard';
 import LoginPage from './page/Login/Login';
+import ProtectedRoute from './page/Login/ProtectedRoute';
+import { AuthProvider } from './page/Login/AuthContext';
 
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginPage/>
+    element: <LoginPage/>,
   },
   {
     path: '/home',
-    element: <Sidebar/>,
+    element: <ProtectedRoute><Sidebar/></ProtectedRoute>,
     children: [
       {
         path:'/home',
-        element:<Dashboard/>
+        element:<ProtectedRoute><Dashboard/></ProtectedRoute>
       },
     ],
   },
@@ -33,6 +35,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
+    <AuthProvider>
     <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )
