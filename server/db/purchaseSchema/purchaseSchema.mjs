@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
 const taxSchema = new Schema({
@@ -65,8 +64,13 @@ const purchaseSchema = new Schema({
     totalAmount : {
         type: Number,
         required: true
+    },
+    purchaseDate : {
+        type: Date,
+        default: Date.now(),
+        required: true
     }
 })
 
-export default mongoose.model('Purchase', purchaseSchema)
+export default purchaseSchema
 
