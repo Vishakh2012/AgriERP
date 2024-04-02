@@ -12,31 +12,83 @@ import Dashboard from './page/Dashboard/Dashboard';
 import LoginPage from './page/Login/Login';
 import ProtectedRoute from './page/Login/ProtectedRoute';
 import { AuthProvider } from './page/Login/AuthContext';
-import TableDemo from './page/Sales_Display/Sales_Display';
+import SalesDisplay from './page/Sales_Display/Sales_Display';
+
 
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginPage/>,
+    element: <LoginPage />,
   },
   {
     path: '/home',
-    element: <Sidebar/>,
+    element: <Sidebar />,
     children: [
-      // {
-      //   path:'/home',
-      //   element:<Dashboard/>
-      // },
       {
-        path:'/home',
-        element:<TableDemo/>
-      }
+        path: '/home',
+        element: <Dashboard />,
+      },
     ],
   },
-  
+  {
+    path:'/sales',
+    element:<Sidebar />,
+    children: [
+      {
+        path:'/sales',
+        element:<SalesDisplay/>
+      }
+    ]
+  },
+  {
+    path:'/purchase',
+    element:<Sidebar/>,
+    children: [
+      {
+        
+      }
+    ]
+  },
+  {
+    path:'/staff',
+    element:<Sidebar/>,
+    children: [
+      {
+        
+      }
+    ]
+  },
+  {
+    path:'/farmers',
+    element:<Sidebar/>,
+    children: [
+      {
+        
+      }
+    ]
+  },
+  {
+    path:'/stakeholders',
+    element:<Sidebar/>,
+    children: [
+      {
+        
+      }
+    ]
+  },
+  {
+    path:'/products',
+    element:<Sidebar/>,
+    children: [
+      {
+        
+      }
+    ]
+  }
 ]);
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>

@@ -10,7 +10,7 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { IconContext } from "react-icons";
 import { RiUserSettingsLine } from "react-icons/ri";
 import { VscSignOut } from "react-icons/vsc";
-import { useAuth } from "../Login/AuthContext";
+import { useAuth } from "../../page/Login/AuthContext";
 
 const ProfileDropdown = () => {
     const {logout} = useAuth()
@@ -41,13 +41,13 @@ const ProfileDropdown = () => {
                     <IconContext.Provider value={{ size: '20px' }}>
                         <IoSettingsOutline />
                     </IconContext.Provider>
-                    <Link to={''}><span className="block py-2 ml-2">Logout</span></Link>
+                    <Link to={''}><span className="block py-2 ml-2">Settings</span></Link>
                 </div>
                 <div className="border-t border-gray-200 pt-2 flex items-center">
                     <IconContext.Provider value={{ size: '20px' }}>
                         <VscSignOut/>
                     </IconContext.Provider>
-                    <Link to={''}><button onClick={logout} className="block py-2 ml-2">Settings</button></Link>
+                    <Link to={''}><button onClick={logout} className="block py-2 ml-2">Logout</button></Link>
                 </div>
             </PopoverContent>
         </Popover>
