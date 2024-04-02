@@ -12,6 +12,7 @@ import Dashboard from './page/Dashboard/Dashboard';
 import LoginPage from './page/Login/Login';
 import ProtectedRoute from './page/Login/ProtectedRoute';
 import { AuthProvider } from './page/Login/AuthContext';
+import TableDemo from './page/Sales_Display/Sales_Display';
 
 
 
@@ -22,12 +23,16 @@ const router = createBrowserRouter([
   },
   {
     path: '/home',
-    element: <ProtectedRoute><Sidebar/></ProtectedRoute>,
+    element: <Sidebar/>,
     children: [
+      // {
+      //   path:'/home',
+      //   element:<Dashboard/>
+      // },
       {
         path:'/home',
-        element:<ProtectedRoute><Dashboard/></ProtectedRoute>
-      },
+        element:<TableDemo/>
+      }
     ],
   },
   
