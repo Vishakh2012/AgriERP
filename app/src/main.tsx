@@ -13,7 +13,7 @@ import LoginPage from './page/Login/Login';
 import ProtectedRoute from './page/Login/ProtectedRoute';
 import { AuthProvider } from './page/Login/AuthContext';
 import TableDemo from './page/Sales_Display/Sales_Display';
-
+import Product_Display from './page/Product_Display/Product_Display';
 
 
 const router = createBrowserRouter([
@@ -31,8 +31,9 @@ const router = createBrowserRouter([
       // },
       {
         path:'/home',
-        element:<TableDemo/>
-      }
+        element:<Product_Display />
+      },
+      
     ],
   },
   
