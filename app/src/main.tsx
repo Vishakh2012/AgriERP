@@ -15,23 +15,77 @@ import { AuthProvider } from './page/Login/AuthContext';
 
 
 
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LoginPage/>,
+    element: <LoginPage />,
   },
   {
     path: '/home',
-    element: <ProtectedRoute><Sidebar/></ProtectedRoute>,
+    element: <Sidebar />,
     children: [
       {
-        path:'/home',
-        element:<ProtectedRoute><Dashboard/></ProtectedRoute>
+        path: '/home',
+        element: <Dashboard />,
       },
     ],
   },
-  
+  {
+    path:'/sales',
+    element:<Sidebar />,
+    children: [
+      {
+      }
+    ]
+  },
+  {
+    path:'/purchase',
+    element:<Sidebar/>,
+    children: [
+      {
+        
+      }
+    ]
+  },
+  {
+    path:'/staff',
+    element:<Sidebar/>,
+    children: [
+      {
+        
+      }
+    ]
+  },
+  {
+    path:'/farmers',
+    element:<Sidebar/>,
+    children: [
+      {
+        
+      }
+    ]
+  },
+  {
+    path:'/stakeholders',
+    element:<Sidebar/>,
+    children: [
+      {
+        
+      }
+    ]
+  },
+  {
+    path:'/products',
+    element:<Sidebar/>,
+    children: [
+      {
+        
+      }
+    ]
+  }
 ]);
+
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
