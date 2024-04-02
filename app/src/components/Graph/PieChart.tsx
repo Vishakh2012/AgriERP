@@ -1,25 +1,25 @@
 import React from "react";
 import { Chart } from "react-google-charts";
 
-interface GraphData {
+interface PieChartData {
   labels: string[];
   data: [string, number][];
 }
 
 
-const Graph: React.FC<{ graphData: GraphData }> = ({ graphData }) => {
+const PieChart: React.FC<{ graphData: PieChartData }> = ({ graphData }) => {
 
   const { labels, data } = graphData;
   const chartData = [labels, ...data];
 
   return (
     <Chart
-      chartType="ColumnChart"
+      chartType="PieChart"
       width="100%"
-      height="350px"
+      height="320px"
       data={chartData}
     />
   );
 };
 
-export default Graph;
+export default PieChart;
