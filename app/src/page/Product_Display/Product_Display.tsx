@@ -9,9 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import Header from '@/components/Header/header';
+import Header from '@/components/Header/Header';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 7;
 const products = [
     {
       category: "Electronics",
@@ -282,7 +282,10 @@ const Product_Display= ()=> {
 
   return (
     <div>
-      <div className="mx-auto max-w-5xl px-4 mt-16"> {/* Center the content */}
+        <div className='m-3'>
+           <Header text='Products Details'/>
+        </div>
+      <div className="w-4/5 px-4 mt-12"> {/* Center the content */}
       <form onSubmit={handleFilterSubmit} className="flex flex-wrap items-end justify-between mb-4">
           <input
             type="text"
@@ -317,13 +320,13 @@ const Product_Display= ()=> {
         <TableHeader  className="sticky top-0 bg-white z-10">
           <TableRow>
             <TableHead className="w-[100px] text-center font-medium">Serial No</TableHead>
-            <TableHead className="w-[200px] text-center font-medium">Category</TableHead>
-            <TableHead className="w-[200px] text-center font-medium">Name</TableHead>
-            <TableHead className="w-[200px] text-center font-medium">HSN</TableHead>
-            <TableHead className="w-[200px] text-center font-medium">Item Code</TableHead>
-            <TableHead className="w-[250px] text-center font-medium">Price</TableHead>
-            <TableHead className="w-[250px] text-center font-medium">Tax</TableHead>
-            <TableHead className="w-[250px] text-center font-medium">Current Stock</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Category</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Name</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">HSN</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Item Code</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Price</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Tax</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Current Stock</TableHead>
 
           </TableRow>
         </TableHeader>

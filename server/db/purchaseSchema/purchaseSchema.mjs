@@ -64,6 +64,11 @@ const purchaseSchema = new Schema({
     totalAmount : {
         type: Number,
         required: true
+    },
+    purchaseDate : {
+        type: Date,
+        default: Date.now(),
+        required: true
     }
 })
 
