@@ -10,7 +10,7 @@ import product from "./routes/productRoutes/product.mjs"
 import farmer from "./routes/farmerRoutes/farmer.mjs"
 import authJwt from "./middleware/authJwt.mjs";
 import fpo from "./routes/fpoRoutes/fpo.mjs";
-
+import dashboard from "./routes/dashboardRoutes/graphRoutes.mjs"
 const PORT = process.env.PORT || 5050;
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -29,6 +29,7 @@ app.use("/api/staff", staff);
 app.use("/api/product", product);
 app.use("/api/farmer", farmer);
 app.use("/api/fpo", fpo);
+app.use("/api/dashboard", dashboard);
 
 app.use((req, res, next) => {
     res.header(

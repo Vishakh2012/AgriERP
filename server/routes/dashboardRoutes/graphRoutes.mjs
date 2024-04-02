@@ -1,8 +1,8 @@
-const express = require('express');
+import express from "express"
 const router = express.Router();
-const Sales = require('./models/Sales');
-const Purchase = require('./models/Purchase');
-const { addMonths } = require('date-fns');
+import Sales  from '../../db/salesSchema/salesSchema.mjs'
+import Purchase from '../../db/purchaseSchema/purchaseSchema.mjs'
+import { addMonths }  from 'date-fns'
 
 router.get("/bargraphInfo/:months", async (req, res) => {
     const numberOfMonths = parseInt(req.params.months);
@@ -65,5 +65,5 @@ router.get("/bargraphInfo/:months", async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;
 

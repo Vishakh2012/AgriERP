@@ -66,11 +66,7 @@ const purchaseSchema = new Schema({
         type: Number,
         required: true
     },
-<<<<<<< HEAD
-    purchaseDate : {
-=======
     purchaseDate: {
->>>>>>> 3e9535e (FEAT:)
         type: Date,
         default: Date.now(),
         required: true
