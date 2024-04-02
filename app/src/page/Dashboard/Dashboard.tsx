@@ -52,10 +52,10 @@ const Dashboard = () => {
      
          
             <div className='w-[600px] bg-white'>
-            <GraphDropdown onDataFetched={handleGraphData} />
+              <GraphDropdown onDataFetched={handleGraphData} />
               <BarChart graphData={graphData}/>
             </div>
-          </div>  
+        </div>  
         </div>
 
     </>

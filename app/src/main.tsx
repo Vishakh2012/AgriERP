@@ -12,6 +12,7 @@ import Dashboard from './page/Dashboard/Dashboard';
 import LoginPage from './page/Login/Login';
 import ProtectedRoute from './page/Login/ProtectedRoute';
 import { AuthProvider } from './page/Login/AuthContext';
+import SalesDisplay from './page/Sales_Display/Sales_Display';
 
 
 
@@ -25,10 +26,6 @@ const router = createBrowserRouter([
     path: '/home',
     element: <Sidebar />,
     children: [
-      // {
-      //   path:'/home',
-      //   element:<Dashboard/>
-      // },
       {
         path: '/home',
         element: <Dashboard />,
@@ -40,6 +37,8 @@ const router = createBrowserRouter([
     element:<Sidebar />,
     children: [
       {
+        path:'/sales',
+        element:<SalesDisplay/>
       }
     ]
   },

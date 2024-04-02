@@ -9,9 +9,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import Header from '@/components/Header/header';
+import Header from '@/components/Header/Header';
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 7;
 const invoices = [
   {
     saleDate: "2024-01-01",
@@ -209,7 +209,7 @@ const invoices = [
 
 
 
-const TableDemo = ()=> {
+const SalesDisplay = ()=> {
   const [filterCriteria, setFilterCriteria] = useState({
     billNo: '',
     saleDate: '',
@@ -257,7 +257,10 @@ const TableDemo = ()=> {
 
   return (
     <div>
-      <div className="mx-auto max-w-5xl px-4 mt-16"> {/* Center the content */}
+      <div className='m-3'>
+      <Header text='Sales'/>
+      </div>
+      <div className="w-4/5 px-4 mt-12"> {/* Center the content */}
       <form onSubmit={handleFilterSubmit} className="flex flex-wrap items-end justify-between mb-4">
           <input
             type="text"
@@ -286,7 +289,7 @@ const TableDemo = ()=> {
           <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"> Apply Filter</button>
         </form>
         </div>
-      <div className=" w-4/5 px-4 mt-16 rounded-3xl"> 
+      <div className=" w-4/5 px-4 mt-14 rounded-3xl"> 
       <Table className="shadow-md w-full mx-auto rounded-3xl ">
       <div className=" max-h-[600px] bg-white">
         <TableHeader  className="sticky top-0 bg-white z-10">
@@ -331,4 +334,4 @@ const TableDemo = ()=> {
   )
 }
 
-export default TableDemo
+export default SalesDisplay
