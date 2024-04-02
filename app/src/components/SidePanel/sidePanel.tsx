@@ -10,7 +10,7 @@ import SidePanelButton from "./sidePanelButton";
 const Sidebar = () => {
   return (
     <div className='flex '>
-      <div className="h-screen w-64 bg-white text-black shadow-lg">
+      <div className="h-screen w-64 bg-white text-black shadow-lg overflow-y-auto">
         <div className="p-0">
         <img src={logo} alt="Logo" className="h-24 mx-auto mt-4 mb-4" />
         <ul className='mt-14 '>
@@ -24,7 +24,7 @@ const Sidebar = () => {
         </ul>
       </div>        
     </div>
-      <div className="flex-auto bg-gray-100">
+      <div className="flex-auto bg-gray-100 overflow-y-auto">
               <Outlet/>
       </div>
     </div>
