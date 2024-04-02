@@ -194,7 +194,7 @@ const Purchase_Display= ()=> {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:5050/api/purchase/getDetails');
+      const response = await fetch('http://localhost:5050/api/purchase/getDetails/Example_FPO');
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
