@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Header from '@/components/Header/Header';
+import { useEffect } from 'react';
 
 const PAGE_SIZE = 7;
 const purchases = [
@@ -184,11 +185,24 @@ const purchases = [
 ];
 
 
-  
-
-
-
 const Purchase_Display= ()=> {
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:5050/api/purchase/getDetails');
+      const jsonData = await response.json();
+      setData(jsonData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+
   const [filterCriteria, setFilterCriteria] = useState({
     billNumber: '',
     farmerId: '',
@@ -210,7 +224,7 @@ const Purchase_Display= ()=> {
     // Add your filtering logic here
     console.log("Filter criteria:", filterCriteria);
   };
-  const filteredInvoices = purchases.filter(invoice => {
+  const filteredInvoices = data.filter(invoice => {
     if (
       (filterCriteria.billNumber !== '' && invoice.billNumber !== filterCriteria.billNumber) ||
       (filterCriteria.farmerId !== '' && invoice.farmerId !== filterCriteria.farmerId) ||
