@@ -49,6 +49,7 @@ const purchaseSchema = new Schema({
     billNumber: {
         type: String
     },
+     
     farmerId : {
         type: String,
         required: true
@@ -65,7 +66,11 @@ const purchaseSchema = new Schema({
         type: Number,
         required: true
     },
+<<<<<<< HEAD
     purchaseDate : {
+=======
+    purchaseDate: {
+>>>>>>> 3e9535e (FEAT:)
         type: Date,
         default: Date.now(),
         required: true
