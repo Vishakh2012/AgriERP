@@ -13,7 +13,7 @@ const GraphDropdown = ({ onDataFetched }) => {
   const fetchData = async (timePeriod) => {
     try {
       const response = await fetch(
-        `http://localhost:5050/api/data?period=${timePeriod}`
+        `http://localhost:5050/api/dashboard/bargraph/${timePeriod}`
       );
       const jsonData = await response.json();
       onDataFetched(jsonData);
@@ -29,17 +29,17 @@ const GraphDropdown = ({ onDataFetched }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56 shadow-lg bg-white rounded-md mt-2">
         <div className="py-2 px-4">
-          <Link to="#" onClick={() => fetchData("past1Month")}>
+          <Link to="#" onClick={() => fetchData(1)}>
             <span className="cursor-pointer">Past 1 Month</span>
           </Link>
         </div>
         <div className="border-t border-gray-200 py-2 px-4">
-          <Link to="#" onClick={() => fetchData("past3Months")}>
+          <Link to="#" onClick={() => fetchData(3)}>
             <span className="cursor-pointer">Past 3 Months</span>
           </Link>
         </div>
         <div className="border-t border-gray-200 py-2 px-4">
-          <Link to="#" onClick={() => fetchData("past1Year")}>
+          <Link to="#" onClick={() => fetchData(12)}>
             <span className="cursor-pointer">Past 1 Year</span>
           </Link>
         </div>
