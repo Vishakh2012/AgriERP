@@ -258,7 +258,7 @@ const SalesDisplay = ()=> {
   return (
     <div>
       <div className='m-3'>
-      <Header text='Sales'/>
+      <Header text='Sales Details'/>
       </div>
       <div className="w-4/5 px-4 mt-12"> {/* Center the content */}
       <form onSubmit={handleFilterSubmit} className="flex flex-wrap items-end justify-between mb-4">
