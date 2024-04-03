@@ -217,7 +217,7 @@ const Staff_Details = ()=> {
       <form onSubmit={handleFilterSubmit} className="flex flex-wrap items-end justify-between mb-4">
           <input
             type="text"
-            name="billNo"
+            name="salary"
             value={filterCriteria.salary}
             onChange={handleFilterChange}
             placeholder="Salary"
@@ -225,7 +225,7 @@ const Staff_Details = ()=> {
           />
           <input
             type="text"
-            name="saleDate"
+            name="designation"
             value={filterCriteria.designation}
             onChange={handleFilterChange}
             placeholder="Designation"
@@ -233,7 +233,7 @@ const Staff_Details = ()=> {
           />
           <input
             type="text"
-            name="finalAmount"
+            name="bloodGroup"
             value={filterCriteria.bloodGroup}
             onChange={handleFilterChange}
             placeholder="Blood Group"
