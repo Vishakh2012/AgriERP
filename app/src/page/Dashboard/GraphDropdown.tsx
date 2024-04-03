@@ -12,8 +12,7 @@ import {
 const GraphDropdown = ({ onDataFetched }) => {
     const fetchData = async (timePeriod) => {
         try {
-
-            const response = await fetch('http://localhost:5050/api/dashboard/bargraphInfo/Example_FPO/${timePeriod}',
+            const response = await fetch(`http://localhost:5050/api/dashboard/bargraphInfo/Example_FPO/${timePeriod}`,
                 {
                     method: 'GET', // Specify the HTTP method (GET in this case)
                     headers: {
@@ -41,13 +40,13 @@ const GraphDropdown = ({ onDataFetched }) => {
                     </Link>
                 </div>
                 <div className="border-t border-gray-200 py-2 px-4">
-                    <Link to="#" onClick={() => fetchData(3)}>
-                        <span className="cursor-pointer">Past 3 Months</span>
+                    <Link to="#" onClick={() => fetchData(24)}>
+                        <span className="cursor-pointer">Past 1 year</span>
                     </Link>
                 </div>
                 <div className="border-t border-gray-200 py-2 px-4">
-                    <Link to="#" onClick={() => fetchData(12)}>
-                        <span className="cursor-pointer">Past 1 Year</span>
+                    <Link to="#" onClick={() => fetchData(36)}>
+                        <span className="cursor-pointer">Past 3 Year</span>
                     </Link>
                 </div>
             </DropdownMenuContent>
