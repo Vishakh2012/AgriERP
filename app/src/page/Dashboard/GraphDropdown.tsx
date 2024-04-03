@@ -13,14 +13,16 @@ const GraphDropdown = ({ onDataFetched }) => {
     const fetchData = async (timePeriod) => {
         try {
 
-            const response = await fetch('http://localhost:5050/api/dashboard/bargraphInfo/Example_FPO/${timePeriod}', {
-                method: 'GET',
-                headers: {
-                    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MDNiYTc0YmE1NTkyNTgwY2Y2YTVkZiIsImlhdCI6MTcxMjEyMDgxOSwiZXhwIjoxNzEyMjA3MjE5fQ.cPkVFqzL9qTLPN7NREo6KwavycPXEGd34KvOWpuWPfQ'
-                }
-            });
-
+            const response = await fetch('http://localhost:5050/api/dashboard/bargraphInfo/Example_FPO/${timePeriod}',
+                {
+                    method: 'GET', // Specify the HTTP method (GET in this case)
+                    headers: {
+                        // Set the Content-Type header
+                        'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MDNiYTc0YmE1NTkyNTgwY2Y2YTVkZiIsImlhdCI6MTcxMjEyMDgxOSwiZXhwIjoxNzEyMjA3MjE5fQ.cPkVFqzL9qTLPN7NREo6KwavycPXEGd34KvOWpuWPfQ' // Set any other headers you need
+                    }
+                });
             const jsonData = await response.json();
+            console.log(jsonData)
             onDataFetched(jsonData);
         } catch (error) {
             console.error("Error fetching data:", error);
