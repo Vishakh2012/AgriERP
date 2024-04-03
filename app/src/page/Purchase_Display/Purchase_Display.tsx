@@ -192,21 +192,18 @@ const PurchaseDisplay = () => {
 
     const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:5050/api/purchase/getDetails/Example_FPO',
-                {
-                    method: 'GET', // Specify the HTTP method (GET in this case)
-                    headers: {
-                         // Set the Content-Type header
-                        'x-access-token': '' // Set any other headers you need
-                    }
-                });
+            const response = await fetch('http://localhost:5050/api/purchase/getDetails/Example_FPO', {
+                method: 'GET',
+                headers: {
+                    'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MDNiYTc0YmE1NTkyNTgwY2Y2YTVkZiIsImlhdCI6MTcxMjEyMDgxOSwiZXhwIjoxNzEyMjA3MjE5fQ.cPkVFqzL9qTLPN7NREo6KwavycPXEGd34KvOWpuWPfQ'
+                }
+            });
             const jsonData = await response.json();
-            console.log(jsonData);
-            setData(jsonData)
-            console.log(data)
+            setData(jsonData);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
+
     };
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -215,7 +212,7 @@ const PurchaseDisplay = () => {
         return data.slice(startIndex, startIndex + PAGE_SIZE);
     };
 
-    const pageCount = Math.ceil(purchases.length / PAGE_SIZE);
+    const pageCount = Math.ceil(data.length / PAGE_SIZE);
     const paginatedData = applyPagination(data);
 
     const handlePageChange = (page) => {
@@ -269,7 +266,7 @@ const PurchaseDisplay = () => {
                                     <TableCell className="text-center">{(currentPage - 1) * PAGE_SIZE + index + 1}</TableCell>
                                     <TableCell className="text-center">{purchase.billNumber}</TableCell>
                                     <TableCell className="text-center">{purchase.purchaseDate}</TableCell>
-                                    <TableCell className="text-center">{purchase.GSTin}</TableCell>
+                                    <TableCell className="text-center">{purchase.GSTIN}</TableCell>
                                     <TableCell className="text-center">{purchase.farmerId}</TableCell>
                                     <TableCell className="text-center">{purchase.totalAmount}</TableCell>
                                 </TableRow>
@@ -278,13 +275,13 @@ const PurchaseDisplay = () => {
                     </div>
                 </Table>
                 <div className="flex justify-center mt-4">
-                    {Array.from({ length: pageCount }, (_, i) => (
+                    {Array.from({ length: Math.min(pageCount, 3) }, (_, i) => (
                         <button
-                            key={i}
-                            onClick={() => handlePageChange(i + 1)}
-                            className={`mx-1 px-3 py-1 rounded-full border ${currentPage === i + 1 ? 'bg-blue-500 text-white' : 'hover:bg-blue-500 hover:text-white border-gray-300'}`}
+                            key={currentPage + i}
+                            onClick={() => handlePageChange(currentPage + i)}
+                            className={`mx-1 px-3 py-1 rounded-full border ${currentPage === currentPage + i ? 'bg-blue-500 text-white' : 'hover:bg-blue-500 hover:text-white border-gray-300'}`}
                         >
-                            {i + 1}
+                            {currentPage + i}
                         </button>
                     ))}
                 </div>
