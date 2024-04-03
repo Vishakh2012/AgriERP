@@ -27,27 +27,29 @@ const router = createBrowserRouter([
   },
   {
     path: '/home',
-    element: <Sidebar />,
+    element:<ProtectedRoute><Sidebar /></ProtectedRoute>,
+
     children: [
       {
         path: '/home',
-        element: <Dashboard />,
+        element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
       },
     ],
   },
   {
     path:'/sales',
-    element:<Sidebar />,
+        element:<ProtectedRoute><Sidebar /></ProtectedRoute>,
+
     children: [
       {
         path:'/sales',
-        element:<SalesDisplay/>
+        element:<ProtectedRoute><SalesDisplay/></ProtectedRoute>
       }
     ]
   },
   {
     path:'/purchase',
-    element:<Sidebar/>,
+    element:<ProtectedRoute><Sidebar/></ProtectedRoute>,
     children: [
       
       {
@@ -58,17 +60,19 @@ const router = createBrowserRouter([
   },
   {
     path:'/staff',
-    element:<Sidebar/>,
+        element:<ProtectedRoute><Sidebar /></ProtectedRoute>,
+
     children: [
       {
         path:'/staff',
-        element:<Staff_Details />
+        element:<ProtectedRoute><Staff_Details /></ProtectedRoute>
       }
     ]
   },
   {
     path:'/farmers',
-    element:<Sidebar/>,
+        element:<ProtectedRoute><Sidebar /></ProtectedRoute>,
+
     children: [
       {
         
@@ -77,7 +81,8 @@ const router = createBrowserRouter([
   },
   {
     path:'/stakeholders',
-    element:<Sidebar/>,
+        element:<ProtectedRoute><Sidebar /></ProtectedRoute>,
+
     children: [
       {
         
@@ -86,11 +91,10 @@ const router = createBrowserRouter([
   },
   {
     path:'/products',
-    element:<Sidebar/>,
     children: [
       {
         path:'/products',
-        element:<Product_Display/>
+        element:<ProtectedRoute><Product_Display/></ProtectedRoute>
       }
     ]
   }
