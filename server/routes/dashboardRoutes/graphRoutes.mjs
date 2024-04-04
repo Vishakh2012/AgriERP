@@ -1,51 +1,32 @@
-import express from "express"
+import express from "express";
 const router = express.Router();
-import Sales  from '../../db/salesSchema/salesSchema.mjs'
-import Purchase from '../../db/purchaseSchema/purchaseSchema.mjs'
-import { addMonths }  from 'date-fns'
+import Sales from '../../db/salesSchema/salesSchema.mjs';
+import Purchase from '../../db/purchaseSchema/purchaseSchema.mjs';
+import { addMonths } from 'date-fns';
+import getCollectionForFPO from "../../controllers/getModel.mjs";
 
-router.get("/bargraphInfo/:months", async (req, res) => {
+router.get("/bargraphInfo/:fponame/:months", async (req, res) => {
     const numberOfMonths = parseInt(req.params.months);
+    const fpoName = req.params.fponame;
 
     try {
         const endDate = new Date();
         const startDate = addMonths(endDate, -numberOfMonths);
 
-        // Aggregate sales data for the past `numberOfMonths` months
-        const salesData = await Sales.aggregate([
-            {
-                $match: {
-                    saleDate: { $gte: startDate, $lte: endDate }
-                }
-            },
-            {
-                $group: {
-                    _id: null,
-                    totalSales: { $sum: "$finalAmount" }
-                }
-            }
-        ]);
+        const Sales_ = await getCollectionForFPO(fpoName, Sales, "Sales");
+        const Purchase_ = await getCollectionForFPO(fpoName, Purchase, "Purchase");
 
-        // Aggregate purchase data for the past `numberOfMonths` months
-        const purchaseData = await Purchase.aggregate([
-            {
-                $match: {
-                    purchaseDate: { $gte: startDate, $lte: endDate }
-                }
-            },
-            {
-                $group: {
-                    _id: null,
-                    totalPurchase: { $sum: "$totalAmount" }
-                }
-            }
-        ]);
+        const sales = await Sales_.find({ saleDate: { $gte: startDate } });
+        const purchases = await Purchase_.find({ purchaseDate: { $gte: startDate} });
 
         // Calculate revenue, expense, and profit/loss
-        const totalSales = salesData.length > 0 ? salesData[0].totalSales : 0;
-        const totalPurchase = purchaseData.length > 0 ? purchaseData[0].totalPurchase : 0;
-        const revenue = totalSales;
+        let totalSales = 0;
+        sales.forEach(sale => totalSales += sale.finalAmount);
+
+        let totalPurchase = 0;
+        purchases.forEach(purchase => totalPurchase += purchase.totalAmount);
         const expense = totalPurchase;
+        const revenue = totalSales
         const profitOrLoss = totalSales - totalPurchase;
 
         // Formatting the data as per the required format
@@ -55,7 +36,9 @@ router.get("/bargraphInfo/:months", async (req, res) => {
                 ["Revenue", revenue],
                 ["Expense", expense],
                 ["Profit/Loss", profitOrLoss]
-            ]
+            ],
+            start: startDate,
+            sales:sales
         };
 
         res.json(formattedData);
@@ -63,7 +46,7 @@ router.get("/bargraphInfo/:months", async (req, res) => {
         console.error(error);
         res.status(500).json({ error: "Internal Server Error" });
     }
-});
+})
 
 export default router;
 
