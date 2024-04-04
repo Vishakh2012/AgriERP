@@ -56,22 +56,22 @@ const Dashboard = () => {
 
           </div>
           <div className='mt-10 flex flex-row p-6 justify-between '>
-            <div className='w-[600px] bg-white ml-5'>
+            <div className='w-[580px] bg-white ml-5'>
               <GraphDropdown onDataFetched={handleBarChartData} />
               <BarChart graphData={barchartData}/>
             </div>
-            <div className='w-[600px] bg-white mr-5'>
+            <div className='w-[580px] bg-white mr-5'>
                 <LineChart graphData={barchartData}/>
             </div>
             
         </div>
         <div className='mt-10 flex flex-row p-6 justify-between '>
-            <div className='w-[600px] bg-white h-[320px]'>
+            <div className='w-[580px] bg-white h-[320px]'>
               <div className='p-3'>
               <TopSellingProducts/>
               </div>
             </div>
-            <div className='w-[600px] bg-white h-[320px]'>
+            <div className='w-[580px] bg-white h-[320px]'>
               <div className='p-3'>
               <TopFarmers/>
               </div>
