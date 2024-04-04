@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import {
   Table,
   TableBody,
@@ -163,66 +163,102 @@ const staffDetails = [
 
 
 const Staff_Details = ()=> {
-  const [filterCriteria, setFilterCriteria] = useState({
-    salary: '',
-    designation: '',
-    bloodGroup: ''
-  });
+  const [filterCriteria, setFilterCriteria] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
-
+  const [sortOption, setSortOption] = useState('');
+  const [sortedData, setSortedData] = useState([]);
+  const [sortColumn, setSortColumn] = useState('');
+  
 
   const handleFilterChange = (e) => {
-    const { name, value } = e.target;
-    setFilterCriteria(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
+    const { value } = e.target;
+    setFilterCriteria(value);
   };
 
-  const handleFilterSubmit = (e) => {
-    e.preventDefault();
-    // Add your filtering logic here
-    console.log("Filter criteria:", filterCriteria);
+  const handleSortOptionChange = (e) => {
+    const { value } = e.target;
+    setSortOption(value);
   };
-  const filteredInvoices = staffDetails.filter(invoice => {
-    if (
-      (filterCriteria.salary !== '' && invoice.basicSalary !== filterCriteria.salary) ||
-      (filterCriteria.designation !== '' && invoice.designation !== filterCriteria.designation) ||
-      (filterCriteria.bloodGroup !== '' && invoice.bloodGroup !== filterCriteria.bloodGroup)
-    ) {
-      return false; // Filter out invoices that don't match any criteria
-    }
-    return true; // Include invoices that meet all criteria
-  });
-  
+
+  const applySorting = (data) => {
+    if (sortColumn === '') return data;
+    const sorted = [...data].sort((a, b) => {
+      if (sortOption === 'ascending') {
+        return a[sortColumn].localeCompare(b[sortColumn]);
+      } else {
+        return b[sortColumn].localeCompare(a[sortColumn]);
+      }
+    });
+    return sorted;
+  };
+
   const applyPagination = (data) => {
     const startIndex = (currentPage - 1) * PAGE_SIZE;
     return data.slice(startIndex, startIndex + PAGE_SIZE);
   };
 
-  const pageCount = Math.ceil(filteredInvoices.length / PAGE_SIZE);
-  const paginatedData = applyPagination(filteredInvoices);
+  const pageCount = Math.ceil(sortedData.length / PAGE_SIZE);
+  const paginatedData = applyPagination(sortedData);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'ArrowLeft' && currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+      } else if (e.key === 'ArrowRight' && currentPage < pageCount) {
+        setCurrentPage(currentPage + 1);
+      } else if (e.key === 'ArrowUp') {
+        const sortSelect = document.getElementById('sortSelect');
+        if (sortSelect.selectedIndex > 0) {
+          sortSelect.selectedIndex--;
+        }
+      }
+      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
+        e.preventDefault();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [currentPage, pageCount]);
+
+  useEffect(() => {
+    const sortedAndFilteredData = applySorting(staffDetails.filter(invoice => {
+      return Object.values(invoice).some(value =>
+        value.toString().toLowerCase().includes(filterCriteria.toLowerCase())
+      );
+    }));
+    setSortedData(sortedAndFilteredData);
+  }, [filterCriteria, sortColumn, sortOption]);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-  
 
+  const handleColumnSort = (column) => {
+    setSortColumn(column);
+    setSortOption('ascending');
+  };
   return (
     <div>
       <div className='m-3'>
       <Header text='Staff Details'/>
-      </div>
       <div className="w-4/5 px-4 mt-12"> {/* Center the content */}
-      <form onSubmit={handleFilterSubmit} className="flex flex-wrap items-end justify-between mb-4">
-          <input
+      <input
             type="text"
+<<<<<<< HEAD
             name="salary"
             value={filterCriteria.salary}
+=======
+            value={filterCriteria}
+>>>>>>> 8cf75d9 (FEAT:)
             onChange={handleFilterChange}
-            placeholder="Salary"
+            placeholder="Search"
             className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
           />
+<<<<<<< HEAD
           <input
             type="text"
             name="designation"
@@ -237,44 +273,47 @@ const Staff_Details = ()=> {
             value={filterCriteria.bloodGroup}
             onChange={handleFilterChange}
             placeholder="Blood Group"
+=======
+          <select
+            id="sortSelect"
+            value={sortColumn}
+            onChange={(e) => handleColumnSort(e.target.value)}
             className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
-          />
-          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"> Apply Filter</button>
-        </form>
-        </div>
-      <div className=" w-4/5 px-4 mt-14 rounded-3xl"> 
+          >
+            <option value="">Sort By</option>
+            {Object.keys(staffDetails[0]).map(column => (
+              <option key={column} value={column}>{column}</option>
+            ))}
+          </select>
+          <select
+           id="orderSelect"
+            value={sortOption}
+            onChange={handleSortOptionChange}
+>>>>>>> 8cf75d9 (FEAT:)
+            className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+          >
+            <option value="">Order</option>
+            <option value="ascending">Ascending</option>
+            <option value="descending">Descending</option>
+          </select>
+      </div>
+      <div className=" w-5/6 px-4 mt-14 rounded-3xl"> 
       <Table className="shadow-md w-full mx-auto rounded-3xl ">
       <div className=" max-h-[600px] bg-white">
         <TableHeader  className="sticky top-0 bg-white z-10">
           <TableRow>
-            <TableHead className="w-[100px] text-center font-medium">Serial No</TableHead>
-            <TableHead className="w-[100px] text-center font-medium">Name</TableHead>
-            <TableHead className="w-[100px] text-center font-medium">Staff Id</TableHead>
-            <TableHead className="w-[100px] text-center font-medium">Email</TableHead>
-            <TableHead className="w-[100px] text-center font-medium">Phone</TableHead>
-            <TableHead className="w-[100px] text-center font-medium">Address</TableHead>
-            <TableHead className="w-[100px] text-center font-medium">Designaion</TableHead>
-            <TableHead className="w-[100px] text-center font-medium">Blood Group</TableHead>
-            <TableHead className="w-[100px] text-center font-medium">Date of Joining</TableHead>
-            <TableHead className="w-[100px] text-center font-medium">Basic Pay</TableHead>
-            <TableHead className="w-[100px] text-center font-medium">Account Number</TableHead>
-          </TableRow>
+                {Object.keys(staffDetails[0]).map((key) => (
+                  <TableHead key={key} className="w-[100px] text-center font-medium">{key}</TableHead>
+                ))}
+              </TableRow>
         </TableHeader>
         <TableBody>
         {paginatedData.map((staff,index) => (
-            <TableRow key={staff.saleDate}>
-              <TableCell className="text-center">{(currentPage - 1) * PAGE_SIZE + index + 1}</TableCell>
-              <TableCell className="text-center">{staff.name}</TableCell>
-              <TableCell className="text-center">{staff.staffId}</TableCell>
-              <TableCell className="text-center">{staff.email}</TableCell>
-              <TableCell className="text-center">{staff.phone}</TableCell>
-              <TableCell className="text-center">{staff.address}</TableCell>
-              <TableCell className="text-center">{staff.designation}</TableCell>
-              <TableCell className="text-center">{staff.bloodGroup}</TableCell>
-              <TableCell className="text-center">{staff.dateofJoining}</TableCell>
-              <TableCell className="text-center">{staff.basicSalary}</TableCell>
-              <TableCell className="text-center">{staff.accountNumber}</TableCell>
-            </TableRow>
+            <TableRow key={index}>
+            {Object.values(staff).map((value, i) => (
+              <TableCell key={i} className="text-center">{value}</TableCell>
+            ))}
+          </TableRow>
           ))}
         </TableBody>
         </div>
@@ -291,8 +330,9 @@ const Staff_Details = ()=> {
           ))}
         </div>
     </div>
-  </div>
-  )
+    </div>
+    </div>
+)
 }
 
 export default Staff_Details

@@ -1,22 +1,34 @@
-import React from "react";
 import { Chart } from "react-google-charts";
-
-interface LineChartData {
-  labels: string[];
-  data: [string, number][];
-}
+import { useState, useEffect } from 'react';
+import sample from '../../page/Dashboard/sample.json';
 
 
-const LineChart: React.FC<{ graphData: LineChartData }> = ({ graphData }) => {
+const LineChart = () => {
 
-  const { labels, data } = graphData;
+    const [LinechartData, setLineChartData] = useState(sample);
+
+    useEffect(() => {
+        fetchLineChartData();
+      }, []);
+
+    const fetchLineChartData = async()=>{
+        try {
+          const response = await fetch('http://localhost:5050/api/posts');
+          const jsonData = await response.json();
+          setLineChartData(jsonData);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+
+  const { labels, data } = LinechartData;
   const chartData = [labels, ...data];
 
   return (
     <Chart
       chartType="LineChart"
       width="100%"
-      height="350px"
+      height="280px"
       data={chartData}
     />
   );

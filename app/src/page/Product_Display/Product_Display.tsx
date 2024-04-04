@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
   Table,
   TableBody,
@@ -235,12 +235,27 @@ const products = [
 
 
 const Product_Display= ()=> {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:5050/api/purchase/getDetails');
+      const jsonData = await response.json();
+      setData(jsonData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
   const [filterCriteria, setFilterCriteria] = useState({
     itemCode: '',
     HSN: '',
     name: ''
   });
   const [currentPage, setCurrentPage] = useState(1);
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
 
   const handleFilterChange = (e) => {
@@ -253,31 +268,32 @@ const Product_Display= ()=> {
 
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-    // Add your filtering logic here
-    console.log("Filter criteria:", filterCriteria);
+    // Apply filter criteria to products
+    const filteredData = data.filter(product => {
+      return (
+        (filterCriteria.itemCode === '' || product.itemCode === filterCriteria.itemCode) &&
+        (filterCriteria.HSN === '' || product.hsn === filterCriteria.HSN) &&
+        (filterCriteria.name === '' || product.name === filterCriteria.name)
+      );
+    });
+    // Update state with filtered data
+    setFilteredProducts(filteredData);
+    // Reset page to first page after filtering
+    setCurrentPage(1);
   };
-  const filteredInvoices = products.filter(invoice => {
-    if (
-      (filterCriteria.itemCode !== '' && invoice.itemCode !== filterCriteria.itemCode) ||
-      (filterCriteria.HSN !== '' && invoice.hsn !== filterCriteria.HSN) ||
-      (filterCriteria.name !== '' && invoice.name !== filterCriteria.name)
-    ) {
-      return false; // Filter out invoices that don't match any criteria
-    }
-    return true; // Include invoices that meet all criteria
-  });
   
   const applyPagination = (data) => {
     const startIndex = (currentPage - 1) * PAGE_SIZE;
     return data.slice(startIndex, startIndex + PAGE_SIZE);
   };
 
-  const pageCount = Math.ceil(filteredInvoices.length / PAGE_SIZE);
-  const paginatedData = applyPagination(filteredInvoices);
+  const pageCount = Math.ceil(filteredProducts.length / PAGE_SIZE);
+  const paginatedData = applyPagination(filteredProducts);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
   
 
   return (
@@ -289,7 +305,7 @@ const Product_Display= ()=> {
       <form onSubmit={handleFilterSubmit} className="flex flex-wrap items-end justify-between mb-4">
           <input
             type="text"
-            name="billNo"
+            name="itemCode"
             value={filterCriteria.itemCode}
             onChange={handleFilterChange}
             placeholder="Item Code"
@@ -297,7 +313,7 @@ const Product_Display= ()=> {
           />
           <input
             type="text"
-            name="saleDate"
+            name="HSN"
             value={filterCriteria.HSN}
             onChange={handleFilterChange}
             placeholder="HSN"
@@ -305,7 +321,7 @@ const Product_Display= ()=> {
           />
           <input
             type="text"
-            name="finalAmount"
+            name="name"
             value={filterCriteria.name}
             onChange={handleFilterChange}
             placeholder="Name"

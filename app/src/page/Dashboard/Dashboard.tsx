@@ -9,6 +9,7 @@ import GraphDropdown from './GraphDropdown';
 import Header from '@/components/Header/Header';
 import BarChart from '@/components/Graph/BarChart';
 import LineChart from '@/components/Graph/LineChart';
+<<<<<<< HEAD
 import TopSellingProducts from './TopSellingProducts';
 import TopFarmers from './TopFarmers';
 
@@ -16,6 +17,12 @@ const Dashboard = () => {
   const [data, setData] = useState([]);
   const [barchartData, setBarChartData] = useState(sample);
 
+=======
+
+const Dashboard = () => {
+  const [data, setData] = useState([]);
+  const [barChartData, setBarChartData] = useState(sample);
+>>>>>>> 8cf75d9 (FEAT:)
 
   useEffect(() => {
     fetchData();
@@ -73,6 +80,7 @@ const Dashboard = () => {
             
         </div>
         <div className='mt-10 flex flex-row p-6 justify-between '>
+<<<<<<< HEAD
             <div className='w-[560px] ml-5 bg-white h-[350px]'>
               <div className='p-3'>
               <TopSellingProducts/>
@@ -81,8 +89,14 @@ const Dashboard = () => {
             
             <div className='w-[560px] bg-white mr-5'>
                 <LineChart graphData={barchartData}/>
+=======
+            <div className='w-[600px] bg-white ml-5'>
+              <GraphDropdown onDataFetched={handleBarChartData} />
+              <BarChart graphData={barChartData}/>
+>>>>>>> 8cf75d9 (FEAT:)
             </div>
-        </div>  
+            
+        </div>
         </div>
 
     </>
