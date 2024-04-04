@@ -27,29 +27,29 @@ const router = createBrowserRouter([
     },
     {
         path: '/home',
-        element: <ProtectedRoute><Sidebar /></ProtectedRoute>,
+        element: <Sidebar />,
 
         children: [
             {
                 path: '/home',
-                element: <ProtectedRoute><Dashboard /></ProtectedRoute>,
+                element:<Dashboard />,
             },
         ],
     },
     {
         path: '/sales',
-        element: <ProtectedRoute><Sidebar /></ProtectedRoute>,
+        element: <Sidebar />,
 
         children: [
             {
                 path: '/sales',
-                element: <ProtectedRoute><SalesDisplay /></ProtectedRoute>
+                element:<SalesDisplay />
             }
         ]
     },
     {
         path: '/purchase',
-        element: <ProtectedRoute><Sidebar /></ProtectedRoute>,
+        element:<Sidebar />,
         children: [
 
             {
@@ -60,18 +60,18 @@ const router = createBrowserRouter([
     },
     {
         path: '/staff',
-        element: <ProtectedRoute><Sidebar /></ProtectedRoute>,
+        element: <Sidebar />,
 
         children: [
             {
                 path: '/staff',
-                element: <ProtectedRoute><Staff_Details /></ProtectedRoute>
+                element:<Staff_Details />
             }
         ]
     },
     {
         path: '/farmers',
-        element: <ProtectedRoute><Sidebar /></ProtectedRoute>,
+        element:<Sidebar />,
 
         children: [
             {
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
     },
     {
         path: '/stakeholders',
-        element: <ProtectedRoute><Sidebar /></ProtectedRoute>,
+        element:<Sidebar />,
 
         children: [
             {
@@ -91,12 +91,12 @@ const router = createBrowserRouter([
     },
     {
         path: '/products',
-        element: <ProtectedRoute><Sidebar /></ProtectedRoute>,
+        element:<Sidebar />,
 
         children: [
             {
                 path: '/products',
-                element: <ProtectedRoute><Product_Display /></ProtectedRoute>
+                element:<Product_Display />
             }
         ]
     }

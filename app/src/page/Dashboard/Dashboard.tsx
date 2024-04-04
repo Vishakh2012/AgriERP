@@ -8,7 +8,6 @@ import { IoPeople } from "react-icons/io5";
 import GraphDropdown from './GraphDropdown';
 import Header from '@/components/Header/Header';
 import BarChart from '@/components/Graph/BarChart';
-import cardSample from './cardSample.json'
 import LineChart from '@/components/Graph/LineChart';
 import TopSellingProducts from './TopSellingProducts';
 import TopFarmers from './TopFarmers';
@@ -25,7 +24,13 @@ const Dashboard = () => {
 
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:5050/api/posts');
+      const accessToken = localStorage.getItem('accessToken')
+      const response = await fetch('http://localhost:5050/api/posts' ,{
+        headers:{
+          'x-access-token': accessToken ? accessToken : ''
+        }
+      }
+      );
       const jsonData = await response.json();
       setData(jsonData);
     } catch (error) {
@@ -56,27 +61,27 @@ const Dashboard = () => {
 
           </div>
           <div className='mt-10 flex flex-row p-6 justify-between '>
-            <div className='w-[580px] bg-white ml-5'>
+            <div className='w-[560px] bg-white ml-5'>
               <GraphDropdown onDataFetched={handleBarChartData} />
               <BarChart graphData={barchartData}/>
             </div>
-            <div className='w-[580px] bg-white mr-5'>
-                <LineChart graphData={barchartData}/>
-            </div>
-            
-        </div>
-        <div className='mt-10 flex flex-row p-6 justify-between '>
-            <div className='w-[580px] bg-white h-[320px]'>
-              <div className='p-3'>
-              <TopSellingProducts/>
-              </div>
-            </div>
-            <div className='w-[580px] bg-white h-[320px]'>
+            <div className='w-[560px] mr-5 bg-white h-[390px]'>
               <div className='p-3'>
               <TopFarmers/>
               </div>
             </div>
             
+        </div>
+        <div className='mt-10 flex flex-row p-6 justify-between '>
+            <div className='w-[560px] ml-5 bg-white h-[350px]'>
+              <div className='p-3'>
+              <TopSellingProducts/>
+              </div>
+            </div>
+            
+            <div className='w-[560px] bg-white mr-5'>
+                <LineChart graphData={barchartData}/>
+            </div>
         </div>  
         </div>
 

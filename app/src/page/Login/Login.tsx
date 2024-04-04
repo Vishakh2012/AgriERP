@@ -31,6 +31,10 @@ const LoginPage = () => {
                 const errorData = await response.json();
                 throw new Error(errorData.message || "Signin failed");
             }
+            const data = await response.json();
+            const { accessToken,fpoName } = data;
+            localStorage.setItem('accessToken', accessToken);
+            localStorage.setItem('fpoName',fpoName)
             login()
             navigate("/home");
         } catch (error) {
@@ -62,11 +66,8 @@ const LoginPage = () => {
                 throw new Error(errorData.message || "Signup failed");
             }
             const data = await response.json();
-            const { id, userName, email: userEmail, accessToken } = data;
+            const { id } = data;
             console.log("User ID:", id);
-            console.log("Username:", userName);
-            console.log("Email:", userEmail);
-            console.log("Access Token:", accessToken);
             setShowSignUpForm(false)
         } catch (error) {
             console.error("Signup Error:", error.message);

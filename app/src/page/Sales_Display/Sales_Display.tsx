@@ -3,10 +3,13 @@ import {
     Table,
     TableBody,
 <<<<<<< HEAD
+<<<<<<< HEAD
     TableCaption,
     TableCell,
     TableFooter,
 =======
+=======
+>>>>>>> 5b93208 (FEAT:)
     TableCell,
 >>>>>>> 074edb2 (FEAT:)
     TableHead,
@@ -216,13 +219,8 @@ const invoices = [
 
 const SalesDisplay = () => {
     const [data, setData] = useState([]);
-    const [filterCriteria, setFilterCriteria] = useState({
-        billNo: '',
-        saleDate: '',
-        finalAmount: ''
-    });
-    const [currentPage, setCurrentPage] = useState(1);
-    const [filteredData, setFilteredData] = useState([]);
+
+
 
     useEffect(() => {
         fetchData();
