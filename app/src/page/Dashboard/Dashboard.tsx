@@ -82,7 +82,8 @@ const Dashboard = () => {
             <div className='w-[560px] bg-white mr-5'>
                 <LineChart graphData={barchartData}/>
             </div>
-        </div>  
+            
+        </div>
         </div>
 
     </>
