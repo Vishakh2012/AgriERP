@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -208,15 +206,49 @@ const invoices = [
 ];
 
 
-
-const SalesDisplay = ()=> {
+const SalesDisplay = () => {
+  const [data, setData] = useState([]);
   const [filterCriteria, setFilterCriteria] = useState({
     billNo: '',
     saleDate: '',
     finalAmount: ''
   });
   const [currentPage, setCurrentPage] = useState(1);
+  const [filteredData, setFilteredData] = useState([]);
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:5050/api/purchase/getDetails');
+      const jsonData = await response.json();
+      setData(jsonData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  const applyFilter = () => {
+    const filteredInvoices = invoices.filter(invoice => {
+      return (
+        (filterCriteria.billNo === '' || invoice.billNo === filterCriteria.billNo) &&
+        (filterCriteria.saleDate === '' || invoice.saleDate === filterCriteria.saleDate) &&
+        (filterCriteria.finalAmount === '' || invoice.finalAmount === filterCriteria.finalAmount)
+      );
+    });
+    setFilteredData(filteredInvoices);
+    setCurrentPage(1); // Reset page to first page after filtering
+  };
+
+  const applyPagination = (data) => {
+    const startIndex = (currentPage - 1) * PAGE_SIZE;
+    return data.slice(startIndex, startIndex + PAGE_SIZE);
+  };
+
+  const pageCount = Math.ceil(filteredData.length / PAGE_SIZE);
+  const paginatedData = applyPagination(filteredData);
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
@@ -228,40 +260,20 @@ const SalesDisplay = ()=> {
 
   const handleFilterSubmit = (e) => {
     e.preventDefault();
-    // Add your filtering logic here
-    console.log("Filter criteria:", filterCriteria);
+    applyFilter();
   };
-  const filteredInvoices = invoices.filter(invoice => {
-    if (
-      (filterCriteria.billNo !== '' && invoice.billNo !== filterCriteria.billNo) ||
-      (filterCriteria.saleDate !== '' && invoice.saleDate !== filterCriteria.saleDate) ||
-      (filterCriteria.finalAmount !== '' && invoice.finalAmount !== filterCriteria.finalAmount)
-    ) {
-      return false; // Filter out invoices that don't match any criteria
-    }
-    return true; // Include invoices that meet all criteria
-  });
-  
-  const applyPagination = (data) => {
-    const startIndex = (currentPage - 1) * PAGE_SIZE;
-    return data.slice(startIndex, startIndex + PAGE_SIZE);
-  };
-
-  const pageCount = Math.ceil(filteredInvoices.length / PAGE_SIZE);
-  const paginatedData = applyPagination(filteredInvoices);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
-  
 
   return (
     <div>
       <div className='m-3'>
-      <Header text='Sales Details'/>
+        <Header text='Sales Details' />
       </div>
-      <div className="w-4/5 px-4 mt-12"> {/* Center the content */}
-      <form onSubmit={handleFilterSubmit} className="flex flex-wrap items-end justify-between mb-4">
+      <div className="w-4/5 px-4 mt-12">
+        <form onSubmit={handleFilterSubmit} className="flex flex-wrap items-end justify-between mb-4">
           <input
             type="text"
             name="billNo"
@@ -288,37 +300,35 @@ const SalesDisplay = ()=> {
           />
           <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"> Apply Filter</button>
         </form>
-        </div>
-      <div className=" w-4/5 px-4 mt-14 rounded-3xl"> 
-      <Table className="shadow-md w-full mx-auto rounded-3xl ">
-      <div className=" max-h-[600px] bg-white">
-        <TableHeader  className="sticky top-0 bg-white z-10">
-          <TableRow>
-            <TableHead className="w-[100px] text-center font-medium">Serial No</TableHead>
-            <TableHead className="w-[200px] text-center font-medium">Sale Date</TableHead>
-            <TableHead className="w-[200px] text-center font-medium">Bill No</TableHead>
-            <TableHead className="w-[200px] text-center font-medium">Merchant Id</TableHead>
-            <TableHead className="w-[200px] text-center font-medium">Final Amount</TableHead>
-            <TableHead className="w-[250px] text-center font-medium">Total Amount Without Discount</TableHead>
-
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-        {paginatedData.map((invoice,index) => (
-            <TableRow key={invoice.saleDate}>
-              <TableCell className="text-center">{(currentPage - 1) * PAGE_SIZE + index + 1}</TableCell>
-              <TableCell className="text-center">{invoice.saleDate}</TableCell>
-              <TableCell className="text-center">{invoice.billNo}</TableCell>
-              <TableCell className="text-center">{invoice.merchantId}</TableCell>
-              <TableCell className="text-center">{invoice.finalAmount}</TableCell>
-              <TableCell className="text-center">{invoice.totalAmountWithoutDiscount}</TableCell>
-
-            </TableRow>
-          ))}
-        </TableBody>
-        </div>
-      </Table>
-      <div className="flex justify-center mt-4">
+      </div>
+      <div className="w-4/5 px-4 mt-14 rounded-3xl">
+        <Table className="shadow-md w-full mx-auto rounded-3xl ">
+          <div className=" max-h-[600px] bg-white">
+            <TableHeader className="sticky top-0 bg-white z-10">
+              <TableRow>
+                <TableHead className="w-[100px] text-center font-medium">Serial No</TableHead>
+                <TableHead className="w-[200px] text-center font-medium">Sale Date</TableHead>
+                <TableHead className="w-[200px] text-center font-medium">Bill No</TableHead>
+                <TableHead className="w-[200px] text-center font-medium">Merchant Id</TableHead>
+                <TableHead className="w-[200px] text-center font-medium">Final Amount</TableHead>
+                <TableHead className="w-[250px] text-center font-medium">Total Amount Without Discount</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {paginatedData.map((invoice, index) => (
+                <TableRow key={invoice.saleDate}>
+                  <TableCell className="text-center">{(currentPage - 1) * PAGE_SIZE + index + 1}</TableCell>
+                  <TableCell className="text-center">{invoice.saleDate}</TableCell>
+                  <TableCell className="text-center">{invoice.billNo}</TableCell>
+                  <TableCell className="text-center">{invoice.merchantId}</TableCell>
+                  <TableCell className="text-center">{invoice.finalAmount}</TableCell>
+                  <TableCell className="text-center">{invoice.totalAmountWithoutDiscount}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </div>
+        </Table>
+        <div className="flex justify-center mt-4">
           {Array.from({ length: pageCount }, (_, i) => (
             <button
               key={i}
@@ -329,9 +339,9 @@ const SalesDisplay = ()=> {
             </button>
           ))}
         </div>
+      </div>
     </div>
-  </div>
   )
 }
 
-export default SalesDisplay
+export default SalesDisplay;

@@ -257,7 +257,7 @@ const Purchase_Display= ()=> {
       <form onSubmit={handleFilterSubmit} className="flex flex-wrap items-end justify-between mb-4">
           <input
             type="text"
-            name="billNo"
+            name="billN"
             value={filterCriteria.billNumber}
             onChange={handleFilterChange}
             placeholder="Bill Number"

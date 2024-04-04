@@ -9,10 +9,11 @@ import { IoPeople } from "react-icons/io5";
 import GraphDropdown from './GraphDropdown';
 import Header from '@/components/Header/Header';
 import BarChart from '@/components/Graph/BarChart';
+import LineChart from '@/components/Graph/LineChart';
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
-  const [graphData, setGraphData] = useState(sample);
+  const [barChartData, setBarChartData] = useState(sample);
 
   useEffect(() => {
     fetchData();
@@ -32,8 +33,8 @@ const Dashboard = () => {
     return Number(value) || 1; 
   };
 
-  const handleGraphData = (newGraphData) => {
-    setGraphData(newGraphData);
+  const handleBarChartData = (newGraphData) => {
+    setBarChartData(newGraphData);
   };
 
   return (
@@ -48,14 +49,13 @@ const Dashboard = () => {
           <DashboardCard text="Profit/Loss" icon={<IconContext.Provider value={{ color: "green",size:'24px', className: "mr-2" }}><GrMoney /></IconContext.Provider>} figures={convertToNumber(data[2])} difference={convertToNumber(data[6])}/>
           <DashboardCard text="Total Shareholders" icon={<IconContext.Provider value={{ color: "blue",size:'24px', className: "mr-2" }}><IoPeople /></IconContext.Provider>} figures={convertToNumber(data[3])} />
         </div>
-        <div className='mt-10 flex flex-col items-center'>
-     
-         
-            <div className='w-[600px] bg-white'>
-              <GraphDropdown onDataFetched={handleGraphData} />
-              <BarChart graphData={graphData}/>
+        <div className='mt-10 flex flex-row p-6 justify-between '>
+            <div className='w-[600px] bg-white ml-5'>
+              <GraphDropdown onDataFetched={handleBarChartData} />
+              <BarChart graphData={barChartData}/>
             </div>
-        </div>  
+            
+        </div>
         </div>
 
     </>
