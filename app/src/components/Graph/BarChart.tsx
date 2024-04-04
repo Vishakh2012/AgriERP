@@ -11,12 +11,12 @@ const BarChart: React.FC<{ graphData: BarChartData }> = ({ graphData }) => {
 
   const { labels, data } = graphData;
   const chartData = [labels, ...data];
-
+  console.log(chartData)
   return (
     <Chart
       chartType="ColumnChart"
       width="100%"
-      height="320px"
+      height="350px"
       data={chartData}
     />
   );
