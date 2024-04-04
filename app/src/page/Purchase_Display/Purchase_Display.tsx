@@ -5,7 +5,7 @@ import {
     TableCaption,
     TableCell,
     TableFooter,
-    TableCell,
+
     TableHead,
     TableHeader,
     TableRow,
@@ -120,4 +120,4 @@ const Purchase_Display = () => {
     )
 }
 
-export default PurchaseDisplay;
+export default Purchase_Display;

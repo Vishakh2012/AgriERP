@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import {
     Table,
     TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-
     TableCell,
     TableHead,
     TableHeader,
@@ -17,13 +13,8 @@ const PAGE_SIZE = 7;
 
 const SalesDisplay = () => {
     const [data, setData] = useState([]);
-    const [filterCriteria, setFilterCriteria] = useState({
-        billNo: '',
-        saleDate: '',
-        finalAmount: ''
-    });
-    const [currentPage, setCurrentPage] = useState(1);
-    const [filteredData, setFilteredData] = useState([]);
+
+
 
     useEffect(() => {
         fetchData();
