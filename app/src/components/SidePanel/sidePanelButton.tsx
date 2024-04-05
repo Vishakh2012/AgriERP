@@ -28,7 +28,6 @@ const SidePanelButton: React.FC<SidePanelButtonContent> = (props: SidePanelButto
             </Link>
         </div>
     );
-
 };
 
 export default SidePanelButton;
