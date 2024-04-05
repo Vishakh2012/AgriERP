@@ -11,7 +11,6 @@ const SidePanelButton: React.FC<SidePanelButtonContent> = (props: SidePanelButto
     const location = useLocation();
     const isActive = location.pathname === props.url;
 
-
     return (
         <div className={`flex z-60 items-center mb-6 relative pl-4`}>
             <div className={`w-1.5 h-full bg-blue-500 absolute left-0 top-0 ${isActive ? "" : "hidden"} rounded-r-md`}></div>
