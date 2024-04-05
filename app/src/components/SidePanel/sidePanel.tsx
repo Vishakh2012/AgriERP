@@ -11,17 +11,9 @@ import SidePanelButton from "./sidePanelButton";
 
 
 const Sidebar = () => {
-  const [showSidebar, setShowSidebar] = useState(true); // State to manage whether to show the sidebar or not
-
-  // Function to toggle the sidebar visibility
-  const toggleSidebar = () => {
-    setShowSidebar(!showSidebar);
-  };
-
-  return (
-    <div className='flex'>
-      {showSidebar && (
-        <div className="w-1/5 bg-white text-black hidden md:block">
+    return (
+        <div className='flex'>
+        <div className="md:w-1/5 bg-white text-black hidden md:block">
           <div className="fixed">
             <ul className='mt-14'>
               <li className="mb-7"><SidePanelButton text="Dashboard" url='/home' icon={<FaHome />}/></li>
@@ -34,15 +26,11 @@ const Sidebar = () => {
             </ul>
           </div>
         </div>
-      )}
-      <div className={`w-${showSidebar ? 4/5 : 'full'} flex-wrap  bg-gray-100 overflow-y-auto`}>
-      <div className="md:hidden"> {/* Render the toggle button only for small screens */}
-      <button onClick={toggleSidebar}><FaBars /></button>
-          </div>
-        {showSidebar && <Outlet />} {/* Render the content only if the sidebar is visible */}
+     <div className = 'bg-[#f0f7ff] w-full'> 
+     <Outlet/>
+     </div>{/* Render the content only if the sidebar is visible */}
       </div>
-    </div>
-  );
+    );
 };
 
 export default Sidebar;
