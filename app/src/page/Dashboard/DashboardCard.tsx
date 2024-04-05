@@ -16,9 +16,9 @@ interface DashboardCardContent {
 
 const DashboardCard: React.FC<DashboardCardContent> = (props) => {
     return (
-        <Card className="w-5/6 md:w-1/4 flex flesx-wrap  h-[130px] mb-2 justify-center items-center ">
+        <Card className="w-5/6 md:w-1/4 flex flex-wrap h-full justify-center items-center ">
             <CardHeader className="mt-0">
-                <div className="flex justify-between">
+                <div className="flex justify-between flex-wrap">
                     <div>
                     <CardTitle>{props.figures}</CardTitle>
                     </div>
@@ -30,7 +30,7 @@ const DashboardCard: React.FC<DashboardCardContent> = (props) => {
                 <h1>{props.text}</h1>
                 </div>
                 
-                <div className="mt-5 flex items-center">
+                <div className="md:mt-5 flex items-center flex-wrap">
                 {props.difference !== undefined && (
                         props.difference < 0 ? (
                             <>

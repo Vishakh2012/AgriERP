@@ -40,32 +40,32 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className="flex flex-col w-screen">
+            <div className="flex flex-col justify-around items-center md:items-start md:items-right w-full md:ml-4">
 
-                <div className='m-3'><Header text='Welcome to AgriERP' /></div>
+                <div className='justify-center items-center w-5/6 mt-4'><Header text='Welcome to AgriERP' /></div>
 
                 <DashBoardCardGroup />
-                <div className='w-2/3'>
-                    <div className='mt-10 flex flex-wrap p-6 justify-between '>
-                        <div className='w-1/2 bg-white ml-5'>
+                <div className='w-5/6 h-1/3'>
+                    <div className='mt-2 flex flex-col md:flex-row gap-x-2 rounded-lg'>
+                        <div className='w-full md:w-1/2 mb-2 md:mb-0 bg-white rounded-lg'>
                             <GraphDropdown onDataFetched={handleBarChartData} />
                             <BarChart graphData={barchartData} />
                         </div>
-                        <div className='w-[560px] mr-5 bg-white h-[390px]'>
+                        <div className='w-full md:w-1/2 mb-2 md:mb-0 bg-white h-[390px] rounded-lg'>
                             <div className='p-3'>
                                 <TopFarmers />
                             </div>
                         </div>
 
                     </div>
-                    <div className='mt-10 flex flex-wrap p-6 justify-between '>
-                        <div className='w-[560px] ml-5 bg-white h-[350px]'>
+                    <div className='flex flex-col md:flex-row rounded-lg gap-x-2 mt-2 '>
+                        <div className='w-full md:w-1/2 bg-white h-[390px]'>
                             <div className='p-3'>
                                 <TopSellingProducts />
                             </div>
                         </div>
 
-                        <div className='w-[560px] bg-white mr-5'>
+                        <div className='w-full md:w-1/2 bg-white mr-5'>
                             <LineChart graphData={barchartData} />
                         </div>
 
