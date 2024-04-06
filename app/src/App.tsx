@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 
 import Sidebar from "./components/SidePanel/sidePanel"
 import { Dashboard } from "./page/Dashboard/Dashboard"
+import ResponsiveSidePanel from "./components/SidePanel/ResponsiveSidePanel"
 
 function App() {
 
@@ -14,7 +15,7 @@ function App() {
 
   return (
     <>
-    <Sidebar/>
+    <ResponsiveSidePanel/>
     </>
   )
 }
