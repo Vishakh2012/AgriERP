@@ -1,5 +1,3 @@
-import { useState } from 'react';
-import { FaBars } from 'react-icons/fa'; // Import the icon you want to use for the toggle butto
 import { IoPeople } from "react-icons/io5";
 import { FaHome } from "react-icons/fa";
 import { PiHandbagFill } from "react-icons/pi";
@@ -13,8 +11,8 @@ import SidePanelButton from "./sidePanelButton";
 const Sidebar = () => {
     return (
         <div className='flex'>
-        <div className="md:w-1/5 bg-white text-black hidden md:block">
-          <div className="fixed">
+        <div className="md:w-1/5 bg-white text-black hidden md:block pr-4">
+          <div className="">
             <ul className='mt-14'>
               <li className="mb-7"><SidePanelButton text="Dashboard" url='/home' icon={<FaHome />}/></li>
               <li className="mb-7"><SidePanelButton text="Buying" url='/purchase' icon={<PiHandbagFill />}/></li>
