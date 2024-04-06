@@ -297,25 +297,28 @@ const Staff_Details = ()=> {
             <option value="descending">Descending</option>
           </select>
       </div>
-      <div className=" w-5/6 px-4 mt-14 rounded-3xl"> 
+      <div className="  px-4 mt-14 rounded-3xl"> 
       <Table className="shadow-md w-full mx-auto rounded-3xl ">
       <div className=" max-h-[600px] bg-white">
         <TableHeader  className="sticky top-0 bg-white z-10">
           <TableRow>
+          <TableHead className="w-[100px] text-center font-medium">Serial Number</TableHead>
                 {Object.keys(staffDetails[0]).map((key) => (
                   <TableHead key={key} className="w-[100px] text-center font-medium">{key}</TableHead>
                 ))}
               </TableRow>
         </TableHeader>
         <TableBody>
-        {paginatedData.map((staff,index) => (
-            <TableRow key={index}>
-            {Object.values(staff).map((value, i) => (
-              <TableCell key={i} className="text-center">{value}</TableCell>
-            ))}
-          </TableRow>
-          ))}
-        </TableBody>
+        {(paginatedData).map((staff, index) => (
+                  <TableRow key={index}>
+                    {/* Render the Serial Number cell only in the table body */}
+                    <TableCell className="text-center">{index + 1}</TableCell>
+                    {Object.values(staff).map((value, i) => (
+                      <TableCell key={i} className="text-center">{value}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
         </div>
       </Table>
       <div className="flex justify-center mt-4">
