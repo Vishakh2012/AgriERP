@@ -8,4 +8,4 @@ steps for installation and running
 
   this will ensure that the front-end the backend and the server all run together
   the frontend is running at `http://localhost:5173/`
-  the backend is running at   `http://localhost:5173/`
+  the backend is running at   `http://localhost:5050/`
