@@ -1,6 +1,10 @@
 import ProfileDropdown from '@/components/Header/ProfileDropdown';
 import React, { useState } from 'react';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaHome, FaBoxOpen } from 'react-icons/fa';
+import SidePanelButton from '../SidePanel/sidePanelButton';
+import { PiHandbagFill } from 'react-icons/pi';
+import { IoPeople } from 'react-icons/io5';
+import { IoMdClose } from "react-icons/io";
 interface Headercontent {
     text: string;
 }
@@ -38,6 +42,22 @@ const Header: React.FC<Headercontent> = (props) => {
                     <ProfileDropdown />
                 </div>
             </div>
+            {showSidebar && (
+                <div className="absolute top-0 left-0 transform md:hidden bg-white w-full h-full p-4 rounded-lg z-30">
+                    <button  className= 'float-right' onClick={toggleSidebar}><IoMdClose size={30}/></button>
+
+                    <ul className='mt-14'>
+                        <li className="mb-7"><SidePanelButton text="Dashboard" url='/home' icon={<FaHome />}  /></li>
+                        <li className="mb-7"><SidePanelButton text="Buying" url='/purchase' icon={<PiHandbagFill />} /></li>
+                        <li className="mb-7"><SidePanelButton text="Selling" url='/sales' icon={<PiHandbagFill />} /></li>
+                        <li className="mb-7"><SidePanelButton text="Products and Inventory" url='/products' icon={<FaBoxOpen />} /></li>
+                        <li className="mb-7"><SidePanelButton text="Staff" url='/staff' icon={<IoPeople />} /></li>
+                        <li className="mb-7"><SidePanelButton text="Stake Holders" url='/stakeholders' icon={<IoPeople />} /></li>
+                        <li className="mb-7"><SidePanelButton text="Farmers" url='/farmers' icon={<IoPeople />} /></li>
+                    </ul>
+
+                </div>
+            )}
         </div>
     );
 }
