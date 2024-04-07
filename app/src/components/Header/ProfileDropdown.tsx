@@ -1,3 +1,4 @@
+// ProfileDropdown.tsx
 import { Button } from "@/components/ui/button"
 import {
     Popover,
@@ -13,24 +14,24 @@ import { VscSignOut } from "react-icons/vsc";
 import { useAuth } from "../../page/Login/AuthContext";
 
 const ProfileDropdown = () => {
-    const {logout} = useAuth()
+    const { logout } = useAuth()
 
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <Button className="w-28 flex-none" variant="outline">
-                    <div className="flex justify-between">
+                <Button className="w-28 flex-none sm:w-auto" variant="outline">
+                    <div className="flex justify-between items-center">
                         <IconContext.Provider value={{ size: '20px' }}>
                             <RiUserSettingsLine />
                         </IconContext.Provider>
-                        <span className="pl-3">Options</span>
+                        <span className="hidden sm:block pl-3">Options</span>
                     </div>
                 </Button>
             </PopoverTrigger>
-            <PopoverContent className="w-40">
+            <PopoverContent className="w-40 sm:w-auto">
 
-              {/* Dropdown Content */}
-              
+                {/* Dropdown Content */}
+
                 <div className="flex items-center">
                     <IconContext.Provider value={{ size: '20px' }}>
                         <CgProfile />
@@ -45,7 +46,7 @@ const ProfileDropdown = () => {
                 </div>
                 <div className="border-t border-gray-200 pt-2 flex items-center">
                     <IconContext.Provider value={{ size: '20px' }}>
-                        <VscSignOut/>
+                        <VscSignOut />
                     </IconContext.Provider>
                     <Link to={''}><button onClick={logout} className="block py-2 ml-2">Logout</button></Link>
                 </div>

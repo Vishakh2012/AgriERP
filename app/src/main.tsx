@@ -16,6 +16,9 @@ import SalesDisplay from './page/Sales_Display/Sales_Display';
 import Product_Display from './page/Product_Display/Product_Display';
 import Purchase_Display from './page/Purchase_Display/Purchase_Display';
 import Staff_Details from './page/Staff_Details/Staff_Details';
+import Farmers from './page/Farmers/Forms';
+import FarmerForms from './page/Farmers/FarmerForms';
+
 
 
 
@@ -75,8 +78,9 @@ const router = createBrowserRouter([
 
         children: [
             {
-
-            }
+                path:'/farmers',
+                element:<FarmerForms/>
+            },
         ]
     },
     {
