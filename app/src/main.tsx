@@ -16,6 +16,8 @@ import SalesDisplay from './page/Sales/Sales_Display';
 import Product_Display from './page/Product_Display/Product_Display';
 import Purchase_Display from './page/Purchase_Display/Purchase_Display';
 import Staff_Details from './page/Staff_Details/Staff_Details';
+import FarmerForms from './page/Farmers/FarmerForms';
+
 import Sales_Form from './page/Sales/Sales_Form';
 
 
@@ -47,7 +49,8 @@ const router = createBrowserRouter([
                 element:<SalesDisplay />
             },
             {
-                
+                path:'/sales/form',
+                element:<Sales_Form/>  
             }
         ]
     },
@@ -79,10 +82,9 @@ const router = createBrowserRouter([
 
         children: [
             {
-                path: '/farmers',
-                element:<Sales_Form />
-
-            }
+                path:'/farmers',
+                element:<FarmerForms/>
+            },
         ]
     },
     {
