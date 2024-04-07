@@ -1,3 +1,4 @@
+// Header.tsx
 import ProfileDropdown from '@/components/Header/ProfileDropdown';
 import React, { useState } from 'react';
 import { FaBars, FaHome, FaBoxOpen } from 'react-icons/fa';
