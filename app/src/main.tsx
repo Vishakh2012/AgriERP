@@ -12,13 +12,14 @@ import Dashboard from './page/Dashboard/Dashboard';
 import LoginPage from './page/Login/Login';
 import ProtectedRoute from './page/Login/ProtectedRoute';
 import { AuthProvider } from './page/Login/AuthContext';
-import SalesDisplay from './page/Sales_Display/Sales_Display';
+import SalesDisplay from './page/Sales/Sales_Display';
 import Product_Display from './page/Product_Display/Product_Display';
 import Purchase_Display from './page/Purchase_Display/Purchase_Display';
 import Staff_Details from './page/Staff_Details/Staff_Details';
 import Farmers from './page/Farmers/Forms';
 import FarmerForms from './page/Farmers/FarmerForms';
 
+import Sales_Form from './page/Sales/Sales_Form';
 
 
 
@@ -47,6 +48,9 @@ const router = createBrowserRouter([
             {
                 path: '/sales',
                 element:<SalesDisplay />
+            },
+            {
+                
             }
         ]
     },
