@@ -16,17 +16,14 @@ import SalesDisplay from './page/Sales/Sales_Display';
 import Product_Display from './page/Product_Display/Product_Display';
 import Purchase_Display from './page/Purchase_Display/Purchase_Display';
 import Staff_Details from './page/Staff_Details/Staff_Details';
-<<<<<<< HEAD
 import FarmerForms from './page/Farmers/AddNewFarmer/FarmerForms';
 
 import Sales_Form from './page/Sales/Sales_Form';
 import Confirmation from './page/Farmers/AddNewFarmer/Confirmation';
 import StaffForms from './page/Staff_Details/AddNewStaff/StaffForms';
-=======
 import Farmers from './page/Farmers/Forms';
 import FarmerForms from './page/Farmers/FarmerForms';
 
->>>>>>> 2a7a00c (FEAT:)
 
 
 
@@ -97,13 +94,10 @@ const router = createBrowserRouter([
                 path:'/farmers',
                 element:<FarmerForms/>
             },
-<<<<<<< HEAD
             {
                 path:'/farmers/forms/success',
                 element:<Confirmation/>
             }
-=======
->>>>>>> 2a7a00c (FEAT:)
         ]
     },
     {
