@@ -1,5 +1,4 @@
-import React from 'react'
-import Forms from './Forms'
+import Forms from './FormsCombined'
 import Header from '@/components/Header/Header'
 
 const FarmerForms = () => {
