@@ -13,9 +13,8 @@ import {
 
 } from "@/components/ui/table"
 import Header from '@/components/Header/Header';
-
+import Pagination from '@/components/Pagination/Pagination'
 const PAGE_SIZE = 7;
-<<<<<<< HEAD
 const invoices = [
     {
         saleDate: "2024-01-01",
@@ -212,12 +211,10 @@ const invoices = [
 ];
 
 
+
 const SalesDisplay = () => {
 
-    return (
-    <>
-    </>
-  )
+    return ( <> </>)
 }
 
 export default SalesDisplay;

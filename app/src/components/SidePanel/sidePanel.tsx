@@ -11,7 +11,7 @@ import SidePanelButton from "./sidePanelButton";
 const Sidebar = () => {
     return (
         <div className='flex'>
-        <div className="md:w-1/5 bg-white text-black hidden md:block pr-4">
+        <div className="sm:w-[320px] h-screen bg-white text-black hidden sm:block">
           <div className="">
             <ul className='mt-14'>
               <li className="mb-7"><SidePanelButton text="Dashboard" url='/home' icon={<FaHome />}/></li>
