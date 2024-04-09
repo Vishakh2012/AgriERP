@@ -171,77 +171,15 @@ const staffDetails = [
 
 
 const Staff_Details = ()=> {
-    const {} =  useFilter(staffDetails) 
+    const { filterCriteria, filteredData, handleFilterChange } =  useFilter(staffDetails)
+    const {handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn} = useSort(filterCriteria, filteredData)
+    const {pageCount, paginatedData, handlePageChange, currentPage} = usePagination(5,sortedData) 
  return (
     <div>
-      <div className='m-3'>
+      <div className='ml-4'>
       <Header text='Staff Details'/>
-      <div className="w-4/5 px-4 mt-12"> {/* Center the content */}
-      <input
-            type="text"
-            value={filterCriteria}
-            onChange={handleFilterChange}
-            placeholder="Search"
-            className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
-          />
-          <select
-            id="sortSelect"
-            value={sortColumn}
-            onChange={(e) => handleColumnSort(e.target.value)}
-            className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
-          >
-            <option value="">Sort By</option>
-            {Object.keys(staffDetails[0]).map(column => (
-              <option key={column} value={column}>{column}</option>
-            ))}
-          </select>
-          <select
-           id="orderSelect"
-            value={sortOption}
-            onChange={handleSortOptionChange}
-            className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
-          >
-            <option value="">Order</option>
-            <option value="ascending">Ascending</option>
-            <option value="descending">Descending</option>
-          </select>
-      </div>
-      <div className="  px-4 mt-14 rounded-3xl"> 
-      <Table className="shadow-md w-full mx-auto rounded-3xl ">
-      <div className=" max-h-[600px] bg-white">
-        <TableHeader  className="sticky top-0 bg-white z-10">
-          <TableRow>
-          <TableHead className="w-[100px] text-center font-medium">Serial Number</TableHead>
-                {Object.keys(staffDetails[0]).map((key) => (
-                  <TableHead key={key} className="w-[100px] text-center font-medium">{key}</TableHead>
-                ))}
-              </TableRow>
-        </TableHeader>
-        <TableBody>
-        {(paginatedData).map((staff, index) => (
-                  <TableRow key={index}>
-                    {/* Render the Serial Number cell only in the table body */}
-                    <TableCell className="text-center">{index + 1}</TableCell>
-                    {Object.values(staff).map((value, i) => (
-                      <TableCell key={i} className="text-center">{value}</TableCell>
-                    ))}
-                  </TableRow>
-                ))}
-              </TableBody>
-        </div>
-      </Table>
-      <div className="flex justify-center mt-4">
-          {Array.from({ length: pageCount }, (_, i) => (
-            <button
-              key={i}
-              onClick={() => handlePageChange(i + 1)}
-              className={`mx-1 px-3 py-1 rounded-full border ${currentPage === i + 1 ? 'bg-blue-500 text-white' : 'hover:bg-blue-500 hover:text-white border-gray-300'}`}
-            >
-              {i + 1}
-            </button>
-          ))}
-        </div>
-    </div>
+    <TableTools filterCriteria= {filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={staffDetails}/>
+    <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={staffDetails}/>
     </div>
     </div>
 )
