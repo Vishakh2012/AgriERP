@@ -9,8 +9,8 @@ import TopFarmers from './TopFarmers';
 import DashBoardCardGroup from './DashboardShortCards';
 
 const Dashboard = () => {
-    const [data, setData] = useState([]);
-    const [barChartData, setBarChartData] = useState(sample);
+    const [barchartData, setBarChartData] = useState(sample);
+
 
     useEffect(() => {
         fetchData();
@@ -40,9 +40,9 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className="flex flex-col justify-around items-center md:items-start md:ml-4 w-[100%-4rem] ">
+            <div className="flex flex-col justify-around items-center md:items-start md:items-right w-full md:ml-4">
 
-               <Header text='Welcome to AgriERP' />
+                <div className='justify-center items-center w-5/6 mt-4'><Header text='Welcome to AgriERP' /></div>
 
                 <DashBoardCardGroup />
                 <div className='w-5/6 h-1/3'>
@@ -71,19 +71,6 @@ const Dashboard = () => {
 
                     </div>
                 </div>
-            </div>
-            <div className='mt-10 flex flex-row p-6 justify-between '>
-                <div className='w-[560px] ml-5 bg-white h-[350px]'>
-                    <div className='p-3'>
-                        <TopSellingProducts />
-                    </div>
-                </div>
-
-                <div className='w-[600px] bg-white ml-5'>
-                    <GraphDropdown onDataFetched={handleBarChartData} />
-                    <BarChart graphData={barChartData} />
-                </div>
-
             </div>
 
         </>

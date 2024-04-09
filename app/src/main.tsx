@@ -21,9 +21,6 @@ import FarmerForms from './page/Farmers/AddNewFarmer/FarmerForms';
 import Sales_Form from './page/Sales/Sales_Form';
 import Confirmation from './page/Farmers/AddNewFarmer/Confirmation';
 import StaffForms from './page/Staff_Details/AddNewStaff/StaffForms';
-import Farmers from './page/Farmers/Forms';
-import FarmerForms from './page/Farmers/FarmerForms';
-
 
 
 

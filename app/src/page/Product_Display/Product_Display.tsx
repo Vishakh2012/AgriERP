@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import {
     Table,
     TableBody,
@@ -234,29 +234,28 @@ const products = [
 
 
 
+const Product_Display= ()=> {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-const Product_Display = () => {
-    const [data, setData] = useState([]);
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        try {
-            const response = await fetch('http://localhost:5050/api/purchase/getDetails');
-            const jsonData = await response.json();
-            setData(jsonData);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-    const [filterCriteria, setFilterCriteria] = useState({
-        itemCode: '',
-        HSN: '',
-        name: ''
-    });
-    const [currentPage, setCurrentPage] = useState(1);
-    const [filteredProducts, setFilteredProducts] = useState(products);
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:5050/api/purchase/getDetails');
+      const jsonData = await response.json();
+      setData(jsonData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+  const [filterCriteria, setFilterCriteria] = useState({
+    itemCode: '',
+    HSN: '',
+    name: ''
+  });
+  const [currentPage, setCurrentPage] = useState(1);
+  const [filteredProducts, setFilteredProducts] = useState(products);
 
 
     const handleFilterChange = (e) => {
@@ -267,29 +266,35 @@ const Product_Display = () => {
         }));
     };
 
-    const handleFilterSubmit = (e) => {
-        e.preventDefault();
-        // Apply filter criteria to products
-        const filteredData = data.filter(product => {
-            return (
-                (filterCriteria.itemCode === '' || product.itemCode === filterCriteria.itemCode) &&
-                (filterCriteria.HSN === '' || product.hsn === filterCriteria.HSN) &&
-                (filterCriteria.name === '' || product.name === filterCriteria.name)
-            );
-        });
-        // Update state with filtered data
-        setFilteredProducts(filteredData);
-        // Reset page to first page after filtering
-        setCurrentPage(1);
-    };
+  const handleFilterSubmit = (e) => {
+    e.preventDefault();
+    // Apply filter criteria to products
+    const filteredData = data.filter(product => {
+      return (
+        (filterCriteria.itemCode === '' || product.itemCode === filterCriteria.itemCode) &&
+        (filterCriteria.HSN === '' || product.hsn === filterCriteria.HSN) &&
+        (filterCriteria.name === '' || product.name === filterCriteria.name)
+      );
+    });
+    // Update state with filtered data
+    setFilteredProducts(filteredData);
+    // Reset page to first page after filtering
+    setCurrentPage(1);
+  };
+  
+  const applyPagination = (data) => {
+    const startIndex = (currentPage - 1) * PAGE_SIZE;
+    return data.slice(startIndex, startIndex + PAGE_SIZE);
+  };
 
-    const applyPagination = (data) => {
-        const startIndex = (currentPage - 1) * PAGE_SIZE;
-        return data.slice(startIndex, startIndex + PAGE_SIZE);
-    };
+  const pageCount = Math.ceil(filteredProducts.length / PAGE_SIZE);
+  const paginatedData = applyPagination(filteredProducts);
 
-    const pageCount = Math.ceil(filteredProducts.length / PAGE_SIZE);
-    const paginatedData = applyPagination(filteredProducts);
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -368,7 +373,82 @@ const Product_Display = () => {
 
             </div>
         </div>
-    )
+      <div className="w-4/5 px-4 mt-12"> {/* Center the content */}
+      <form onSubmit={handleFilterSubmit} className="flex flex-wrap items-end justify-between mb-4">
+          <input
+            type="text"
+            name="itemCode"
+            value={filterCriteria.itemCode}
+            onChange={handleFilterChange}
+            placeholder="Item Code"
+            className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+          />
+          <input
+            type="text"
+            name="HSN"
+            value={filterCriteria.HSN}
+            onChange={handleFilterChange}
+            placeholder="HSN"
+            className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+          />
+          <input
+            type="text"
+            name="name"
+            value={filterCriteria.name}
+            onChange={handleFilterChange}
+            placeholder="Name"
+            className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
+          />
+          <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"> Apply Filter</button>
+        </form>
+        </div>
+      <div className=" w-4/5 px-4 mt-16 rounded-3xl"> 
+      <Table className="shadow-md w-full mx-auto rounded-3xl ">
+      <div className=" max-h-[600px] bg-white">
+        <TableHeader  className="sticky top-0 bg-white z-10">
+          <TableRow>
+            <TableHead className="w-[100px] text-center font-medium">Serial No</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Category</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Name</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">HSN</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Item Code</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Price</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Tax</TableHead>
+            <TableHead className="w-[150px] text-center font-medium">Current Stock</TableHead>
+
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+        {paginatedData.map((product,index) => (
+            <TableRow key={product.hsn}>
+              <TableCell className="text-center">{(currentPage - 1) * PAGE_SIZE + index + 1}</TableCell>
+              <TableCell className="text-center">{product.category}</TableCell>
+              <TableCell className="text-center">{product.name}</TableCell>
+              <TableCell className="text-center">{product.hsn}</TableCell>
+              <TableCell className="text-center">{product.itemCode}</TableCell>
+              <TableCell className="text-center">{product.price}</TableCell>
+              <TableCell className="text-center">{product.tax}</TableCell>
+              <TableCell className="text-center">{product.currentStock}</TableCell>
+
+            </TableRow>
+          ))}
+        </TableBody>
+        </div>
+      </Table>
+      <div className="flex justify-center mt-4">
+          {Array.from({ length: pageCount }, (_, i) => (
+            <button
+              key={i}
+              onClick={() => handlePageChange(i + 1)}
+              className={`mx-1 px-3 py-1 rounded-full border ${currentPage === i + 1 ? 'bg-blue-500 text-white' : 'hover:bg-blue-500 hover:text-white border-gray-300'}`}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+    </div>
+  </div>
+  )
 }
 
 export default Product_Display
