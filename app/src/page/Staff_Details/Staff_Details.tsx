@@ -171,85 +171,8 @@ const staffDetails = [
 
 
 const Staff_Details = ()=> {
-  const [filterCriteria, setFilterCriteria] = useState('');
-  const [currentPage, setCurrentPage] = useState(1);
-  const [sortOption, setSortOption] = useState('');
-  const [sortedData, setSortedData] = useState([]);
-  const [sortColumn, setSortColumn] = useState('');
-  
-
-  const handleFilterChange = (e) => {
-    const { value } = e.target;
-    setFilterCriteria(value);
-  };
-
-  const handleSortOptionChange = (e) => {
-    const { value } = e.target;
-    setSortOption(value);
-  };
-
-  const applySorting = (data) => {
-    if (sortColumn === '') return data;
-    const sorted = [...data].sort((a, b) => {
-      if (sortOption === 'ascending') {
-        return a[sortColumn].localeCompare(b[sortColumn]);
-      } else {
-        return b[sortColumn].localeCompare(a[sortColumn]);
-      }
-    });
-    return sorted;
-  };
-
-  const applyPagination = (data) => {
-    const startIndex = (currentPage - 1) * PAGE_SIZE;
-    return data.slice(startIndex, startIndex + PAGE_SIZE);
-  };
-
-  const pageCount = Math.ceil(sortedData.length / PAGE_SIZE);
-  const paginatedData = applyPagination(sortedData);
-
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowLeft' && currentPage > 1) {
-        setCurrentPage(currentPage - 1);
-      } else if (e.key === 'ArrowRight' && currentPage < pageCount) {
-        setCurrentPage(currentPage + 1);
-      } else if (e.key === 'ArrowUp') {
-        const sortSelect = document.getElementById('sortSelect');
-        if (sortSelect.selectedIndex > 0) {
-          sortSelect.selectedIndex--;
-        }
-      }
-      if (['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) {
-        e.preventDefault();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [currentPage, pageCount]);
-
-  useEffect(() => {
-    const sortedAndFilteredData = applySorting(staffDetails.filter(invoice => {
-      return Object.values(invoice).some(value =>
-        value.toString().toLowerCase().includes(filterCriteria.toLowerCase())
-      );
-    }));
-    setSortedData(sortedAndFilteredData);
-  }, [filterCriteria, sortColumn, sortOption]);
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  const handleColumnSort = (column) => {
-    setSortColumn(column);
-    setSortOption('ascending');
-  };
-  return (
+    const {} =  useFilter(staffDetails) 
+ return (
     <div>
       <div className='m-3'>
       <Header text='Staff Details'/>
