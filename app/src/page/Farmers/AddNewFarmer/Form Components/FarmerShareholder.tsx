@@ -68,7 +68,7 @@ const FarmerShareholder = ({ formData, handleChange, handleKeyPress }) => {
           onChange={handleChange}
           placeholder="Number Of Shares"
           required
-          disabled={formData.shareholder=='no'}
+          disabled={formData.shareholder=='No'}
           onKeyDown={handleKeyPress} 
           />
         </div>

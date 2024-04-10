@@ -18,6 +18,8 @@ interface TableContents {
     currentPage: number,
     handlePageChange: (e: number) => void
     Details: Data[]
+    edit?: boolean
+    delete?: boolean
 
 }
 const TableShow: React.FC<TableContents> = (props) => {
@@ -31,6 +33,7 @@ const TableShow: React.FC<TableContents> = (props) => {
                             {Object.keys(props.Details[0]).map((key) => (
                                 <TableHead key={key} className="font-medium">{key}</TableHead>
                             ))}
+                            {(props.edit || props.delete) && <TableHead className="font-medium">Actions</TableHead>}
                         </TableRow>
                     </TableHeader>
                     <TableBody>

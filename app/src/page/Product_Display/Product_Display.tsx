@@ -246,7 +246,7 @@ const Product_Display = () => {
     return (
         <div>
             <div className='m-3'>
-                <Header text='Staff Details' />
+                <Header text='Product Details' />
                 <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={productDetails} />
                 <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={productDetails} />
             </div>
