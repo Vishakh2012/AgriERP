@@ -1,6 +1,5 @@
 import InputComponent from '@/components/Input/Input'
 
-
 const FarmerShareholder = ({ formData, handleChange, handleKeyPress }) => {
   return (
     <>
@@ -56,8 +55,8 @@ const FarmerShareholder = ({ formData, handleChange, handleKeyPress }) => {
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
           </select>
         </div>
         <div>

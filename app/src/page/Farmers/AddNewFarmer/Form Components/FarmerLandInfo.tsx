@@ -1,14 +1,13 @@
 import InputComponent from '@/components/Input/Input'
 import { useEffect, useState } from 'react';
 import Select from 'react-select'
-import cropsData from './cropsData.json';
+import cropsData from '../cropsData.json';
 
-const FarmerLandInfo = ({ formData, handleChange, handleKeyPress ,handleCropChange }) => {
+const FarmerLandInfo = ({ formData, handleChange, handleKeyPress, handleCropChange }) => {
 
-    const [products,setProducts]=useState(cropsData)
-    useEffect(() => {
-      fetchProducts();
-  
+  const [products,setProducts]=useState(cropsData)
+  useEffect(() => {
+    fetchProducts();
   }, []);
   
   const fetchProducts = async () => {
@@ -22,7 +21,7 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress ,handleCropChan
           );
           const data = await response.json();
           setProducts(data);
-      } catch (error) {
+    } catch (error) {
           console.error('Error fetching data:', error);
       }
   };
@@ -30,6 +29,25 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress ,handleCropChan
   return (
     <>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+          <label htmlFor="farmerType" className="block text-sm font-medium text-gray-700">Farmer Type</label>
+          <select
+            id="farmerType"
+            name='farmerType'
+            value={formData.farmerType}
+            onChange={handleChange}
+            required
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+          >
+            <option value="">Select</option>
+            <option value="Small Farmer">Small Farmer</option>
+            <option value="Marginal Farmer">Marginal Farmer</option>
+            <option value="Landless Farmer">Landless Farmer</option>
+            <option value="Tenant Farmer">Tenant Farmer</option>
+            <option value="Large Farmer">Large Farmer</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
         <div>
           <label htmlFor="landType" className="block text-sm font-medium text-gray-700">Land Type</label>
           <select
@@ -41,8 +59,8 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress ,handleCropChan
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select</option>
-            <option value="yes">Owned</option>
-            <option value="no">Lease</option>
+            <option value="Owned">Owned</option>
+            <option value="Lease">Lease</option>
           </select>
         </div>
         <div>
@@ -57,9 +75,7 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress ,handleCropChan
           onKeyDown={handleKeyPress}
         />
         </div>
-        </div>
-
-        <div className="grid grid-cols-1 gap-5 ">
+        
             <div>
         <label htmlFor="cropsProduced" className="block text-sm font-medium text-gray-700">Crops Produced</label>
           <Select
@@ -73,8 +89,7 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress ,handleCropChan
   
           />
           </div>
-          </div>
-
+</div>
     </>
   )
 }

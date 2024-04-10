@@ -1,6 +1,5 @@
 import InputComponent from '@/components/Input/Input'
 
-
 const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
   return (
     <div>
@@ -53,9 +52,9 @@ const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="others">Others</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
           </select>
         </div>
       <div>
@@ -105,11 +104,11 @@ const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select category</option>
-            <option value="sc">SC</option>
-            <option value="st">ST</option>
-            <option value="obc">OBC</option>
-            <option value="general">General</option>
-            <option value="others">Others</option>
+            <option value="SC">SC</option>
+            <option value="ST">ST</option>
+            <option value="OBC">OBC</option>
+            <option value="General">General</option>
+            <option value="Others">Others</option>
           </select>
         </div>
         <div>

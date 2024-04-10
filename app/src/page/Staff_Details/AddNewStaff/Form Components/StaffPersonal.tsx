@@ -1,7 +1,7 @@
 import InputComponent from '@/components/Input/Input'
 
 
-const FormsPersonal = ({ formData, handleChange, handleKeyPress }) => {
+const StaffPersonal = ({ formData, handleChange, handleKeyPress }) => {
   return (
     <div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
@@ -53,9 +53,30 @@ const FormsPersonal = ({ formData, handleChange, handleKeyPress }) => {
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="others">Others</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="bloodGroup" className="block text-sm font-medium text-gray-700">Blood Group</label>
+          <select
+            id="bloodGroup"
+            name="bloodGroup"
+            value={formData.bloodGroup}
+            onChange={handleChange}
+            required
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+          >
+            <option value="">Select</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
           </select>
         </div>
       <div>
@@ -124,4 +145,4 @@ const FormsPersonal = ({ formData, handleChange, handleKeyPress }) => {
   )
 }
 
-export default FormsPersonal
+export default StaffPersonal
