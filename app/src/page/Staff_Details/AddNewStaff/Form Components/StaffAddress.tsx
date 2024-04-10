@@ -1,7 +1,7 @@
 import InputComponent from '@/components/Input/Input'
 
 
-const FarmerAddress = ({ formData, handleChange, handleKeyPress }) => {
+const StaffAddress = ({ formData, handleChange, handleKeyPress }) => {
    
   return (
     
@@ -67,19 +67,6 @@ const FarmerAddress = ({ formData, handleChange, handleKeyPress }) => {
         />
         </div>
         <div>
-        
-        <InputComponent
-          label="Block"
-          type="text"
-          name="block"
-          value={formData.block}
-          onChange={handleChange}
-          placeholder="Block"
-          required
-          onKeyDown={handleKeyPress}
-        />
-        </div>
-        <div>
         <InputComponent
           label="Post Office"
           type="text"
@@ -109,4 +96,4 @@ const FarmerAddress = ({ formData, handleChange, handleKeyPress }) => {
   )
 }
 
-export default FarmerAddress
+export default StaffAddress

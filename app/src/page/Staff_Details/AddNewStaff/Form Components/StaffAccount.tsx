@@ -30,8 +30,7 @@ const StaffAccount = ({ formData, handleChange, handleKeyPress }) => {
           onKeyDown={handleKeyPress}
         />
         </div>
-      </div>
-      <div className='grid grid-cols-1'>
+      
         <div>
         <InputComponent
           label="Bank Account Number"
@@ -44,8 +43,19 @@ const StaffAccount = ({ formData, handleChange, handleKeyPress }) => {
           onKeyDown={handleKeyPress}
         />
         </div>
-      </div>
-      
+        <div>
+    <InputComponent
+          label="Salary"
+          type="text"
+          name="salary"
+          value={formData.salary}
+          onChange={handleChange}
+          placeholder="salary"
+          required
+          onKeyDown={handleKeyPress}
+        />
+        </div>
+        </div>
         </>
   )
 }

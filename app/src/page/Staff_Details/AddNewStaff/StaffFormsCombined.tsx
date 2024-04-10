@@ -1,14 +1,14 @@
-import  { useState } from 'react';
+import  { SetStateAction, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom'
-import StaffPersonal from './StaffPersonal';
-import StaffAddress from './StaffAddress';
-import StaffAccount from './StaffAccount';
+import StaffPersonal from './Form Components/StaffPersonal';
+import StaffAddress from './Form Components/StaffAddress';
+import StaffAccount from './Form Components/StaffAccount';
 
 
 const StaffFormsCombined = () => {
 
-
+  const [activeComponent, setActiveComponent] = useState("personal");
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
@@ -30,6 +30,8 @@ const StaffFormsCombined = () => {
     postOffice:'',
     dob:'',
     dateOfJoin:'',
+    salary:'',
+    bloodGroup:''
   });
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
@@ -56,7 +58,9 @@ const StaffFormsCombined = () => {
       formData.bankAccountNumber !== '' &&
       formData.ifscCode !== '' &&
       formData.state !== '' &&
-      formData.pincode !== '' 
+      formData.pincode !== '' &&
+      formData.dateOfJoin!=='' &&
+      formData.dob!==''
     );
   };
 
@@ -101,15 +105,52 @@ const StaffFormsCombined = () => {
     }
   };
 
+  const handleNextButtonClick = () => {
+    switch (activeComponent) {
+      case "personal":
+        setActiveComponent("address");
+        break;
+      case "address":
+        setActiveComponent("account");
+        break;
+    }
+  }
+  const handleButtonClick = (component: SetStateAction<string>) => {
+    setActiveComponent(component);
+  };
+
 
   return (
     <div className='m-6'>
+      <div className="flex justify-center gap-1">
+        <Button className="rounded-none" onClick={() => handleButtonClick("personal")}>Personal</Button>
+        <Button className="rounded-none" onClick={() => handleButtonClick("address")}>Address</Button>
+        <Button className="rounded-none" onClick={() => handleButtonClick("account")}>Account</Button>
+      </div>
     <form onSubmit={handleSubmit} className='grid gap-5 p-4'>
+      {activeComponent === 'personal' &&
+      <>
       <StaffPersonal formData={formData} handleChange={handleChange} handleKeyPress={handleKeyPress}/>
+      <Button type="button" onClick={handleNextButtonClick} className="mt-3 w-full sm:w-auto justify-self-center">
+          Next
+        </Button>
+      </>
+  }
+   {activeComponent === 'address' &&   
+   <>
       <StaffAddress formData={formData} handleChange={handleChange} handleKeyPress={handleKeyPress}/>
-    
+      <Button type="button" onClick={handleNextButtonClick} className="mt-3 w-full sm:w-auto justify-self-center">
+          Next
+        </Button>
+        </>
+    }
+    {activeComponent === 'account' &&
+        <>
         <StaffAccount formData={formData} handleChange={handleChange} handleKeyPress={handleKeyPress}/>
-      <Button className='mt-3 w-full sm:w-auto justify-self-center' type="submit">Submit</Button>
+        <Button className='mt-3 w-full sm:w-auto justify-self-center' type="submit">Submit</Button>
+        </>
+    }
+      
     </form>
     </div>
   );

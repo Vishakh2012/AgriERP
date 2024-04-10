@@ -1,13 +1,9 @@
-import InputComponent from '@/components/Input/Input'
+import InputComponent from "@/components/Input/Input";
 
-
-const StaffAddress = ({ formData, handleChange, handleKeyPress }) => {
-   
+const FarmerAddress= ({ formData, handleChange, handleKeyPress }) => {
   return (
-    
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-        <div>
-        
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
         <InputComponent
           label="Address Line 1"
           type="text"
@@ -18,8 +14,8 @@ const StaffAddress = ({ formData, handleChange, handleKeyPress }) => {
           required
           onKeyDown={handleKeyPress}
         />
-        </div>
-        <div>
+      </div>
+      <div>
         <InputComponent
           label="Address Line 2"
           type="text"
@@ -29,8 +25,8 @@ const StaffAddress = ({ formData, handleChange, handleKeyPress }) => {
           placeholder="Address Line 2"
           onKeyDown={handleKeyPress}
         />
-        </div>
-        <div>
+      </div>
+      <div>
         <InputComponent
           label="State"
           type="text"
@@ -41,8 +37,8 @@ const StaffAddress = ({ formData, handleChange, handleKeyPress }) => {
           required
           onKeyDown={handleKeyPress}
         />
-        </div>
-        <div>
+      </div>
+      <div>
         <InputComponent
           label="District"
           type="text"
@@ -53,8 +49,8 @@ const StaffAddress = ({ formData, handleChange, handleKeyPress }) => {
           required
           onKeyDown={handleKeyPress}
         />
-        </div>
-        <div>
+      </div>
+      <div>
         <InputComponent
           label="City"
           type="text"
@@ -65,8 +61,20 @@ const StaffAddress = ({ formData, handleChange, handleKeyPress }) => {
           required
           onKeyDown={handleKeyPress}
         />
-        </div>
-        <div>
+      </div>
+      <div>
+        <InputComponent
+          label="Block"
+          type="text"
+          name="block"
+          value={formData.block}
+          onChange={handleChange}
+          placeholder="Block"
+          required
+          onKeyDown={handleKeyPress}
+        />
+      </div>
+      <div>
         <InputComponent
           label="Post Office"
           type="text"
@@ -77,8 +85,8 @@ const StaffAddress = ({ formData, handleChange, handleKeyPress }) => {
           required
           onKeyDown={handleKeyPress}
         />
-        </div>
-        <div>
+      </div>
+      <div>
         <InputComponent
           label="Pincode"
           type="text"
@@ -89,22 +97,9 @@ const StaffAddress = ({ formData, handleChange, handleKeyPress }) => {
           required
           onKeyDown={handleKeyPress}
         />
-        </div>
-        <div>
-    <InputComponent
-          label="Salary"
-          type="text"
-          name="salary"
-          value={formData.salary}
-          onChange={handleChange}
-          placeholder="salary"
-          required
-          onKeyDown={handleKeyPress}
-        />
-        </div>
-        </div>
-    
-  )
-}
+      </div>
+    </div>
+  );
+};
 
-export default StaffAddress
+export default FarmerAddress;

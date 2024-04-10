@@ -4,8 +4,8 @@ import Header from '@/components/Header/Header'
 const FarmerForms = () => {
   return (
     <>
-    <Header text='Add New Farmer'/>
-    <Forms/>
+      <Header text='Add New Farmer'/>
+      <Forms/>
     </>
   )
 }
