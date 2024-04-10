@@ -10,6 +10,8 @@ import Pagination from "../Pagination/Pagination";
 import { Button } from "../ui/button";
 import { IoMdClose } from "react-icons/io";
 import { useEffect, useState } from "react";
+import { MdEdit } from "react-icons/md"
+import { MdDelete } from "react-icons/md"
 
 interface Data {
     [key: string]: string;
@@ -22,6 +24,8 @@ interface TableContents {
     handlePageChange: (e: number) => void;
     Details: Data[];
     PAGE_SIZE: number
+    edit:boolean
+    delete:boolean
 }
 
 const TableShow: React.FC<TableContents> = (props) => {
@@ -73,7 +77,7 @@ const TableShow: React.FC<TableContents> = (props) => {
                                     <option value="restore">Restore</option>
                                 </select>
                             </TableHead>
-                            <TableHead className="font-medium">Serial Number</TableHead>
+                            <TableHead className="font-medium">Sl No</TableHead>
                             {visibleHeaders.map((key) => (
                                 <TableHead key={key} className="font-medium">
                                     <span className="flex flex-row justify-center items-center">
@@ -98,6 +102,18 @@ const TableShow: React.FC<TableContents> = (props) => {
                                         {staff[key]}
                                     </TableCell>
                                 ))}
+                                <TableCell className="flex justify-center">
+                                        {props.edit && (
+                                            <button className=" border-2 rounded mr-2">
+                                                <MdEdit/>
+                                            </button>
+                                        )}
+                                        {props.delete && (
+                                            <button  className=" border-2 rounded mr-2">
+                                                <MdDelete/>
+                                            </button>
+                                        )}
+                                    </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

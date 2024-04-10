@@ -16,13 +16,13 @@ const farmerDetails=[
 const FarmerTable = () => {
     const { filterCriteria, filteredData, handleFilterChange } = useFilter(farmerDetails)
     const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filterCriteria, filteredData)
-    const { pageCount, paginatedData, handlePageChange, currentPage } = usePagination(5, sortedData)
+    const { pageCount, paginatedData, handlePageChange, currentPage } = usePagination(sortedData)
     return (
         <div>
             <div className='m-3'>
                 <Header text='Product Details' />
                 <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={farmerDetails} buttonText='Add New Farmer' buttonRoute='/farmers/forms'/>
-                <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={farmerDetails} edit={true} />
+                <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={farmerDetails} PAGE_SIZE={5} edit={true} delete={true}/>
             </div>
         </div>
     )
