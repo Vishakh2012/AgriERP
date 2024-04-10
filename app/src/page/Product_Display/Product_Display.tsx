@@ -242,13 +242,13 @@ const productDetails = [
 const Product_Display = () => {
     const { filterCriteria, filteredData, handleFilterChange } = useFilter(productDetails)
     const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filterCriteria, filteredData)
-    const { pageCount, paginatedData, handlePageChange, currentPage } = usePagination(5, sortedData)
+    const { pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE } = usePagination(sortedData)
     return (
         <div>
             <div className='m-3'>
                 <Header text='Staff Details' />
                 <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={productDetails} />
-                <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={productDetails} />
+                <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={productDetails} PAGE_SIZE={PAGE_SIZE} />
             </div>
         </div>
     )

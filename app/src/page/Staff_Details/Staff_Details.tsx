@@ -173,13 +173,13 @@ const staffDetails = [
 const Staff_Details = ()=> {
     const { filterCriteria, filteredData, handleFilterChange } =  useFilter(staffDetails)
     const {handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn} = useSort(filterCriteria, filteredData)
-    const {pageCount, paginatedData, handlePageChange, currentPage} = usePagination(5,sortedData) 
+    const {pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE} = usePagination(sortedData) 
  return (
     <div>
       <div className='ml-4'>
       <Header text='Staff Details'/>
     <TableTools filterCriteria= {filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={staffDetails}/>
-    <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={staffDetails}/>
+    <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE}/>
     </div>
     </div>
 )

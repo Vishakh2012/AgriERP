@@ -4,10 +4,11 @@ interface Data {
     [key: string]: string;
 }
 
-const usePagination = (PAGE_SIZE: number, sortedData: Data[]) => {
+const usePagination = (sortedData: Data[]) => {
+    const PAGE_SIZE = 7
     const [currentPage, setCurrentPage] = useState<number>(1);
 
-    const applyPagination = (data) => {
+    const applyPagination = (data: Data[]) => {
         const startIndex = (currentPage - 1) * PAGE_SIZE;
         return data.slice(startIndex, startIndex + PAGE_SIZE);
     };
@@ -33,7 +34,7 @@ const usePagination = (PAGE_SIZE: number, sortedData: Data[]) => {
             window.removeEventListener('keydown', handleKeyDown)
         }
     },[pageCount, currentPage])
-    return {pageCount, paginatedData, handlePageChange, currentPage}
+    return {pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE}
 }
 
 export default usePagination
