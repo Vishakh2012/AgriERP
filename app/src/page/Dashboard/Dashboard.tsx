@@ -40,7 +40,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <div className="w-[100%-4rem] flex flex-col justify-around items-center md:items-start md:items-right md:ml-4">
+            <div className="flex flex-col justify-around items-center md:items-start md:items-right w-full md:ml-4">
 
                 <div className='justify-center items-center w-5/6 mt-4'><Header text='Welcome to AgriERP' /></div>
 

@@ -22,3 +22,4 @@ const useFilter = (details: data[]) => {
 }
 
 export default useFilter
+

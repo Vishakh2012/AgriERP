@@ -1,12 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
 import Header from '@/components/Header/Header';
 import TableTools from '@/components/TableTools/TableTools';
 import TableShow from '@/components/TableShow/TableShow';
@@ -14,7 +6,6 @@ import usePagination from '@/hooks/usePagination';
 import useSort from '@/hooks/useSort';
 import useFilter from '@/hooks/useFilter';
 
-const PAGE_SIZE = 7;
 
 interface Data {
     [key: string]: string;
@@ -22,8 +13,6 @@ interface Data {
 
 const SalesDisplay = () => {
     const [data, setData] = useState<Data[]>([{hello: "hi"}]);
-
-
 
     useEffect(() => {
         fetchData();
