@@ -42,7 +42,7 @@ const Dashboard = () => {
         <>
             <div className="flex flex-col justify-around items-center md:items-start md:items-right w-full md:ml-4">
 
-                <div className='justify-center items-center w-5/6 mt-4'><Header text='Welcome to AgriERP' /></div>
+                <Header text='Welcome to AgriERP' />
 
                 <DashBoardCardGroup />
                 <div className='w-5/6 h-1/3'>
