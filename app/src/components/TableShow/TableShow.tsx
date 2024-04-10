@@ -5,52 +5,112 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/components/ui/table"
-import Pagination from "../Pagination/Pagination"
+} from "@/components/ui/table";
+import Pagination from "../Pagination/Pagination";
+import { Button } from "../ui/button";
+import { IoMdClose } from "react-icons/io";
+import { useEffect, useState } from "react";
 
 interface Data {
     [key: string]: string;
 }
 
 interface TableContents {
-    paginatedData: Data[],
-    pageCount: number,
-    currentPage: number,
-    handlePageChange: (e: number) => void
-    Details: Data[]
-    edit?: boolean
-    delete?: boolean
-
+    paginatedData: Data[];
+    pageCount: number;
+    currentPage: number;
+    handlePageChange: (e: number) => void;
+    Details: Data[];
+    PAGE_SIZE: number
 }
+
 const TableShow: React.FC<TableContents> = (props) => {
+    const [allHeaders, setAllHeaders] = useState<string[]>([]);
+    const [visibleHeaders, setVisibleHeaders] = useState<string[]>([]);
+    const [hiddenHeaders, setHiddenHeaders] = useState<string[]>([]);
+
+    useEffect(() => {
+        // Extract all headers from props.Details
+        if (props.Details.length > 0) {
+            const headers = Object.keys(props.Details[0]);
+            setAllHeaders(headers);
+            setVisibleHeaders(headers);
+        }
+    }, [props.Details]);
+
+    const removeRow = (headerToRemove: string) => {
+        setVisibleHeaders(visibleHeaders.filter((header) => header !== headerToRemove));
+        setHiddenHeaders([...hiddenHeaders, headerToRemove]);
+    };
+
+    const addField = (selectedField: string) => {
+        if (selectedField === "restore") {
+            setVisibleHeaders(allHeaders);
+            setHiddenHeaders([]);
+        } else {
+            setVisibleHeaders([...visibleHeaders, selectedField]);
+            setHiddenHeaders(hiddenHeaders.filter((header) => header !== selectedField));
+        }
+    };
+
     return (
         <div className="mt-4 mb-12 w-5/6 sm:w-9/10 flex flex-col">
             <Table className="border-collapse w-full">
                 <div className="bg-white">
                     <TableHeader className="text-center sticky top-0 bg-white z-10">
                         <TableRow>
+                            <TableHead>
+                                <select
+                                    id="sortHeaderSelect"
+                                    value="default"
+                                    onChange={(e) => addField(e.target.value)}
+                                    className="mr-2 mb-2 sm:mb-0 w-full sm:w-[90px] px-3 py-2 rounded-md  focus:outline-none bg-blue-500 text-white"
+                                >
+                                    <option value="default" disabled>Add Field</option>
+                                    {hiddenHeaders.map((column) => (
+                                        <option key={column} value={column}>{column}</option>
+                                    ))}
+                                    <option value="restore">Restore</option>
+                                </select>
+                            </TableHead>
                             <TableHead className="font-medium">Serial Number</TableHead>
-                            {Object.keys(props.Details[0]).map((key) => (
-                                <TableHead key={key} className="font-medium">{key}</TableHead>
+                            {visibleHeaders.map((key) => (
+                                <TableHead key={key} className="font-medium">
+                                    <span className="flex flex-row justify-center items-center">
+                                        {key}
+                                        <div className="" onClick={() => { removeRow(key) }}>
+                                            <IoMdClose />
+                                        </div>
+                                    </span>
+                                </TableHead>
                             ))}
                             {(props.edit || props.delete) && <TableHead className="font-medium">Actions</TableHead>}
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {(props.paginatedData).map((staff: Data, index: number) => (
-                            <TableRow key={index}>
+                        {props.paginatedData.map((staff: Data, index: number) => (
+                            <TableRow key={(props.currentPage - 1)*props.PAGE_SIZE + index}>
+                                <TableCell></TableCell>
                                 {/* Render the Serial Number cell only in the table body */}
-                                <TableCell className="">{index + 1}</TableCell>
-                                {Object.values(staff).map((value, i) => (
-                                    <TableCell key={i} className="">{value}</TableCell>
+                                <TableCell className="">{(props.currentPage-1)*props.PAGE_SIZE + index + 1}</TableCell>
+                                {visibleHeaders.map((key, i) => (
+                                    <TableCell key={i} className="">
+                                        {staff[key]}
+                                    </TableCell>
                                 ))}
                             </TableRow>
                         ))}
                     </TableBody>
                 </div>
             </Table>
-            <Pagination pageCount={props.pageCount} currentPage={props.currentPage} handlePageChange={props.handlePageChange} />
+            <Pagination
+                pageCount={props.pageCount}
+                currentPage={props.currentPage}
+                handlePageChange={props.handlePageChange}
+            />
         </div>
-    )
-}
-export default TableShow
+    );
+};
+
+export default TableShow;
+

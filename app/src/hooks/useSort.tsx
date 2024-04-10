@@ -1,5 +1,5 @@
-import { useState, useEffect, ChangeEvent } from "react";
 
+import { useState, useEffect, ChangeEvent } from "react";
 const useSort = (filterCriteria: string, filteredData) => {
     const [sortOption, setSortOption] = useState('');
     const [sortedData, setSortedData] = useState([]);

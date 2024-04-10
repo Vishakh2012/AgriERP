@@ -1,12 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
 import Header from '@/components/Header/Header';
 import TableTools from '@/components/TableTools/TableTools';
 import TableShow from '@/components/TableShow/TableShow';
@@ -14,7 +6,6 @@ import usePagination from '@/hooks/usePagination';
 import useSort from '@/hooks/useSort';
 import useFilter from '@/hooks/useFilter';
 
-const PAGE_SIZE = 7;
 
 interface Data {
     [key: string]: string;
@@ -22,8 +13,6 @@ interface Data {
 
 const SalesDisplay = () => {
     const [data, setData] = useState<Data[]>([{hello: "hi"}]);
-
-
 
     useEffect(() => {
         fetchData();
@@ -49,13 +38,13 @@ const SalesDisplay = () => {
     };
     const { filterCriteria, filteredData, handleFilterChange } = useFilter(data)
     const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filterCriteria, filteredData)
-    const { pageCount, paginatedData, handlePageChange, currentPage } = usePagination(5, sortedData)
+    const { pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE } = usePagination(sortedData)
     return (
         <div>
             <div className='m-3'>
                 <Header text='Staff Details' />
                 <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={data} />
-                <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={data} />
+                <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={data} PAGE_SIZE={PAGE_SIZE} />
             </div>
         </div>
     )

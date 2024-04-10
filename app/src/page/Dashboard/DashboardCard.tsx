@@ -6,7 +6,6 @@ import {
 import { ReactNode } from "react";
 import { IconContext } from "react-icons";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
-
 interface DashboardCardContent {
     text: string;
     icon?: ReactNode;
