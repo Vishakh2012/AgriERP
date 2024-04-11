@@ -1,23 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
 import Header from '@/components/Header/Header';
-import Pagination from '@/components/Pagination/Pagination';
 import useFilter from '@/hooks/useFilter';
 import useSort from '@/hooks/useSort';
 import usePagination from '@/hooks/usePagination';
 import TableTools from '@/components/TableTools/TableTools';
 import TableShow from '@/components/TableShow/TableShow';
 
-const PAGE_SIZE = 7;
 const productDetails = [
     {
         category: "Electronics",
@@ -244,8 +231,8 @@ const Product_Display = () => {
     const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filterCriteria, filteredData)
     const { pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE } = usePagination(sortedData)
     return (
-        <div>
-            <div className='md:ml-3'>
+        <div className='w-full'>
+            <div className='md:ml-4 w-full h-screen'>
                 <Header text='Staff Details' />
                 <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={productDetails} />
                 <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={productDetails} PAGE_SIZE={PAGE_SIZE} />
