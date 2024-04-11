@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
+import { useState, useRef, useEffect} from "react";
+import { Button, ButtonProps } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -10,10 +10,20 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const GenerateBillDialog = ({ onSubmit }) => {
-  const [open, setOpen] = useState(false);
-  const [selectedPayment, setSelectedPayment] = useState("Cash");
-  const buttonsRef = useRef([null, null, null]);
+interface GenerateBillDialogProps {
+  onSubmit: (paymentMode: string) => void;
+}
+
+interface DialogButtonProps extends ButtonProps {
+  index: number;
+}
+
+const GenerateBillDialog: React.FC<GenerateBillDialogProps> = ({
+  onSubmit,
+}: GenerateBillDialogProps) => {
+  const [open, setOpen] = useState<boolean>(false);
+  const [selectedPayment, setSelectedPayment] = useState<string>("Cash");
+  const buttonsRef = useRef<HTMLButtonElement[]>([null, null, null]);
 
   useEffect(() => {
     if (open) {
@@ -30,13 +40,13 @@ const GenerateBillDialog = ({ onSubmit }) => {
     setOpen(false);
   };
 
-  const handlePaymentSelection = (paymentMode) => {
+  const handlePaymentSelection = (paymentMode: string) => {
     setSelectedPayment(paymentMode);
     onSubmit(paymentMode);
     handleClose();
   };
 
-  const handleKeyDown = (e, index) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
     const lastIndex = buttonsRef.current.length - 1;
     let nextIndex;
 
@@ -50,7 +60,7 @@ const GenerateBillDialog = ({ onSubmit }) => {
       buttonsRef.current[nextIndex]?.focus();
     } else if (e.key === "Enter") {
       e.preventDefault();
-      handlePaymentSelection(buttonsRef.current[index]?.textContent);
+      handlePaymentSelection(buttonsRef.current[index]?.textContent || "");
     }
   };
 
