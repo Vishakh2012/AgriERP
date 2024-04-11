@@ -54,7 +54,7 @@ const TableShow: React.FC<TableContents> = (props) => {
     };
 
     return (
-        <div className="mt-4 mb-12 w-full sm:w-11/12 flex flex-col">
+        <div className="mt-4 mb-12 w-5/6 sm:w-11/12 flex flex-col">
             <Table className="border-collapse w-full">
                 <div className="bg-white">
                     <TableHeader className="text-center sticky top-0 bg-white z-10">

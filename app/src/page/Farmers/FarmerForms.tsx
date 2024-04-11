@@ -1,13 +1,14 @@
-import React from 'react'
 import Forms from './Forms'
 import Header from '@/components/Header/Header'
 
 const FarmerForms = () => {
     return (
-        <>
-            <Header text='Add New Farmer' />
-            <Forms />
-        </>
+        <div className=''>
+            <div className=' w-1/2 md:ml-4 flex flex-col'>
+                <Header text='Add New Farmer' />
+                <Forms />
+            </div>
+        </div>
     )
 }
 
