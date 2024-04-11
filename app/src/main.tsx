@@ -18,7 +18,7 @@ import Purchase_Display from './page/Purchase_Display/Purchase_Display';
 import Staff_Details from './page/Staff_Details/Staff_Details';
 import FarmerForms from './page/Farmers/FarmerForms';
 
-import Sales_Form from './page/Sales/Sales_Form';
+import Sales_Form from './page/Sales/Sales_Input/Sales_Form';
 
 
 
