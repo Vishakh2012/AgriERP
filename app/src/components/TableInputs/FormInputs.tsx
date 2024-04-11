@@ -1,6 +1,17 @@
-import React from "react";
+import React from 'react'
+import { useState ,useEffect} from 'react';
 
-const CustomerDetails = ({ customerName, setCustomerName, mobileNumber, setMobileNumber, billNo }) => {
+const FormInputs = () => {
+    const [customerName, setCustomerName] = useState("");
+    const [mobileNumber, setMobileNumber] = useState("");
+    const [billNo, setBillNo] = useState(100);
+
+    useEffect(() => {
+        // Increment the bill number when a new bill is generated
+        setBillNo(prevBillNo => prevBillNo + 1);
+      }, []);
+
+
   return (
     <div className="flex flex-col md:flex-row">
       <div className="flex flex-col mb-4 md:mb-0">
@@ -28,7 +39,7 @@ const CustomerDetails = ({ customerName, setCustomerName, mobileNumber, setMobil
         <input type="text" id="billNo" value={billNo} disabled className="border px-2 py-1 rounded focus:outline-none" />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default CustomerDetails;
+export default FormInputs
