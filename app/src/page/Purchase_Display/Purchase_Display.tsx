@@ -2,19 +2,26 @@ import React, { useState, useEffect } from 'react';
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
-    TableFooter,
-
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
 import Header from '@/components/Header/Header'
+import useFilter from '@/hooks/useFilter';
+import useSort from '@/hooks/useSort';
+import usePagination from '@/hooks/usePagination';
+import TableTools from '@/components/TableTools/TableTools';
+import TableShow from '@/components/TableShow/TableShow';
 
-const PAGE_SIZE = 7;
+
+interface Data {
+    [key: string]: string;
+}
+
+
 const Purchase_Display = () => {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<Data[]>([{hi: "hello"}]);
     useEffect(() => {
         fetchData();
     }, []);
@@ -35,89 +42,20 @@ const Purchase_Display = () => {
             console.error('Error fetching data:', error);
         }
     };
-    const [currentPage, setCurrentPage] = useState(1);
 
-    const applyPagination = (data) => {
-        const startIndex = (currentPage - 1) * PAGE_SIZE;
-        return data.slice(startIndex, startIndex + PAGE_SIZE);
-    };
-
-    const pageCount = Math.ceil(data.length / PAGE_SIZE);
-    const paginatedData = applyPagination(data);
-
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
-    };
-
-    return (
-        <div>
-            <div className='m-3'>
-                <Header text='Purchases' />
-            </div>
-            <div className="w-4/5 px-4 mt-12">
-                <form onSubmit={(e) => e.preventDefault()} className="flex flex-wrap items-end justify-between mb-4">
-                    <input
-                        type="text"
-                        name="billNo"
-                        placeholder="Bill Number"
-                        className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
-                    />
-                    <input
-                        type="text"
-                        name="saleDate"
-                        placeholder="Farmer ID"
-                        className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
-                    />
-                    <input
-                        type="text"
-                        name="finalAmount"
-                        placeholder="GSTIN"
-                        className="mr-2 mb-2 md:mb-0 px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500"
-                    />
-                    <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"> Apply Filter</button>
-                </form>
-            </div>
-            <div className="w-4/5 px-4 mt-16 rounded-3xl">
-                <Table className="shadow-md w-full mx-auto rounded-3xl">
-                    <div className=" max-h-[600px] bg-white">
-                        <TableHeader className="sticky top-0 bg-white z-10">
-                            <TableRow>
-                                <TableHead className="w-[100px] text-center font-medium">Serial No</TableHead>
-                                <TableHead className="w-[200px] text-center font-medium">Bill Number</TableHead>
-                                <TableHead className="w-[200px] text-center font-medium">Purchase Date</TableHead>
-                                <TableHead className="w-[200px] text-center font-medium">GSTIN</TableHead>
-                                <TableHead className="w-[200px] text-center font-medium">Farmer ID</TableHead>
-                                <TableHead className="w-[200px] text-center font-medium">Total Amount</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {paginatedData.map((purchase, index) => (
-                                <TableRow key={purchase.purchaseDate}>
-                                    <TableCell className="text-center">{(currentPage - 1) * PAGE_SIZE + index + 1}</TableCell>
-                                    <TableCell className="text-center">{purchase.billNumber}</TableCell>
-                                    <TableCell className="text-center">{purchase.purchaseDate}</TableCell>
-                                    <TableCell className="text-center">{purchase.GSTIN}</TableCell>
-                                    <TableCell className="text-center">{purchase.farmerId}</TableCell>
-                                    <TableCell className="text-center">{purchase.totalAmount}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </div>
-                </Table>
-                <div className="flex justify-center mt-4">
-                    {Array.from({ length: Math.min(pageCount, 3) }, (_, i) => (
-                        <button
-                            key={currentPage + i}
-                            onClick={() => handlePageChange(currentPage + i)}
-                            className={`mx-1 px-3 py-1 rounded-full border ${currentPage === currentPage + i ? 'bg-blue-500 text-white' : 'hover:bg-blue-500 hover:text-white border-gray-300'}`}
-                        >
-                            {currentPage + i}
-                        </button>
-                    ))}
-                </div>
-            </div>
-        </div>
-    )
+       const { filterCriteria, filteredData, handleFilterChange } =  useFilter(data)
+    const {handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn} = useSort(filterCriteria, filteredData)
+    const {pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE} = usePagination(sortedData) 
+ return (
+    <div>
+      <div className='md:ml-3'>
+      <Header text='Staff Details'/>
+    <TableTools filterCriteria= {filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={data}/>
+    <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={data} PAGE_SIZE={PAGE_SIZE}/>
+    </div>
+    </div>
+)
+ 
 }
 
 export default Purchase_Display;

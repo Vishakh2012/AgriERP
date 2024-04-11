@@ -11,7 +11,7 @@ import SidePanelButton from "./sidePanelButton";
 const Sidebar = () => {
     return (
         <div className='flex'>
-        <div className="md:w-1/5 bg-white text-black hidden md:block pr-4">
+        <div className="md:w-1/5 bg-white text-black hidden md:block top-0 pr-4 h-screen">
           <div className="">
             <ul className='mt-14'>
               <li className="mb-7"><SidePanelButton text="Dashboard" url='/home' icon={<FaHome />}/></li>
@@ -24,7 +24,7 @@ const Sidebar = () => {
             </ul>
           </div>
         </div>
-     <div className = 'bg-[#f0f7ff] w-full'> 
+     <div className = 'bg-[#f0f7ff] h-screen w-full'> 
      <Outlet/>
      </div>{/* Render the content only if the sidebar is visible */}
       </div>

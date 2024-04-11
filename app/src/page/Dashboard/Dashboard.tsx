@@ -42,10 +42,10 @@ const Dashboard = () => {
         <>
             <div className="flex flex-col justify-around items-center md:items-start md:items-right w-full md:ml-4">
 
-                <div className='justify-center items-center w-5/6 mt-4'><Header text='Welcome to AgriERP' /></div>
+                <Header text='Welcome to AgriERP' />
 
                 <DashBoardCardGroup />
-                <div className='w-5/6 h-1/3'>
+                <div className='w-5/6 sm:w-11/12 h-1/3'>
                     <div className='mt-3 flex flex-col md:flex-row gap-x-2 rounded-lg'>
                         <div className='w-full md:w-1/2 mb-2 md:mb-0 bg-white rounded-lg'>
                             <GraphDropdown onDataFetched={handleBarChartData} />
