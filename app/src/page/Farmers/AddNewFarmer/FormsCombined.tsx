@@ -144,8 +144,8 @@ const Forms = () => {
   };
 
   return (
-    <div className="m-6">
-      <div className="flex justify-center gap-1">
+    <div className=" w-11/12 my-12">
+      <div className="flex justify-center mb-12 w-full gap-1">
         <Button className="rounded-none" onClick={() => handleButtonClick("personal")}>Personal</Button>
         <Button className="rounded-none" onClick={() => handleButtonClick("address")}>Address</Button>
         <Button className="rounded-none" onClick={() => handleButtonClick("landInfo")}>Land Info</Button>

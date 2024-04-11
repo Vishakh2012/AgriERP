@@ -119,8 +119,8 @@ const Forms = () => {
 
 
   return (
-    <div className=" md:w-11/12">
-    <form onSubmit={handleSubmit} className='grid gap-5 p-4'>
+    <div className="w-11/12 md:w-11/12">
+    <form onSubmit={handleSubmit} className='w-11/12 grid gap-5 p-4'>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         <div>
         <InputComponent

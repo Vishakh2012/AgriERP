@@ -4,7 +4,7 @@ import Header from '@/components/Header/Header'
 const FarmerForms = () => {
     return (
         <div className=''>
-            <div className=' w-1/2 md:ml-4 flex flex-col'>
+            <div className=' w-1/2 md:ml-4'>
                 <Header text='Add New Farmer' />
                 <Forms />
             </div>
