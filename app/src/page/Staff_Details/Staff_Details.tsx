@@ -179,7 +179,7 @@ const Staff_Details = ()=> {
       <div className='ml-4'>
       <Header text='Staff Details'/>
     <TableTools filterCriteria= {filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={staffDetails} buttonText='Add New Staff' buttonRoute='/staff/forms'/>
-    <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE}/>
+    <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE} edit={true} delete={true}/>
     </div>
     </div>
 )

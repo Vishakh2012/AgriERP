@@ -88,13 +88,24 @@ const TableShow: React.FC<TableContents> = (props) => {
                                     </span>
                                 </TableHead>
                             ))}
-                            {(props.edit || props.delete) && <TableHead className="font-medium">Actions</TableHead>}
+                            
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {props.paginatedData.map((staff: Data, index: number) => (
                             <TableRow key={(props.currentPage - 1)*props.PAGE_SIZE + index}>
-                                <TableCell></TableCell>
+                                <TableCell className="flex justify-center">
+                                        {props.edit && (
+                                            <button className=" border-2 rounded mr-2">
+                                                <MdEdit size={'20px'}/>
+                                            </button>
+                                        )}
+                                        {props.delete && (
+                                            <button  className=" border-2 rounded mr-2">
+                                                <MdDelete size={'20px'}/>
+                                            </button>
+                                        )}
+                                    </TableCell>
                                 {/* Render the Serial Number cell only in the table body */}
                                 <TableCell className="">{(props.currentPage-1)*props.PAGE_SIZE + index + 1}</TableCell>
                                 {visibleHeaders.map((key, i) => (
@@ -102,18 +113,7 @@ const TableShow: React.FC<TableContents> = (props) => {
                                         {staff[key]}
                                     </TableCell>
                                 ))}
-                                <TableCell className="flex justify-center">
-                                        {props.edit && (
-                                            <button className=" border-2 rounded mr-2">
-                                                <MdEdit/>
-                                            </button>
-                                        )}
-                                        {props.delete && (
-                                            <button  className=" border-2 rounded mr-2">
-                                                <MdDelete/>
-                                            </button>
-                                        )}
-                                    </TableCell>
+                                
                             </TableRow>
                         ))}
                     </TableBody>
