@@ -197,7 +197,7 @@ const ProductTable = () => {
   };
 
   return (
-    <div className="overflow-x-auto flex-grow">
+    <div className="overflow-x-auto">
       <div className="flex flex-col h-full">
       <div className="p-4">
   <div className="flex flex-col md:flex-row md:justify-between">
