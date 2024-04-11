@@ -1,7 +1,5 @@
 import Searchbar from "./Seachbar"
 import SortUI from "./SortUI"
-import useSort from "@/hooks/useSort"
-import useFilter from "@/hooks/useFilter"
 import { Button } from "../ui/button"
 import { ChangeEvent } from "react"
 
