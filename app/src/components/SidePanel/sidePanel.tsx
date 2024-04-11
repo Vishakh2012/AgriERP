@@ -24,7 +24,7 @@ const Sidebar = () => {
                     </ul>
                 </div>
             </div>
-            <div className='bg-[#f0f7ff] h-full w-full'>
+            <div className='bg-[#f0f7ff] h-full w-full min-h-screen'>
                 <Outlet />
             </div>{/* Render the content only if the sidebar is visible */}
         </div>
