@@ -2,7 +2,7 @@
     "labels": ["Property", "Amount"],
     "data": [
       ["Profit", 8.94],
-      ["Loss", 10.49],
+      ["Expense", 10.49],
       ["Revenue", 19.3]
     ]
 }

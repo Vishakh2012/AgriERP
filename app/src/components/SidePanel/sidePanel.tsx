@@ -12,7 +12,7 @@ const Sidebar = () => {
     return (
         <div className='w-screen flex'>
             <div className="w-[320px] bg-white text-black hidden md:flex top-0 pr-4 h-screen flex-shrink-0">
-                <div className="">
+                <div className="fixed">
                     <ul className='mt-14'>
                         <li className="mb-7"><SidePanelButton text="Dashboard" url='/home' icon={<FaHome />} /></li>
                         <li className="mb-7"><SidePanelButton text="Buying" url='/purchase' icon={<PiHandbagFill />} /></li>

@@ -63,7 +63,7 @@ const TableShow: React.FC<TableContents> = (props) => {
     const handleDelete = async (index: number) => {
         // Remove the row from the paginatedData
         const newData = props.paginatedData.filter((_, i) => i !== index);
-        props.onDelete(index); // Call onDelete to handle client-side state update
+        {props.onDelete && props.onDelete(index)}; // Call onDelete to handle client-side state update
     
         try {
             const response = await fetch(`/api/deleteRow/${props.resourceId}/${index}`, {

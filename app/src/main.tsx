@@ -20,6 +20,7 @@ import Confirmation from './page/Farmers/AddNewFarmer/Confirmation';
 import StaffForms from './page/Staff_Details/AddNewStaff/StaffForms';
 import FpoForm from './page/FPO Details/FPO Form/FpoForm';
 import FarmerTable from './page/Farmers/FarmerTable';
+import ProductForms from './page/Product_Display/AddNewProduct/ProductForms';
 
 
 
@@ -118,6 +119,10 @@ const router = createBrowserRouter([
             {
                 path: '/products',
                 element:<Product_Display />
+            },
+            {
+                path:'/products/forms',
+                element:<ProductForms/>
             }
         ]
     },
@@ -131,7 +136,8 @@ const router = createBrowserRouter([
                 element:<FpoForm/>
             }
         ]
-    }
+    },
+    
 ]);
 
 
