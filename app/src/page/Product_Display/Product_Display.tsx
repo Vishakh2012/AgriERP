@@ -233,9 +233,9 @@ const Product_Display = () => {
     return (
         <div className='w-full'>
             <div className='md:ml-4 w-full h-screen'>
-                <Header text='Staff Details' />
-                <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={productDetails} />
-                <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={productDetails} PAGE_SIZE={PAGE_SIZE} />
+                <Header text='Product Details' />
+                <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={productDetails} buttonText='Add New Product' buttonRoute='/product/forms' />
+                <TableShow edit={true} delete={true} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={productDetails} PAGE_SIZE={PAGE_SIZE} />
             </div>
         </div>
     )

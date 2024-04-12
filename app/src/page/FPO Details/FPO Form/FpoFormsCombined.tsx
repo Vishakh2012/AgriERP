@@ -1,12 +1,56 @@
 import { Button } from '@/components/ui/button';
-import { SetStateAction, useState } from 'react'
+import { SetStateAction, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import FpoBasicDetails from './FPO Form components/FpoBasicDetails';
 import FpoAddress from './FPO Form components/FpoAddress';
 import FpoAccount from './FPO Form components/FpoAccount';
 
 const FpoFormsCombined = () => {
-    const [activeComponent, setActiveComponent] = useState("basic");
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+        // Fetch data from backend API
+        const response = await fetch('http://localhost:5050/api/fpoFormData');
+        if (!response.ok) {
+            throw new Error('Failed to fetch data');
+        }
+        const data = await response.json();
+        
+        // Replace null values with empty strings
+        const formDataWithDefaults: typeof formData = {
+          fpoName: '',
+          email: '',
+          phoneNumber: '',
+          addressLine1: '',
+          addressLine2: '',
+          state: '',
+          pincode: '',
+          district: '',
+          bankBranchName: '',
+          ifscCode: '',
+          bankAccountNumber: '',
+          city: '',
+          postOffice: '',
+          block: '',
+          dateOfFormation: '',
+          fpoCeo: '',
+          fpoRegNo: ''
+        };
+        for (const key in data) {
+          formDataWithDefaults[key as keyof typeof formData] = data[key] || '';
+        }
+        
+        // Set the initial state of formData with fetched data
+        setFormData(formDataWithDefaults);
+    } catch (error:any) {
+        console.error('Error fetching data:', error.message);
+    }
+};
+    const [activeComponent, setActiveComponent] = useState("basic");   //For the buttons above
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
       fpoName: '',
@@ -27,7 +71,7 @@ const FpoFormsCombined = () => {
       fpoCeo:'',
       fpoRegNo:''
     });
-  
+    //For setting the values
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
       const { name, value } = e.target;
       setFormData(prevData => ({
@@ -37,7 +81,7 @@ const FpoFormsCombined = () => {
     };
   
    
-  
+  //The required fields
     const validateForm = () => {
       return (
         formData.fpoName !== '' &&
@@ -53,7 +97,7 @@ const FpoFormsCombined = () => {
         formData.fpoRegNo!==''
       );
     };
-  
+    //Function for sending data to backend
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
       e.preventDefault();
       if (validateForm()) {
@@ -82,7 +126,7 @@ const FpoFormsCombined = () => {
       }
     };
   
-  
+    //For toggling between fields using Enter
     const handleKeyPress = (e: { key: string; preventDefault: () => void; target: { form: any; }; }) => {
       if (e.key === 'Enter') {
         e.preventDefault();
@@ -94,7 +138,7 @@ const FpoFormsCombined = () => {
         }
       }
     };
-  
+    //For toggling between differnet sections of forms(For buttons above)
     const handleNextButtonClick = () => {
       switch (activeComponent) {
         case "basic":
@@ -105,6 +149,7 @@ const FpoFormsCombined = () => {
           break;
       }
     }
+    //Activating the buttons above
     const handleButtonClick = (component: SetStateAction<string>) => {
       setActiveComponent(component);
     };
@@ -125,22 +170,22 @@ const FpoFormsCombined = () => {
             Next
           </Button>
         </>
-    }
-     {activeComponent === 'address' &&   
-     <>
-        <FpoAddress formData={formData} handleChange={handleChange} handleKeyPress={handleKeyPress}/>
-        <Button type="button" onClick={handleNextButtonClick} className="mt-3 w-full sm:w-auto justify-self-center">
-            Next
-          </Button>
-          </>
-      }
-      {activeComponent === 'account' &&
-          <>
-          <FpoAccount formData={formData} handleChange={handleChange} handleKeyPress={handleKeyPress}/>
-          <Button className='mt-3 w-full sm:w-auto justify-self-center' type="submit">Submit</Button>
-          </>
-      }
-        
+        }
+        {activeComponent === 'address' &&   
+        <>
+            <FpoAddress formData={formData} handleChange={handleChange} handleKeyPress={handleKeyPress}/>
+            <Button type="button" onClick={handleNextButtonClick} className="mt-3 w-full sm:w-auto justify-self-center">
+                Next
+              </Button>
+              </>
+          }
+          {activeComponent === 'account' &&
+              <>
+              <FpoAccount formData={formData} handleChange={handleChange} handleKeyPress={handleKeyPress}/>
+              <Button className='mt-3 w-full sm:w-auto justify-self-center' type="submit">Submit</Button>
+              </>
+          }
+            
       </form>
       </div>
     );

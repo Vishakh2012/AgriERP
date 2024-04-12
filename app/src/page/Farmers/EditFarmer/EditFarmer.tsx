@@ -1,15 +1,47 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import FarmerAddress from "./Form Components/FarmerAddress";
-import FarmerShareholder from "./Form Components/FarmerShareholder";
-import FarmerLandInfo from "./Form Components/FarmerLandInfo";
-import FarmerPersonal from "./Form Components/FarmerPersonal";
+import FarmerPersonal from "../AddNewFarmer/Form Components/FarmerPersonal";
+import FarmerAddress from "../AddNewFarmer/Form Components/FarmerAddress";
+import FarmerLandInfo from "../AddNewFarmer/Form Components/FarmerLandInfo";
+import FarmerShareholder from "../AddNewFarmer/Form Components/FarmerShareholder";
 
-const Forms = () => {
+interface formtype{
+    firstName: string,
+    middleName: string,
+    lastName: string,
+    email: string,
+    phoneNumber: string,
+    gender: string,
+    aadhaar: string,
+    addressLine1: string,
+    addressLine2: string,
+    state: string,
+    pincode: string,
+    landArea: string,
+    cropsProduced: string[],
+    block: string,
+    district: string,
+    bankAccountHolderName: string,
+    ifscCode: string,
+    bankAccountNumber: string,
+    numberOfShares: number,
+    shareholder: string,
+    city: string,
+    postOffice: string,
+    landType: string,
+    farmerType: string,
+    dob: Date,
+    dateOfJoin: Date,
+    category: string,
+    fatherName: string,
+}
+
+const EditFarmerForms = (props:any) => {
+   const {selectedRowData} = props
   const navigate = useNavigate();
   const [activeComponent, setActiveComponent] = useState("personal");
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<formtype>({
     firstName: "",
     middleName: "",
     lastName: "",
@@ -39,6 +71,14 @@ const Forms = () => {
     category: "",
     fatherName: "",
   });
+
+  useEffect(() => {
+    if (selectedRowData) {
+        const formDataWithDefaults = { ...selectedRowData };
+        
+        setFormData(formDataWithDefaults);
+    }
+}, [selectedRowData]);
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
@@ -144,7 +184,7 @@ const Forms = () => {
   };
 
   return (
-    <div className=" sm:max-w-[1200px] w-11/12 my-12">
+    <div className="max-w-[400px] sm:max-w-[1200px] my-12">
       <div className="flex justify-center mb-12 w-full gap-1">
         <Button className="rounded-none" onClick={() => handleButtonClick("personal")}>Personal</Button>
         <Button className="rounded-none" onClick={() => handleButtonClick("address")}>Address</Button>
@@ -206,4 +246,4 @@ const Forms = () => {
   );
 };
 
-export default Forms;
+export default EditFarmerForms;

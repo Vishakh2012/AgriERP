@@ -19,6 +19,7 @@ import Sales_Form from './page/Sales/Sales_Form';
 import Confirmation from './page/Farmers/AddNewFarmer/Confirmation';
 import StaffForms from './page/Staff_Details/AddNewStaff/StaffForms';
 import FpoForm from './page/FPO Details/FPO Form/FpoForm';
+import FarmerTable from './page/Farmers/FarmerTable';
 
 
 
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
         children: [
             {
                 path:'/farmers',
+                element:<FarmerTable/>
+            },
+            {
+                path:'/farmers/forms',
                 element:<FarmerForms/>
             },
             {
@@ -120,8 +125,9 @@ const router = createBrowserRouter([
         path: '/fpo',
         element:<Sidebar/>,
         children:[
+            
             {
-                path:'/fpo',
+                path:'/fpo/edit',
                 element:<FpoForm/>
             }
         ]

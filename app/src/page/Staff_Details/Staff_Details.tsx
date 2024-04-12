@@ -1,26 +1,11 @@
-import React, { useState ,useEffect} from 'react';
-import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
 import Header from '@/components/Header/Header';
-import Pagination from '@/components/Pagination/Pagination';
 import usePagination from '@/hooks/usePagination';
 import useFilter from '@/hooks/useFilter';
 import useSort from '@/hooks/useSort'
-import Searchbar from '@/components/TableTools/Seachbar';
-import SortUI from '@/components/TableTools/SortUI';
-import { Button } from '@/components/ui/button';
 import TableTools from '@/components/TableTools/TableTools';
 import TableShow from '@/components/TableShow/TableShow';
+import EditStaffForms from './EditStaff/EditStaffForms';
 
-const PAGE_SIZE = 5;
 const staffDetails = [
     {
         staffId: "ST001",
@@ -176,10 +161,10 @@ const Staff_Details = ()=> {
     const {pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE} = usePagination(sortedData) 
  return (
     <div>
-      <div className='w-full md:ml-4 '>
+    <div className='md:ml-4 w-full'>
       <Header text='Staff Details'/>
-    <TableTools filterCriteria= {filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={staffDetails}/>
-    <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE}/>
+    <TableTools filterCriteria= {filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={staffDetails} buttonText='Add New Staff' buttonRoute='/staff/forms'/>
+    <TableShow formComponent={<EditStaffForms/>} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE} edit={true} delete={true}/>
     </div>
     </div>
 )
