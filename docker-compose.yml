@@ -1,36 +1,22 @@
-version: '3.8'
-
 services:
   app:
     build: ./app
     ports: 
-      - "5173:5173"
-    volumes:
-      - web-root:/app/public
-    develop:
-      watch:
-        - action: sync
-          path: ./app
-          target: /src/app
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: package.json
+      - 5173:5173
+
   server:
     build: ./server
     ports: 
-      - "5050:5050"
+      - 5050:5050
     depends_on: 
       - mongo
     networks: 
       - app-networks
-    volumes:
-      - web-root:/server/public
-
   mongo:
     image: mongo
     networks:
       - app-networks
+
     volumes:
       - data-volume:/data/db
     ports:
@@ -45,4 +31,5 @@ volumes:
   node-modules:
   web-root:
     driver: local
-
+                                                                    │
+  

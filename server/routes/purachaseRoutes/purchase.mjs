@@ -31,7 +31,6 @@ Router.get("/getDetails/:fpoName", async (req, res) => {
         const PurchaseFPO = await getCollectionForFPO(fpoName, purchaseSchema, "Purchase")
 
         const purchase = await PurchaseFPO.find({})
-        console.log(purchase);
         if (!purchase)
             return res.status(500).send({ message: "FPO not found" })
         return res.status(200).json(purchase)

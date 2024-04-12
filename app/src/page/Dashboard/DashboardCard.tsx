@@ -6,6 +6,7 @@ import {
 import { ReactNode } from "react";
 import { IconContext } from "react-icons";
 import { FaArrowUp, FaArrowDown } from "react-icons/fa";
+
 interface DashboardCardContent {
     text: string;
     icon?: ReactNode;
@@ -15,13 +16,13 @@ interface DashboardCardContent {
 
 const DashboardCard: React.FC<DashboardCardContent> = (props) => {
     return (
-        <Card className="w-5/6 md:w-1/4 flex flex-row md:flex-wrap h-[180px] justify-center items-center ">
-            <CardHeader className="">
-                <div className="flex justify-between flex-row md:flex-wrap text-sm md:text-md">
+        <Card className="w-[250px] ml-7 mr-7 h-[130px]">
+            <CardHeader className="mt-0">
+                <div className="flex gap-6 justify-between">
                     <div>
                     <CardTitle>{props.figures}</CardTitle>
                     </div>
-                    <div className = ''>
+                    <div>
                         {props.icon && <span className="float-right">{props.icon}</span>}
                     </div>
                 </div>
@@ -29,7 +30,7 @@ const DashboardCard: React.FC<DashboardCardContent> = (props) => {
                 <h1>{props.text}</h1>
                 </div>
                 
-                <div className="md:mt-2 flex items-center flex-wrap">
+                <div className="mt-5 flex items-start">
                 {props.difference !== undefined && (
                         props.difference < 0 ? (
                             <>
