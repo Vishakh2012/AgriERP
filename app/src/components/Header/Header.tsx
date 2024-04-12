@@ -29,7 +29,7 @@ const Header: React.FC<Headercontent> = (props) => {
     const formattedDate = `${day}, ${month} ${date}, ${year}`;
 
     return (
-        <div className='justify-center items-center w-screen sm:w-11/12 mt-4'>
+        <div className='justify-center items-center w-screen sm:w-11/12 sm:max-w-[1200px] mt-4'>
             <div className='justify-center sm:justify-none items-center w-full'>
 
                 <div className='flex justify-between items-center w-full h-[100px] bg-white text-black px-4 rounded-lg'>

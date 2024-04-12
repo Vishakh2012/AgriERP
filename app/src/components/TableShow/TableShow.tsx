@@ -7,11 +7,10 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import Pagination from "../Pagination/Pagination";
-import { Button } from "../ui/button";
 import { IoMdClose } from "react-icons/io";
-import { useEffect, useState } from "react";
-import { MdEdit } from "react-icons/md"
-import { MdDelete } from "react-icons/md"
+import { ReactElement, useEffect, useState } from "react";
+import { AlertDialogDemo } from "../DeletionAlert/DeletionAlert";
+import { EditDialogBox } from "../EditPopUp/EditPopup";
 
 interface Data {
     [key: string]: string;
@@ -24,8 +23,11 @@ interface TableContents {
     handlePageChange: (e: number) => void;
     Details: Data[];
     PAGE_SIZE: number
-    edit:boolean
-    delete:boolean
+    edit?:boolean
+    delete?:boolean
+    onDelete?:(index: number) => void
+    resourceId?:string
+    formComponent?:ReactElement
 }
 
 const TableShow: React.FC<TableContents> = (props) => {
@@ -57,8 +59,36 @@ const TableShow: React.FC<TableContents> = (props) => {
         }
     };
 
+
+    const handleDelete = async (index: number) => {
+        // Remove the row from the paginatedData
+        const newData = props.paginatedData.filter((_, i) => i !== index);
+        props.onDelete(index); // Call onDelete to handle client-side state update
+    
+        try {
+            const response = await fetch(`/api/deleteRow/${props.resourceId}/${index}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                    
+                },
+            });
+    
+            if (!response.ok) {
+                // Handle non-successful responses
+                throw new Error(`Error deleting row: ${response.status} - ${response.statusText}`);
+            }
+    
+            console.log('Row deleted successfully from the database.');
+        } catch (error) {
+            console.error('Error deleting row from the database:', error);
+        }
+    };
+
+    
+
     return (
-        <div className="mt-4 mb-12 w-5/6 sm:w-11/12 flex flex-col">
+        <div className="mt-4 mb-12 w-5/6 sm:w-11/12 sm:max-w-[1200px] flex flex-col">
             <Table className="border-collapse w-full">
                 <div className="bg-white">
                     <TableHeader className="text-center sticky top-0 bg-white z-10">
@@ -68,7 +98,7 @@ const TableShow: React.FC<TableContents> = (props) => {
                                     id="sortHeaderSelect"
                                     value="default"
                                     onChange={(e) => addField(e.target.value)}
-                                    className="mr-2 mb-2 sm:mb-0 w-full sm:w-[90px] px-3 py-2 rounded-md  focus:outline-none bg-blue-500 text-white"
+                                    className="mr-2 mb-2 sm:mb-0 w-[100px] sm:w-[100px] px-2 py-2 rounded-md  focus:outline-none bg-blue-500 text-white"
                                 >
                                     <option value="default" disabled>Add Field</option>
                                     {hiddenHeaders.map((column) => (
@@ -95,16 +125,12 @@ const TableShow: React.FC<TableContents> = (props) => {
                         {props.paginatedData.map((staff: Data, index: number) => (
                             <TableRow key={(props.currentPage - 1)*props.PAGE_SIZE + index}>
                                 <TableCell className="flex justify-center">
-                                        {props.edit && (
-                                            <button className=" border-2 rounded mr-2">
-                                                <MdEdit size={'20px'}/>
-                                            </button>
+                                        {props.edit && props.formComponent && (
+                                            <EditDialogBox formComponent={props.formComponent} selectedRowData={staff}/>
                                         )}
                                         {props.delete && (
-                                            <button  className=" border-2 rounded mr-2">
-                                                <MdDelete size={'20px'}/>
-                                            </button>
-                                        )}
+                    <AlertDialogDemo onDelete={() => handleDelete((props.currentPage - 1) * props.PAGE_SIZE + index)} />
+                  )}
                                     </TableCell>
                                 {/* Render the Serial Number cell only in the table body */}
                                 <TableCell className="">{(props.currentPage-1)*props.PAGE_SIZE + index + 1}</TableCell>
@@ -124,6 +150,7 @@ const TableShow: React.FC<TableContents> = (props) => {
                 currentPage={props.currentPage}
                 handlePageChange={props.handlePageChange}
             />
+            
         </div>
     );
 };
