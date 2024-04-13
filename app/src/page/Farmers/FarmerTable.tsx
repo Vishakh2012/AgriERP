@@ -5,7 +5,7 @@ import useFilter from '@/hooks/useFilter'
 import usePagination from '@/hooks/usePagination'
 import useSort from '@/hooks/useSort'
 import { useState } from 'react'
-import EditFarmerForms from './EditFarmer/EditFarmer'
+import FarmerFormsCombined from './AddNewFarmer/FormsCombined'
 
 const initialFarmerDetails=[
     {
@@ -83,7 +83,7 @@ const FarmerTable = () => {
             <div className='md:ml-4 w-full h-screen'>
                 <Header text='Farmer Details' />
                 <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={farmerDetails} buttonText='Add New Farmer' buttonRoute='/farmers/forms'/>
-                <TableShow formComponent={<EditFarmerForms/>} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={farmerDetails} PAGE_SIZE={5} edit={true} delete={true} onDelete={handleDelete}/>
+                <TableShow formComponent={<FarmerFormsCombined mode='edit'/>} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={farmerDetails} PAGE_SIZE={5} edit={true} delete={true} onDelete={handleDelete}/>
             </div>
         </div>
     )

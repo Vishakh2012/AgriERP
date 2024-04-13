@@ -5,7 +5,7 @@ const StaffForms = () => {
   return (
     <div className='w-full ml-4 h-screen'>
     <Header text='Add New Staff'/>
-    <StaffFormsCombined/>
+    <StaffFormsCombined mode='add'/>
     </div>
   )
 }

@@ -1,10 +1,15 @@
 import { Button } from "@/components/ui/button";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BasicProductDetails from "./ProductFormComponents/BasicProductDetails";
 import TaxProductDetails from "./ProductFormComponents/TaxProductDetails";
 
-const ProductFormsCombined = () => {
+interface ProductFormProps {
+  mode: 'add' | 'edit';
+  selectedRowData?: any; // Data of the staff member to edit
+}
+
+const ProductFormsCombined: React.FC<ProductFormProps> = ({ mode, selectedRowData }) => {
     const navigate = useNavigate();
     const [activeComponent, setActiveComponent] = useState("basic");
     const [formData, setFormData] = useState({
@@ -19,6 +24,12 @@ const ProductFormsCombined = () => {
       stockCount: 0
     });
   
+    useEffect(() => {
+      if (selectedRowData) {
+        const formDataWithDefaults = { ...selectedRowData };
+        setFormData(formDataWithDefaults);
+      }
+    }, [selectedRowData]);
     
     const handleChange = (e: { target: { name: any; value: any } }) => {
       const { name, value } = e.target;
@@ -44,8 +55,10 @@ const ProductFormsCombined = () => {
         try {
           console.log(formData);
           const accessToken = localStorage.getItem("accessToken");
-          const response = await fetch("http://localhost:5050/api/posts", {
-            method: "POST",
+          const url = mode === 'add' ? 'http://localhost:5050/api/posts' : 'http://localhost:5050/api/posts'; // Adjust the URL for adding and editing
+          const method = mode === 'add' ? 'POST' : 'PUT';
+          const response = await fetch(url, {
+            method: method,
             headers: {
               "Content-Type": "application/json",
               "x-access-token": accessToken ? accessToken : "",

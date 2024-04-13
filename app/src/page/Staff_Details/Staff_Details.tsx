@@ -4,7 +4,7 @@ import useFilter from '@/hooks/useFilter';
 import useSort from '@/hooks/useSort'
 import TableTools from '@/components/TableTools/TableTools';
 import TableShow from '@/components/TableShow/TableShow';
-import EditStaffForms from './EditStaff/EditStaffForms';
+import StaffFormsCombined from './AddNewStaff/StaffFormsCombined';
 
 const staffDetails = [
     {
@@ -164,7 +164,7 @@ const Staff_Details = ()=> {
     <div className='md:ml-4 w-full'>
       <Header text='Staff Details'/>
     <TableTools filterCriteria= {filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={staffDetails} buttonText='Add New Staff' buttonRoute='/staff/forms'/>
-    <TableShow formComponent={<EditStaffForms/>} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE} edit={true} delete={true}/>
+    <TableShow formComponent={<StaffFormsCombined mode='edit'/>} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE} edit={true} delete={true}/>
     </div>
     </div>
 )

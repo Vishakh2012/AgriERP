@@ -4,7 +4,7 @@ import useSort from '@/hooks/useSort';
 import usePagination from '@/hooks/usePagination';
 import TableTools from '@/components/TableTools/TableTools';
 import TableShow from '@/components/TableShow/TableShow';
-import EditProductForms from './EditProduct/EditProduct';
+import ProductFormsCombined from './AddNewProduct/ProductFormsCombined';
 
 const productDetails = [
     {
@@ -233,10 +233,10 @@ const Product_Display = () => {
     const { pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE } = usePagination(sortedData)
     return (
         <div className='w-full'>
-            <div className='md:ml-4 w-full h-screen'>
+            <div className='md:ml-4 w-full h-full'>
                 <Header text='Product Details' />
                 <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={productDetails} buttonText='Add New Product' buttonRoute='/products/forms' />
-                <TableShow formComponent={<EditProductForms/>} edit={true} delete={true} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={productDetails} PAGE_SIZE={PAGE_SIZE} />
+                <TableShow formComponent={<ProductFormsCombined mode='edit'/>} edit={true} delete={true} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={productDetails} PAGE_SIZE={PAGE_SIZE} />
             </div>
         </div>
     )

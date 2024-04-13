@@ -5,7 +5,7 @@ const ProductForms = () => {
   return (
     <div className='w-full ml-4 h-screen'>
       <Header text='Add New Product'/>
-      <ProductFormsCombined/>
+      <ProductFormsCombined mode='add'/>
     </div>
   )
 }
