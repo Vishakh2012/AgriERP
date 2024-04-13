@@ -157,14 +157,17 @@ const staffDetails = [
 
 const Staff_Details = ()=> {
     const { filterCriteria, filteredData, handleFilterChange } =  useFilter(staffDetails)
-    const {handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn} = useSort(filterCriteria, filteredData)
-    const {pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE} = usePagination(sortedData) 
+   const {handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn} = useSort(filteredData)
+  const {pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE} = usePagination(sortedData) 
  return (
     <div>
     <div className='md:ml-4 w-full'>
-      <Header text='Staff Details'/>
-    <TableTools filterCriteria= {filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={staffDetails} buttonText='Add New Staff' buttonRoute='/staff/forms'/>
-    <TableShow formComponent={<EditStaffForms/>} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE} edit={true} delete={true}/>
+    <Header text='Staff Details'/>
+    <TableTools filterCriteria= {filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange}
+    handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={staffDetails}
+    buttonText='Add New Staff' buttonRoute='/staff/forms'/>
+   <TableShow formComponent={<EditStaffForms/>} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage}
+   handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE} edit={true} delete={true}/>
     </div>
     </div>
 )
