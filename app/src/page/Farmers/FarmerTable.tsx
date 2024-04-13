@@ -66,7 +66,7 @@ const initialFarmerDetails=[
 const FarmerTable = () => {
     const [farmerDetails, setFarmerDetails] = useState(initialFarmerDetails)
     const { filterCriteria, filteredData, handleFilterChange } = useFilter(farmerDetails)
-    const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filterCriteria, filteredData)
+    const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filteredData)
     const { pageCount, paginatedData, handlePageChange, currentPage } = usePagination(sortedData)
   
     const handleDelete = (indexToDelete: number) => {
