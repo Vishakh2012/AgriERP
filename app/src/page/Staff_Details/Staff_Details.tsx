@@ -157,8 +157,8 @@ const staffDetails = [
 
 const Staff_Details = ()=> {
     const { filterCriteria, filteredData, handleFilterChange } =  useFilter(staffDetails)
-    const {handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn} = useSort(filterCriteria, filteredData)
-    const {pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE} = usePagination(sortedData) 
+   const {handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn} = useSort(filteredData)
+  const {pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE} = usePagination(sortedData) 
  return (
     <div>
     <div className='md:ml-4 w-full'>

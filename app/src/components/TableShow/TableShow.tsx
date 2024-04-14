@@ -88,9 +88,9 @@ const TableShow: React.FC<TableContents> = (props) => {
     
 
     return (
-        <div className="mt-4 mb-12 w-5/6 sm:w-11/12 sm:max-w-[1200px] flex flex-col">
+        <div className="mt-4 mb-12 w-5/6 sm:w-11/12 sm:max-w-[1400px] flex flex-col">
+        <div className="bg-white">
             <Table className="border-collapse w-full">
-                <div className="bg-white">
                     <TableHeader className="text-center sticky top-0 bg-white z-10">
                         <TableRow>
                             <TableHead>
@@ -143,8 +143,8 @@ const TableShow: React.FC<TableContents> = (props) => {
                             </TableRow>
                         ))}
                     </TableBody>
-                </div>
             </Table>
+            </div>
             <Pagination
                 pageCount={props.pageCount}
                 currentPage={props.currentPage}

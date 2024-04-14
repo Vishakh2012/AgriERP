@@ -37,7 +37,7 @@ const SalesDisplay = () => {
 
     };
     const { filterCriteria, filteredData, handleFilterChange } = useFilter(data)
-    const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filterCriteria, filteredData)
+    const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filteredData)
     const { pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE } = usePagination(sortedData)
     return (
         <div className='w-full'>

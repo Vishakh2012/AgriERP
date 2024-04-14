@@ -1,15 +1,18 @@
 
 import { useState, useEffect, ChangeEvent } from "react";
-const useSort = (filterCriteria: string, filteredData) => {
+interface Data{
+    [key:string] : string
+}
+const useSort = (filteredData: Data[]) => {
     const [sortOption, setSortOption] = useState('');
-    const [sortedData, setSortedData] = useState([]);
+    const [sortedData, setSortedData] = useState<Data[]>([]);
     const [sortColumn, setSortColumn] = useState('');
 
     const handleSortOptionChange = (e: ChangeEvent<HTMLSelectElement>) => {
         const { value } = e.target;
         setSortOption(value);
     };
-    const applySorting = (data) => {
+    const applySorting = (data: Data[]) => {
         if (sortColumn === '') return data;
         const sorted = [...data].sort((a, b) => {
             if (sortOption === 'ascending') {
@@ -46,10 +49,11 @@ const useSort = (filterCriteria: string, filteredData) => {
     }, []);
     useEffect(() => {
         const sortedAndFilteredData = applySorting(filteredData);
+        console.log(filteredData)
         setSortedData(sortedAndFilteredData);
     }, [filteredData, sortColumn, sortOption]);
 
-    const handleColumnSort = (column) => {
+    const handleColumnSort = (column: string) => {
         setSortColumn(column);
         setSortOption('ascending');
     };

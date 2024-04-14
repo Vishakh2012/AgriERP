@@ -229,7 +229,7 @@ const productDetails = [
 
 const Product_Display = () => {
     const { filterCriteria, filteredData, handleFilterChange } = useFilter(productDetails)
-    const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filterCriteria, filteredData)
+    const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filteredData)
     const { pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE } = usePagination(sortedData)
     return (
         <div className='w-full'>
