@@ -1,7 +1,14 @@
 import InputComponent from '@/components/Input/Input'
 
+interface Formdetails{
+  formData:any,
+  handleChange?:any,
+  handleKeyPress?:any,
+  onClick?:any
+  disabled?:any
+}
 
-const FpoAccount = ({ formData, handleChange, handleKeyPress }) => {
+const FpoAccount:React.FC<Formdetails> = (props) => {
   return (
     <>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -11,11 +18,14 @@ const FpoAccount = ({ formData, handleChange, handleKeyPress }) => {
           label="Bank Branch Name"
           type="text"
           name="bankBranchName"
-          value={formData.bankBranchName}
-          onChange={handleChange}
+          value={props.formData.bankBranchName}
+          onChange={props.handleChange}
+          disabled={props.disabled}
           placeholder="Bank Branch Name"
+          onClick={props.onClick}
+
           required
-          onKeyDown={handleKeyPress}
+          onKeyDown={props.handleKeyPress}
         />
         </div>
         <div>
@@ -23,11 +33,13 @@ const FpoAccount = ({ formData, handleChange, handleKeyPress }) => {
           label="IFSC Code"
           type="text"
           name="ifscCode"
-          value={formData.ifscCode}
-          onChange={handleChange}
+          value={props.formData.ifscCode}
+          onChange={props.handleChange}
+          onClick={props.onClick}
+          disabled={props.disabled}
           placeholder="IFSC Code"
           required
-          onKeyDown={handleKeyPress}
+          onKeyDown={props.handleKeyPress}
         />
         </div>
       </div>
@@ -37,11 +49,13 @@ const FpoAccount = ({ formData, handleChange, handleKeyPress }) => {
           label="Bank Account Number"
           type="text"
           name="bankAccountNumber"
-          value={formData.bankAccountNumber}
-          onChange={handleChange}
+          value={props.formData.bankAccountNumber}
+          onChange={props.handleChange}
+          disabled={props.disabled}
+          onClick={props.onClick}
           placeholder="Bank Account Number"
           required
-          onKeyDown={handleKeyPress}
+          onKeyDown={props.handleKeyPress}
         />
         </div>
       </div>

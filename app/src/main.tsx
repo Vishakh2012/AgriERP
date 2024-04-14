@@ -20,6 +20,9 @@ import Confirmation from './page/Farmers/AddNewFarmer/Confirmation';
 import StaffForms from './page/Staff_Details/AddNewStaff/StaffForms';
 import FpoForm from './page/FPO Details/FPO Form/FpoForm';
 import FarmerTable from './page/Farmers/FarmerTable';
+import ProductForms from './page/Product_Display/AddNewProduct/ProductForms';
+import FpoDisplay from './page/FPO Details/FPO Display/FpoDisplay';
+import StakeHolders from './page/StakeHolders/StakeHolders';
 
 
 
@@ -106,7 +109,8 @@ const router = createBrowserRouter([
 
         children: [
             {
-
+                path:'/stakeholders',
+                element:<StakeHolders/>
             }
         ]
     },
@@ -118,6 +122,10 @@ const router = createBrowserRouter([
             {
                 path: '/products',
                 element:<Product_Display />
+            },
+            {
+                path:'/products/forms',
+                element:<ProductForms/>
             }
         ]
     },
@@ -125,13 +133,17 @@ const router = createBrowserRouter([
         path: '/fpo',
         element:<Sidebar/>,
         children:[
-            
+            {
+                path:'/fpo',
+                element:<FpoDisplay/>
+            },
             {
                 path:'/fpo/edit',
                 element:<FpoForm/>
             }
         ]
-    }
+    },
+    
 ]);
 
 

@@ -4,11 +4,12 @@ import useSort from '@/hooks/useSort';
 import usePagination from '@/hooks/usePagination';
 import TableTools from '@/components/TableTools/TableTools';
 import TableShow from '@/components/TableShow/TableShow';
+import ProductFormsCombined from './AddNewProduct/ProductFormsCombined';
 
 const productDetails = [
     {
         category: "Electronics",
-        name: "Smartphone",
+        productName: "Smartphone",
         hsn: "123456",
         itemCode: "ITEM001",
         price: "$500.00",
@@ -17,7 +18,7 @@ const productDetails = [
     },
     {
         category: "Electronics",
-        name: "Laptop",
+        productName: "Laptop",
         hsn: "789012",
         itemCode: "ITEM002",
         price: "$1000.00",
@@ -26,7 +27,7 @@ const productDetails = [
     },
     {
         category: "Clothing",
-        name: "T-Shirt",
+        productName: "T-Shirt",
         hsn: "345678",
         itemCode: "ITEM003",
         price: "$20.00",
@@ -35,7 +36,7 @@ const productDetails = [
     },
     {
         category: "Clothing",
-        name: "Jeans",
+        productName: "Jeans",
         hsn: "901234",
         itemCode: "ITEM004",
         price: "$50.00",
@@ -44,7 +45,7 @@ const productDetails = [
     },
     {
         category: "Books",
-        name: "Novel",
+        productName: "Novel",
         hsn: "567890",
         itemCode: "ITEM005",
         price: "$15.00",
@@ -53,7 +54,7 @@ const productDetails = [
     },
     {
         category: "Books",
-        name: "Textbook",
+        productName: "Textbook",
         hsn: "234567",
         itemCode: "ITEM006",
         price: "$80.00",
@@ -62,7 +63,7 @@ const productDetails = [
     },
     {
         category: "Home Appliances",
-        name: "Refrigerator",
+        productName: "Refrigerator",
         hsn: "890123",
         itemCode: "ITEM007",
         price: "$800.00",
@@ -71,7 +72,7 @@ const productDetails = [
     },
     {
         category: "Home Appliances",
-        name: "Microwave Oven",
+        productName: "Microwave Oven",
         hsn: "456789",
         itemCode: "ITEM008",
         price: "$200.00",
@@ -80,7 +81,7 @@ const productDetails = [
     },
     {
         category: "Furniture",
-        name: "Sofa",
+        productName: "Sofa",
         hsn: "123450",
         itemCode: "ITEM009",
         price: "$700.00",
@@ -89,7 +90,7 @@ const productDetails = [
     },
     {
         category: "Furniture",
-        name: "Bed",
+        productName: "Bed",
         hsn: "678901",
         itemCode: "ITEM010",
         price: "$600.00",
@@ -98,7 +99,7 @@ const productDetails = [
     },
     {
         category: "Kitchenware",
-        name: "Cookware Set",
+        productName: "Cookware Set",
         hsn: "234567",
         itemCode: "ITEM011",
         price: "$100.00",
@@ -107,7 +108,7 @@ const productDetails = [
     },
     {
         category: "Kitchenware",
-        name: "Cutlery Set",
+        productName: "Cutlery Set",
         hsn: "789012",
         itemCode: "ITEM012",
         price: "$50.00",
@@ -116,7 +117,7 @@ const productDetails = [
     },
     {
         category: "Sporting Goods",
-        name: "Tennis Racket",
+        productName: "Tennis Racket",
         hsn: "345678",
         itemCode: "ITEM013",
         price: "$80.00",
@@ -125,7 +126,7 @@ const productDetails = [
     },
     {
         category: "Sporting Goods",
-        name: "Football",
+        productName: "Football",
         hsn: "901234",
         itemCode: "ITEM014",
         price: "$30.00",
@@ -134,7 +135,7 @@ const productDetails = [
     },
     {
         category: "Beauty",
-        name: "Perfume",
+        productName: "Perfume",
         hsn: "567890",
         itemCode: "ITEM015",
         price: "$50.00",
@@ -143,7 +144,7 @@ const productDetails = [
     },
     {
         category: "Beauty",
-        name: "Makeup Kit",
+        productName: "Makeup Kit",
         hsn: "234567",
         itemCode: "ITEM016",
         price: "$40.00",
@@ -152,7 +153,7 @@ const productDetails = [
     },
     {
         category: "Tools",
-        name: "Drill Machine",
+        productName: "Drill Machine",
         hsn: "890123",
         itemCode: "ITEM017",
         price: "$120.00",
@@ -161,7 +162,7 @@ const productDetails = [
     },
     {
         category: "Tools",
-        name: "Screwdriver Set",
+        productName: "Screwdriver Set",
         hsn: "456789",
         itemCode: "ITEM018",
         price: "$25.00",
@@ -170,7 +171,7 @@ const productDetails = [
     },
     {
         category: "Toys",
-        name: "Action Figure",
+        productName: "Action Figure",
         hsn: "123450",
         itemCode: "ITEM019",
         price: "$15.00",
@@ -179,7 +180,7 @@ const productDetails = [
     },
     {
         category: "Toys",
-        name: "Doll",
+        productName: "Doll",
         hsn: "678901",
         itemCode: "ITEM020",
         price: "$10.00",
@@ -188,7 +189,7 @@ const productDetails = [
     },
     {
         category: "Jewelry",
-        name: "Necklace",
+        productName: "Necklace",
         hsn: "234567",
         itemCode: "ITEM021",
         price: "$200.00",
@@ -197,7 +198,7 @@ const productDetails = [
     },
     {
         category: "Jewelry",
-        name: "Earrings",
+        productName: "Earrings",
         hsn: "789012",
         itemCode: "ITEM022",
         price: "$100.00",
@@ -206,7 +207,7 @@ const productDetails = [
     },
     {
         category: "Electricals",
-        name: "LED Bulb",
+        productName: "LED Bulb",
         hsn: "345678",
         itemCode: "ITEM023",
         price: "$5.00",
@@ -215,7 +216,7 @@ const productDetails = [
     },
     {
         category: "Electricals",
-        name: "Extension Cord",
+        productName: "Extension Cord",
         hsn: "901234",
         itemCode: "ITEM024",
         price: "$15.00",
@@ -232,10 +233,10 @@ const Product_Display = () => {
     const { pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE } = usePagination(sortedData)
     return (
         <div className='w-full'>
-            <div className='md:ml-4 w-full h-screen'>
+            <div className='md:ml-4 w-full h-full'>
                 <Header text='Product Details' />
-                <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={productDetails} buttonText='Add New Product' buttonRoute='/product/forms' />
-                <TableShow edit={true} delete={true} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={productDetails} PAGE_SIZE={PAGE_SIZE} />
+                <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={productDetails} buttonText='Add New Product' buttonRoute='/products/forms' />
+                <TableShow formComponent={<ProductFormsCombined mode='edit'/>} edit={true} delete={true} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={productDetails} PAGE_SIZE={PAGE_SIZE} />
             </div>
         </div>
     )
