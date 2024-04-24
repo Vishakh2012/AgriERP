@@ -1,10 +1,5 @@
 import Header from '@/components/Header/Header';
-import useFilter from '@/hooks/useFilter';
-import useSort from '@/hooks/useSort';
-import usePagination from '@/hooks/usePagination';
-import TableTools from '@/components/TableTools/TableTools';
-import TableShow from '@/components/TableShow/TableShow';
-import ProductFormsCombined from './AddNewProduct/ProductFormsCombined';
+import DemoPage from './TableShow/table-trial';
 
 const productDetails = [
     {
@@ -228,15 +223,12 @@ const productDetails = [
 
 
 const Product_Display = () => {
-    const { filterCriteria, filteredData, handleFilterChange } = useFilter(productDetails)
-    const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filteredData)
-    const { pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE } = usePagination(sortedData)
     return (
         <div className='w-full'>
-            <div className='md:ml-4 w-full h-full'>
+            <div className='md:ml-4 print:m-0 w-full h-screen'>
                 <Header text='Product Details' />
-                <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={productDetails} buttonText='Add New Product' buttonRoute='/products/forms' />
-                <TableShow formComponent={<ProductFormsCombined mode='edit'/>} edit={true} delete={true} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={productDetails} PAGE_SIZE={PAGE_SIZE} />
+                    <DemoPage buttonText='Add Product' buttonRoute='add route' displayData={productDetails}/>  
+>>>>>>> f1c3779 (FEAT:)
             </div>
         </div>
     )

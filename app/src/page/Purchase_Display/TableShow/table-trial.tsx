@@ -1,6 +1,7 @@
-import Header from '@/components/Header/Header';
-import DemoPage from './TableShow/table-trial';
-
+import { Staff, columns } from "./columns"
+import React from "react"
+import { DataTable } from "./data-table"
+ 
 const staffDetails = [
     {
         staffId: "ST001",
@@ -147,21 +148,23 @@ const staffDetails = [
         address: "741 Elm Drive, Wilderness",
     },
 ];
-
-
-//buttonText='Add New Staff' buttonRoute='/staff/forms'/
-const Staff_Details = ()=> {
- return (
-    <div className='md:ml-4 w-[100%-4rem]'>
-    <Header text='Staff Details'/>
-    {/*
-    < TableShow formComponent={<EditStaffForms/>} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage}
-    handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE} edit={true} delete={true}/>
-    */}
-   <DemoPage buttonText='Add New Staff' buttonRoute='/staff/forms' displayData={staffDetails} /> 
->>>>>>> f1c3779 (FEAT:)
-    </div>
-)
+interface Data {
+    [key: string] : string
 }
 
-export default Staff_Details
+interface propsTable {
+    buttonText: string
+    buttonRoute: string
+    displayData: Data []
+}
+const DemoPage: React.FC<propsTable> = ({buttonText, buttonRoute, displayData}) =>  {
+  const data = displayData
+ 
+  return (
+    <div className="container w-11/12 mx-0 py-10 px-0 max-w-[1900px]">
+      <DataTable columns={columns} data={data} buttonText={buttonText} buttonRoute={buttonRoute} />
+    </div>
+
+  )
+}
+export default DemoPage

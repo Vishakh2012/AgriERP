@@ -6,11 +6,11 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-import Pagination from "../Pagination/Pagination";
+import Pagination from "@/components/Pagination/Pagination";
 import { IoMdClose } from "react-icons/io";
 import { ReactElement, useEffect, useState } from "react";
-import { AlertDialogDemo } from "../DeletionAlert/DeletionAlert";
-import { EditDialogBox } from "../EditPopUp/EditPopup";
+import { AlertDialogDemo } from "@/components/DeletionAlert/DeletionAlert";
+import { EditDialogBox } from "@/components/EditPopUp/EditPopup";
 
 interface Data {
     [key: string]: string;
@@ -63,7 +63,7 @@ const TableShow: React.FC<TableContents> = (props) => {
     const handleDelete = async (index: number) => {
         // Remove the row from the paginatedData
         const newData = props.paginatedData.filter((_, i) => i !== index);
-        {props.onDelete && props.onDelete(index)}; // Call onDelete to handle client-side state update
+        props.onDelete(index); // Call onDelete to handle client-side state update
     
         try {
             const response = await fetch(`/api/deleteRow/${props.resourceId}/${index}`, {

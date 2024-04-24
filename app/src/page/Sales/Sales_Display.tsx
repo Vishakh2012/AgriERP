@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header/Header';
-import TableTools from '@/components/TableTools/TableTools';
-import TableShow from '@/components/TableShow/TableShow';
 import usePagination from '@/hooks/usePagination';
 import useSort from '@/hooks/useSort';
 import useFilter from '@/hooks/useFilter';
@@ -43,8 +41,6 @@ const SalesDisplay = () => {
         <div className='w-full'>
             <div className='w-full md:ml-4'>
                 <Header text='Staff Details' />
-                <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={data} />
-                <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={data} PAGE_SIZE={PAGE_SIZE} />
             </div>
         </div>
     )

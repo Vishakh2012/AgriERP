@@ -1,9 +1,4 @@
 import Header from '@/components/Header/Header'
-import TableShow from '@/components/TableShow/TableShow'
-import TableTools from '@/components/TableTools/TableTools'
-import useFilter from '@/hooks/useFilter'
-import usePagination from '@/hooks/usePagination'
-import useSort from '@/hooks/useSort'
 import { useState } from 'react'
 import FarmerFormsCombined from './AddNewFarmer/FormsCombined'
 
@@ -65,9 +60,6 @@ const initialFarmerDetails=[
 
 const FarmerTable = () => {
     const [farmerDetails, setFarmerDetails] = useState(initialFarmerDetails)
-    const { filterCriteria, filteredData, handleFilterChange } = useFilter(farmerDetails)
-    const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filteredData)
-    const { pageCount, paginatedData, handlePageChange, currentPage } = usePagination(sortedData)
   
     const handleDelete = (indexToDelete: number) => {
         // Create a copy of the farmerDetails array
@@ -82,8 +74,6 @@ const FarmerTable = () => {
         <div className='w-full'>
             <div className='md:ml-4 w-full h-screen'>
                 <Header text='Farmer Details' />
-                <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={farmerDetails} buttonText='Add New Farmer' buttonRoute='/farmers/forms'/>
-                <TableShow formComponent={<FarmerFormsCombined mode='edit'/>} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={farmerDetails} PAGE_SIZE={5} edit={true} delete={true} onDelete={handleDelete}/>
             </div>
         </div>
     )

@@ -1,17 +1,13 @@
 import  { SetStateAction, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom'
-import StaffPersonal from './Form Components/StaffPersonal';
-import StaffAddress from './Form Components/StaffAddress';
-import StaffAccount from './Form Components/StaffAccount';
+import StaffPersonal from '../AddNewStaff/Form Components/StaffPersonal';
+import StaffAddress from '../AddNewStaff/Form Components/StaffAddress';
+import StaffAccount from '../AddNewStaff/Form Components/StaffAccount';
 
-interface StaffFormProps {
-  mode: 'add' | 'edit';
-  selectedRowData?: any; // Data of the staff member to edit
-}
 
-const StaffFormsCombined: React.FC<StaffFormProps> = ({ mode, selectedRowData }) => {
-
+const EditStaffForms = (props:any) => {
+    const {selectedRowData} = props
   const [activeComponent, setActiveComponent] = useState("personal");
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -33,17 +29,19 @@ const StaffFormsCombined: React.FC<StaffFormProps> = ({ mode, selectedRowData })
     city:'',
     postOffice:'',
     dob:'',
-    dateOfJoin:'',
+    dateOfJoining:'',
     salary:'',
     bloodGroup:''
   });
 
   useEffect(() => {
     if (selectedRowData) {
-      const formDataWithDefaults = { ...selectedRowData };
-      setFormData(formDataWithDefaults);
+        const formDataWithDefaults = { ...selectedRowData };
+        
+        setFormData(formDataWithDefaults);
     }
-  }, [selectedRowData]);
+}, [selectedRowData]);
+
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
@@ -79,12 +77,10 @@ const StaffFormsCombined: React.FC<StaffFormProps> = ({ mode, selectedRowData })
     e.preventDefault();
     if (validateForm()) {
       try {
-        const accessToken = localStorage.getItem('accessToken');
-        const url = mode === 'add' ? 'http://localhost:5050/api/posts' : 'http://localhost:5050/api/posts'; // Adjust the URL for adding and editing
-        const method = mode === 'add' ? 'POST' : 'PUT';
         console.log(formData)
-        const response = await fetch(url, {
-          method: method,
+        const accessToken = localStorage.getItem('accessToken')
+        const response = await fetch('http://localhost:5050/api/posts', {
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
             'x-access-token': accessToken ? accessToken : '',
@@ -134,13 +130,13 @@ const StaffFormsCombined: React.FC<StaffFormProps> = ({ mode, selectedRowData })
 
 
   return (
-    <div className=' w-full'>
-      <div className="flex justify-center gap-1 my-6">
+    <div className='m-6'>
+      <div className="flex justify-center gap-1">
         <Button className="rounded-none" onClick={() => handleButtonClick("personal")}>Personal</Button>
         <Button className="rounded-none" onClick={() => handleButtonClick("address")}>Address</Button>
         <Button className="rounded-none" onClick={() => handleButtonClick("account")}>Account</Button>
       </div>
-    <form onSubmit={handleSubmit} className='grid gap-5 w-full'>
+    <form onSubmit={handleSubmit} className='grid gap-5 p-4'>
       {activeComponent === 'personal' &&
       <>
       <StaffPersonal formData={formData} handleChange={handleChange} handleKeyPress={handleKeyPress}/>
@@ -169,4 +165,4 @@ const StaffFormsCombined: React.FC<StaffFormProps> = ({ mode, selectedRowData })
   );
 };
 
-export default StaffFormsCombined;
+export default EditStaffForms;
