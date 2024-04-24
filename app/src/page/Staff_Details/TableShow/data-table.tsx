@@ -177,7 +177,7 @@ export function DataTable<TData, TValue>({
                                         >
                                             <TableCell>
 
-                                                <EditDialogBox formComponent={<EditStaffForms />} selectedRowData={{ email: row.getValue("email") }} />
+                                                <EditDialogBox formComponent={<EditStaffForms />} selectedRowData={row.original} />
 
                                             </TableCell>
                                             {row.getVisibleCells().map((cell) => {

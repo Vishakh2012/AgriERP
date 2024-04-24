@@ -12,6 +12,7 @@ interface DialogboxContent{
 }
 
 export const EditDialogBox:React.FC<DialogboxContent>= (props) => {
+    console.log(props?.selectedRowData)
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -20,7 +21,7 @@ export const EditDialogBox:React.FC<DialogboxContent>= (props) => {
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[900px]">
-      {React.cloneElement(props.formComponent,{ selectedRowData: props.selectedRowData })}
+      {React.cloneElement(props.formComponent,{ selectedRowData: props?.selectedRowData })}
       </DialogContent>
     </Dialog>
   )

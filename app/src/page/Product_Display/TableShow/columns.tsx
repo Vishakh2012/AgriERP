@@ -3,7 +3,7 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 export type Product = {
     category: string
-    name: string
+    productName: string
     hsn: string
     itemCode: string
     price: string
@@ -18,7 +18,7 @@ export const columns: ColumnDef<Product>[] = [
         header: "Item Code"
     },
     {
-        accessorKey: "name",
+        accessorKey: "productName",
         header: ({ column }) => {
             return (
                 <Button
