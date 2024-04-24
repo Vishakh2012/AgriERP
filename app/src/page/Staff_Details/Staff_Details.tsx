@@ -159,7 +159,6 @@ const Staff_Details = ()=> {
     handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE} edit={true} delete={true}/>
     */}
    <DemoPage buttonText='Add New Staff' buttonRoute='/staff/forms' displayData={staffDetails} /> 
->>>>>>> f1c3779 (FEAT:)
     </div>
 )
 }

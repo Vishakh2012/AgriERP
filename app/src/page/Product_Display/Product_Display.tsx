@@ -228,7 +228,6 @@ const Product_Display = () => {
             <div className='md:ml-4 print:m-0 w-full h-screen'>
                 <Header text='Product Details' />
                     <DemoPage buttonText='Add Product' buttonRoute='add route' displayData={productDetails}/>  
->>>>>>> f1c3779 (FEAT:)
             </div>
         </div>
     )
