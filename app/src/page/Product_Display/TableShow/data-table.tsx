@@ -171,7 +171,6 @@ export function DataTable<TData, TValue>({
                         <TableBody>
                             {table.getRowModel().rows?.length ? (
                                 table.getRowModel().rows.map((row) => {
-                                    console.log(typeof (row.getValue("email")))
                                     return (
                                         <TableRow
                                             key={row.id}
@@ -179,7 +178,9 @@ export function DataTable<TData, TValue>({
                                         >
                                             <TableCell className="print:hidden">
 
-                                                <EditDialogBox formComponent={<ProductFormsCombined mode="edit" />} selectedRowData={{ email: row.getValue("email") }} />
+                                            <div onClick={() => console.log(row.original)}>
+                                            <EditDialogBox formComponent={<ProductFormsCombined mode="edit" />}selectedRowData={row.original} />
+                                            </div>
                                                 <AlertDialogBox onDelete={() => onDelete(row.original)}/>
                                             </TableCell>
                                             {row.getVisibleCells().map((cell) => {
