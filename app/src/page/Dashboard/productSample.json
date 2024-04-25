@@ -1,0 +1,5 @@
+{
+    "product":["tomato","potato"],
+    "quantity":[100,200],
+    "revenue":[200,300]
+}
