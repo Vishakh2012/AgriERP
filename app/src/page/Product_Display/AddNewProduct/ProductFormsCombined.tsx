@@ -18,10 +18,10 @@ const ProductFormsCombined: React.FC<ProductFormProps> = ({ mode, selectedRowDat
       cgst: 0,
       sgst: 0,
       igst: 0,
-      productCategory: "",
-      hsnNumber: 0,
+      category: "",
+      hsn: 0,
       unit: "",
-      stockCount: 0
+      currentStock: 0
     });
   
     useEffect(() => {

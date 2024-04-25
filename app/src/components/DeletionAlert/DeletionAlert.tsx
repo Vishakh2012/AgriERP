@@ -16,7 +16,7 @@ interface AlertDialogProps {
   onDelete: () => void;
 }
 
-export const AlertDialogDemo: React.FC<AlertDialogProps> = ({ onDelete, onCancel }) => {
+export const AlertDialogBox: React.FC<AlertDialogProps> = ({ onDelete }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>

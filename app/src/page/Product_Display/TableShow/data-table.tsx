@@ -22,8 +22,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import StaffFormsCombined from "@/page/Staff_Details/AddNewStaff/StaffFormsCombined"
-import EditStaffForms from "@/page/Staff_Details/EditStaff/EditStaffForms"
+
 import { Input } from "@/components/ui/input"
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -37,13 +36,16 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import ProductFormsCombined from "../AddNewProduct/ProductFormsCombined"
+import { AlertDialogBox } from "@/components/DeletionAlert/DeletionAlert"
 
 export function DataTable<TData, TValue>({
     columns,
     data,
     buttonRoute,
-    buttonText
-}: DataTableProps<TData, TValue>) {
+    buttonText,
+    onDelete
+}: DataTableProps<TData, TValue>& { onDelete: (rowData: TData) => void }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [Filters, setFilters] = React.useState("")
     const [columnVisibility, setColumnVisibility] =
@@ -177,9 +179,9 @@ export function DataTable<TData, TValue>({
                                             <TableCell className="print:hidden">
 
                                             <div onClick={() => console.log(row.original)}>
-                                            <EditDialogBox formComponent={<EditStaffForms />}selectedRowData={row.original} />
+                                            <EditDialogBox formComponent={<ProductFormsCombined mode="edit" />}selectedRowData={row.original} />
                                             </div>
-
+                                                <AlertDialogBox onDelete={() => onDelete(row.original)}/>
                                             </TableCell>
                                             {row.getVisibleCells().map((cell) => {
 

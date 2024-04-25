@@ -3,6 +3,7 @@ import FpoBasicDetails from '../FPO Form/FPO Form components/FpoBasicDetails'
 import FpoAddress from '../FPO Form/FPO Form components/FpoAddress';
 import FpoAccount from '../FPO Form/FPO Form components/FpoAccount';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 const FieldsCombined = () => {
         const [formData, setFormData] = useState({
@@ -72,7 +73,7 @@ const FieldsCombined = () => {
   return (
     <div className=" sm:max-w-[1200px] w-11/12 my-12">
         <div className='flex flex-col'>
-            <Button className='max-w-[120px] ml-4'>Edit FPO Details</Button>
+            <Link to={'/fpo/edit'}><Button className='max-w-[120px] ml-4'>Edit FPO Details</Button></Link>
             <div className='grid gap-5 p-4'>
                 <FpoBasicDetails formData={formData} disabled={true} />
                 <FpoAddress formData={formData} disabled={true}/>
