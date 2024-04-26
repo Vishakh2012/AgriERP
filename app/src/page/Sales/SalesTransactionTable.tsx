@@ -53,12 +53,7 @@ interface Data {
 
 const SalesTransactionTable = () => {
     const [gstType, setGstType] = useState<string>('No GST')
-<<<<<<< HEAD:app/src/page/Sales/SalesTransactionTable.tsx
-    const { handleInputChange, handleEnterKeyPress, handleCustomerDetailsEnterKeyPress ,currentRowIndex, rows } = useRowHandler(staffDetails, productData, gstType)
-=======
     const { handleInputChange, handleEnterKeyPress, handleCustomerDetailsEnterKeyPress, currentRowIndex, rows } = useRowHandler(productDetails, productData, gstType)
->>>>>>> 69ed2a5 (FEAT:):app/src/page/Sales/ProductTable.tsx
-
     const { grandTotal, totalPrice, totalDiscount } = usePriceCalc(rows)
     useEffect(() => {
         salesBillData.length = 0;
@@ -118,13 +113,8 @@ const SalesTransactionTable = () => {
             </div>
 
             <div className="print:h-7/10 print:py-0">
-<<<<<<< HEAD:app/src/page/Sales/SalesTransactionTable.tsx
-                <CustomerDetailsAndGST handleGSTChange={handleGSTChange} handleImport={handleImport} gstType={gstType} handleCustomerDetailsEnterKeyPress={handleCustomerDetailsEnterKeyPress} />
-                <TableInvoice gstType={gstType} Details={staffDetails} rows={rows} productData={productData} handleEnterKeyPress={handleEnterKeyPress} handleInputChange={handleInputChange} currentRowIndex={currentRowIndex.current} />
-=======
                 <CustomerDetailsAndGST handleGSTChange={handleGSTChange} handleImport={handleImport} gstType={gstType} handleCustomerDetailsEnterKeyPress={handleCustomerDetailsEnterKeyPress}/>
                 <TableInvoice gstType={gstType} Details={productDetails} rows={rows} productData={productData} handleEnterKeyPress={handleEnterKeyPress} handleInputChange={handleInputChange} currentRowIndex={currentRowIndex.current} />
->>>>>>> 69ed2a5 (FEAT:):app/src/page/Sales/ProductTable.tsx
                 {/* Fill remaining space */}
                 <div className=" flex flex-col float-end">
 
