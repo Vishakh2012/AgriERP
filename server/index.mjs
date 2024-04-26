@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import "express-async-errors";
 import { connectDB } from "./db/connection.mjs";
+import multer from "multer";
+const multer_ = multer({ dest: "/uploads" });
 
 //route imports
 import signupRoute from "./routes/authenticationRoutes/signupRoute.mjs";
@@ -27,6 +29,8 @@ import getPurchaseRoute from "./routes/puchaseRoutes/getPurchaseRoute.mjs";
 import newPurchaseRoute from "./routes/puchaseRoutes/newPurchaseRoute.mjs";
 import newSalesRoute from "./routes/salesRoutes/newSalesRoute.mjs";
 import getSalesRoute from "./routes/salesRoutes/getSalesRoute.mjs";
+import uploadStaffRoute from "./routes/uploadRoutes/uploadStaffRoute.mjs";
+import uploadFarmerRoute from "./routes/uploadRoutes/uploadFarmerRoute.mjs";
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -78,6 +82,26 @@ app.use("/api/puchase/add", verifyAccessToken, newPurchaseRoute);
 //sales route
 app.use("/api/sales/add", verifyAccessToken, newSalesRoute);
 app.use("/api/sales/get", verifyAccessToken, getSalesRoute);
+
+//upload file route
+// app.use(
+//   "/api/csv/farmer/upload",
+//   verifyAccessToken,
+//   multer_.single("csv"),
+//   csvUploadRoutes
+// );
+app.use(
+  "/api/csv/farmer/upload",
+  verifyAccessToken,
+  multer_.single("csv"),
+  uploadFarmerRoute
+);
+app.use(
+  "/api/csv/staff/upload",
+  verifyAccessToken,
+  multer_.single("csv"),
+  uploadStaffRoute
+);
 
 // CORS setup
 app.use((req, res, next) => {

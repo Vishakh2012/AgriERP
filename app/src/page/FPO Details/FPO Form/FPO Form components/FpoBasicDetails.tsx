@@ -13,77 +13,76 @@ interface Formdetails{
 const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleKeyPress ,onClick,disabled,onFileChange }) => {
   return (
     <>
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-     
-    <div>
-        <InputComponent
-          label="FPO Name"
-          type="text"
-          name="fpoName"
-          value={formData.fpoName}
-          onClick={onClick}
-          onChange={handleChange}
-          placeholder="FPO Name"
-          disabled={disabled}
-          required
-          onKeyDown={handleKeyPress}
-        />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <div>
+          <InputComponent
+            label="FPO Name"
+            type="text"
+            name="fpoName"
+            value={formData.name}
+            onClick={onClick}
+            onChange={handleChange}
+            placeholder="FPO Name"
+            disabled={disabled}
+            required
+            onKeyDown={handleKeyPress}
+          />
         </div>
         <div>
-        <InputComponent
-          label="FPO Registration Number"
-          type="text"
-          name="fpoRegNo"
-          value={formData.fpoRegNo}
-          onClick={onClick}
-          onChange={handleChange}
-          disabled={disabled}
-          placeholder="FPO Registration Number"
-          required
-          onKeyDown={handleKeyPress}
-        />
+          <InputComponent
+            label="FPO Registration Number"
+            type="text"
+            name="fpoRegNo"
+            value={formData.fpoRegNo}
+            onClick={onClick}
+            onChange={handleChange}
+            disabled={disabled}
+            placeholder="FPO Registration Number"
+            required
+            onKeyDown={handleKeyPress}
+          />
         </div>
         <div>
-        <InputComponent
-          label="CEO"
-          type="text"
-          name="fpoCeo"
-          value={formData.fpoCeo}
-          onClick={onClick}
-          onChange={handleChange}
-          disabled={disabled}
-          placeholder="CEO"
-          required
-          onKeyDown={handleKeyPress}
-        />
+          <InputComponent
+            label="CEO"
+            type="text"
+            name="fpoCeo"
+            value={formData.fpoCeo}
+            onClick={onClick}
+            onChange={handleChange}
+            disabled={disabled}
+            placeholder="CEO"
+            required
+            onKeyDown={handleKeyPress}
+          />
         </div>
         <div>
-        <InputComponent
-          label="Date of Formation"
-          type="date"
-          name="dateOfFormation"
-          value={formData.dateOfFormation}
-          onClick={onClick}
-          onChange={handleChange}
-          disabled={disabled}
-          placeholder='Date of Formation'
-          required
-          onKeyDown={handleKeyPress}
-        />
+          <InputComponent
+            label="Date of Formation"
+            type="date"
+            name="dateOfFormation"
+            value={formData.dateOfFormation}
+            onClick={onClick}
+            onChange={handleChange}
+            disabled={disabled}
+            placeholder="Date of Formation"
+            required
+            onKeyDown={handleKeyPress}
+          />
         </div>
         <div>
-        <InputComponent
-          label="Email"
-          type="email"
-          name="email"
-          value={formData.email}
-          onClick={onClick}
-          disabled={disabled}
-          onChange={handleChange}
-          placeholder='Email'
-          required
-          onKeyDown={handleKeyPress}
-        />
+          <InputComponent
+            label="Email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onClick={onClick}
+            disabled={disabled}
+            onChange={handleChange}
+            placeholder="Email"
+            required
+            onKeyDown={handleKeyPress}
+          />
         </div>
         <div>
         <InputComponent
@@ -116,4 +115,4 @@ const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleK
   )
 }
 
-export default FpoBasicDetails
+export default FpoBasicDetails;

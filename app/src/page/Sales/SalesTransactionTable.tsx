@@ -5,6 +5,7 @@ import TableInvoice from "@/components/TableInvoice/TableInvoice";
 import usePriceCalc from "@/hooks/usePriceCalc";
 import useRowHandler from "@/hooks/useAutoFillInvoice";
 import CustomerDetailsAndGST from "@/components/CustomerDetailsAndGST/CustomerDetailsAndGST";
+import { Button } from "@/components/ui/button";
 
 
 const productDetails = [
@@ -50,10 +51,9 @@ interface Data {
     [key: string]: string
 }
 
-const ProductTable = () => {
+const SalesTransactionTable = () => {
     const [gstType, setGstType] = useState<string>('No GST')
     const { handleInputChange, handleEnterKeyPress, handleCustomerDetailsEnterKeyPress, currentRowIndex, rows } = useRowHandler(productDetails, productData, gstType)
-
     const { grandTotal, totalPrice, totalDiscount } = usePriceCalc(rows)
     useEffect(() => {
         salesBillData.length = 0;
@@ -103,7 +103,9 @@ const ProductTable = () => {
     const handleGSTChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setGstType(e.target.value)
     }
-
+    const handlePrintAndRequestSending = () => {
+         window.print()
+    }
     return (
         <div className="overflow-x-auto flex-grow bg-white w-11/12 print:w-screen rounded-md print:h-screen">
             <div className="hidden print:flex print:top-0 w-full print:justify-center">
@@ -116,29 +118,30 @@ const ProductTable = () => {
                 {/* Fill remaining space */}
                 <div className=" flex flex-col float-end">
 
-                <div className="p-4 bg-white border-t flex flex-col md:justify-end float-end">
-                <div className="md:flex  flex-row md:items-center">
-                <label className="print:text-sm">Total Price:</label>
-                <input type="text" id="totalPrice" value={totalPrice} disabled className="border-none px-2 py-1 rounded focus:outline-none" />
-                </div>
-                <div className="mt-4 md:mt-0 md-flex">
-                <label className="mr-2 print:text-sm">Total Discount:</label>
-                <input type="text" id="totalDiscount" value={totalDiscount} disabled className="border-none px-2 py-1 rounded focus:outline-none" />
-                </div>
-                </div>
-                <div className="p-4 bg-white border-t flex ">
-                <div className="md:flex items-center">
-                <label className='print:text-sm' htmlFor="totalPrice">Grand Total</label>
-                <input type="text" id="totalPrice" value={grandTotal} disabled className="border-none px-2 py-1 rounded focus:outline-none mr-auto" />
-                </div>
-                </div>
+                    <div className="p-4 bg-white border-t flex flex-col md:justify-end float-end">
+                        <div className="md:flex  flex-row md:items-center">
+                            <label className="print:text-sm">Total Price:</label>
+                            <input type="text" id="totalPrice" value={totalPrice} disabled className="border-none px-2 py-1 rounded focus:outline-none" />
+                        </div>
+                        <div className="mt-4 md:mt-0 md-flex">
+                            <label className="mr-2 print:text-sm">Total Discount:</label>
+                            <input type="text" id="totalDiscount" value={totalDiscount} disabled className="border-none px-2 py-1 rounded focus:outline-none" />
+                        </div>
+                    </div>
+                    <div className="p-4 bg-white border-t flex ">
+                        <div className="md:flex items-center">
+                            <label className='print:text-sm' htmlFor="totalPrice">Grand Total</label>
+                            <input type="text" id="totalPrice" value={grandTotal} disabled className="border-none px-2 py-1 rounded focus:outline-none mr-auto" />
+                        </div>
+                    </div>
+                    <Button className="bg-blue-700" onClick={handlePrintAndRequestSending}>Print Bill</Button>
                 </div>
             </div>
         </div>
     );
 };
 
-export default ProductTable;
+export default SalesTransactionTable;
 
 
 
