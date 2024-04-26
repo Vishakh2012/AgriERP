@@ -37,14 +37,17 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { AlertDialogBox } from "@/components/DeletionAlert/DeletionAlert"
+import FarmerFormsCombined from "../AddNewFarmer/FormsCombined"
 
 
 export function DataTable<TData, TValue>({
     columns,
     data,
     buttonRoute,
-    buttonText
-}: DataTableProps<TData, TValue>) {
+    buttonText,
+    onDelete
+}: DataTableProps<TData, TValue>& { onDelete: (rowData: TData) => void }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [Filters, setFilters] = React.useState("")
     const [columnVisibility, setColumnVisibility] =
@@ -144,7 +147,7 @@ export function DataTable<TData, TValue>({
                     </Link>
                 </div>
                 </div>
-                <div className="rounded-md border">
+                <div className="rounded-md border bg-white">
                     <Table>
                         <TableHeader>
                             {table.getHeaderGroups().map((headerGroup) => (
@@ -176,10 +179,10 @@ export function DataTable<TData, TValue>({
                                             key={row.id}
                                             data-state={row.getIsSelected() && "selected"}
                                         >
-                                            <TableCell>
+                                            <TableCell className="flex flex-row">
 
-                                            {/*   <EditDialogBox formComponent={} selectedRowData={{ email: row.getValue("email") }} />*/}
-
+                                                <EditDialogBox formComponent={<FarmerFormsCombined mode="edit" />} selectedRowData={{ email: row.getValue("email") }} />
+                                                <AlertDialogBox onDelete={() => onDelete(row.original)}/>
                                             </TableCell>
                                             {row.getVisibleCells().map((cell) => {
 

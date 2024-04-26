@@ -1,6 +1,4 @@
 import Header from '@/components/Header/Header'
-import { useState } from 'react'
-import FarmerFormsCombined from './AddNewFarmer/FormsCombined'
 import DemoPage from './TableShow/table-trial'
 
 const initialFarmerDetails=[
@@ -23,16 +21,7 @@ const initialFarmerDetails=[
 ]
 
 const FarmerTable = () => {
-    const [farmerDetails, setFarmerDetails] = useState(initialFarmerDetails)
-  
-    const handleDelete = (indexToDelete: number) => {
-        // Create a copy of the farmerDetails array
-        const updatedFarmerDetails = [...farmerDetails];
-        // Remove the item at the specified index
-        updatedFarmerDetails.splice(indexToDelete, 1);
-        // Update the state with the new array
-        setFarmerDetails(updatedFarmerDetails);
-    };
+    
 
     return (
         <div className='w-full'>

@@ -34,13 +34,12 @@ const StakeHolders = () => {
     ]
 
 
-    const [farmerDetails, setFarmerDetails] = useState(initialFarmerDetails)
 
     return (
         <div className='w-full'>
             <div className='md:ml-4 w-full h-full'>
                 <Header text='Shareholder Details' />
-                <DemoPage displayData={initialFarmerDetails} buttonRoute='/stakeholder/forms' buttonText='add shareholder'/>
+                <DemoPage displayData={initialFarmerDetails} buttonRoute='/farmers/forms' buttonText='Add Shareholder'/>
             </div>
         </div>
     )

@@ -80,9 +80,9 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress, handleCropChan
         <label htmlFor="cropsProduced" className="block text-sm font-medium text-gray-700">Crops Produced</label>
           <Select
             name="cropsProduced"
-            value={formData.cropsProduced.map(crop => ({ label: crop, value: crop }))}
+            value={(formData.cropsProduced || []).map(crop => ({ label: crop, value: crop }))}
             onChange={handleCropChange}
-            options={products.map(crop => ({ label: crop.name, value: crop.name }))}
+            options={(products || []).map(crop => ({ label: crop.name, value: crop.name }))}
             isMulti
             placeholder="Select Crops"
             required

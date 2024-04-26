@@ -27,7 +27,7 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
     state: "",
     pincode: "",
     landArea: "",
-    cropsProduced: [],
+    cropsProduced: mode === 'edit' && selectedRowData ? selectedRowData.cropsProduced : [],
     block: "",
     district: "",
     bankAccountHolderName: "",

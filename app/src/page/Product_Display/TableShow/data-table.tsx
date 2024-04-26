@@ -176,7 +176,7 @@ export function DataTable<TData, TValue>({
                                             key={row.id}
                                             data-state={row.getIsSelected() && "selected"}
                                         >
-                                            <TableCell className="print:hidden">
+                                            <TableCell className="print:hidden flex flex-row">
 
                                             <div onClick={() => console.log(row.original)}>
                                             <EditDialogBox formComponent={<ProductFormsCombined mode="edit" />}selectedRowData={row.original} />

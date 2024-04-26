@@ -144,7 +144,7 @@ export function DataTable<TData, TValue>({
                     </Link>
                 </div>
                 </div>
-                <div className="rounded-md border">
+                <div className="rounded-md border bg-white">
                     <Table>
                         <TableHeader>
                             {table.getHeaderGroups().map((headerGroup) => (
@@ -176,8 +176,7 @@ export function DataTable<TData, TValue>({
                                             key={row.id}
                                             data-state={row.getIsSelected() && "selected"}
                                         >
-                                            <TableCell>
-
+                                            <TableCell className="flex flex-row">
                                                 <EditDialogBox formComponent={<StaffFormsCombined mode="edit" />} selectedRowData={{ email: row.getValue("email") }} />
                                                 <AlertDialogBox onDelete={() => onDelete(row.original)}/>
                                             </TableCell>

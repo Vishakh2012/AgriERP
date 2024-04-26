@@ -16,6 +16,7 @@ export type Farmer = {
     farmerType: string,
     category: string,
     fatherName: string,
+    cropsProduced:string[]
 }
 
 export const columns: ColumnDef<Farmer>[] = [
@@ -206,7 +207,7 @@ export const columns: ColumnDef<Farmer>[] = [
       )
     },
 
-    }
+    },
 
 
 
