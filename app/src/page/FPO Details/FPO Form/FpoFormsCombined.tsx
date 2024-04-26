@@ -25,7 +25,6 @@ const FpoFormsCombined = () => {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
-
       // Replace null values with empty strings
       const formDataWithDefaults: typeof formData = {
         name: "",

@@ -8,7 +8,7 @@ import CustomerDetailsAndGST from "@/components/CustomerDetailsAndGST/CustomerDe
 import { Button } from "@/components/ui/button";
 
 
-const staffDetails = [
+const productDetails = [
     {
         itemCode: '',
         itemName: '',
@@ -53,7 +53,11 @@ interface Data {
 
 const SalesTransactionTable = () => {
     const [gstType, setGstType] = useState<string>('No GST')
+<<<<<<< HEAD:app/src/page/Sales/SalesTransactionTable.tsx
     const { handleInputChange, handleEnterKeyPress, handleCustomerDetailsEnterKeyPress ,currentRowIndex, rows } = useRowHandler(staffDetails, productData, gstType)
+=======
+    const { handleInputChange, handleEnterKeyPress, handleCustomerDetailsEnterKeyPress, currentRowIndex, rows } = useRowHandler(productDetails, productData, gstType)
+>>>>>>> 69ed2a5 (FEAT:):app/src/page/Sales/ProductTable.tsx
 
     const { grandTotal, totalPrice, totalDiscount } = usePriceCalc(rows)
     useEffect(() => {
@@ -81,21 +85,25 @@ const SalesTransactionTable = () => {
             reader.readAsBinaryString(file);
         }
     };
-    const sendCSVToBackend = (csvData) => {
-        // Send the CSV data to the backend
-        fetch('your_backend_url', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'text/csv', // Set the content type to text/csv
-            },
-            body: csvData,
-        })
-            .then(() => {
-                console.log('CSV data sent to backend successfully');
-            })
-            .catch(error => {
-                console.error('There was an error sending CSV data to the backend:', error);
+    const sendCSVToBackend = async (csvData: any) => {
+        try {
+            // Send the CSV data to the backend
+            const response = await fetch('your_backend_url', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/csv', // Set the content type to text/csv
+                },
+                body: csvData,
             });
+    
+            if (response.ok) {
+                console.log('CSV data sent to backend successfully');
+            } else {
+                throw new Error('Failed to send CSV data to the backend');
+            }
+        } catch (error) {
+            console.error('There was an error sending CSV data to the backend:', error);
+        }
     };
     const handleGSTChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setGstType(e.target.value)
@@ -110,8 +118,13 @@ const SalesTransactionTable = () => {
             </div>
 
             <div className="print:h-7/10 print:py-0">
+<<<<<<< HEAD:app/src/page/Sales/SalesTransactionTable.tsx
                 <CustomerDetailsAndGST handleGSTChange={handleGSTChange} handleImport={handleImport} gstType={gstType} handleCustomerDetailsEnterKeyPress={handleCustomerDetailsEnterKeyPress} />
                 <TableInvoice gstType={gstType} Details={staffDetails} rows={rows} productData={productData} handleEnterKeyPress={handleEnterKeyPress} handleInputChange={handleInputChange} currentRowIndex={currentRowIndex.current} />
+=======
+                <CustomerDetailsAndGST handleGSTChange={handleGSTChange} handleImport={handleImport} gstType={gstType} handleCustomerDetailsEnterKeyPress={handleCustomerDetailsEnterKeyPress}/>
+                <TableInvoice gstType={gstType} Details={productDetails} rows={rows} productData={productData} handleEnterKeyPress={handleEnterKeyPress} handleInputChange={handleInputChange} currentRowIndex={currentRowIndex.current} />
+>>>>>>> 69ed2a5 (FEAT:):app/src/page/Sales/ProductTable.tsx
                 {/* Fill remaining space */}
                 <div className=" flex flex-col float-end">
 
