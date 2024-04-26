@@ -4,6 +4,7 @@ interface propsForHeader{
     gstType: string,
     handleImport: (e: ChangeEvent<HTMLInputElement>) => void,
     handleGSTChange: (e: ChangeEvent<HTMLSelectElement> ) => void
+    handleCustomerDetailsEnterKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }
 const CustomerDetailsAndGST: React.FC<propsForHeader> = (props) => {
 
@@ -19,8 +20,11 @@ const CustomerDetailsAndGST: React.FC<propsForHeader> = (props) => {
                                 <input
                                     type="text"
                                     id="customerName"
+                                    name="customerName"
                                     value={customerName}
                                     onChange={handleCustomerName}
+                                    onKeyDown={ props.handleCustomerDetailsEnterKeyPress}
+                                    autoFocus
                                     className=" border print:border-none px-2 py-1 rounded focus:outline-none"
                                 />
                             </div>
@@ -29,8 +33,10 @@ const CustomerDetailsAndGST: React.FC<propsForHeader> = (props) => {
                                 <input
                                     type="text"
                                     id="mobileNumber"
+                                    name="mobileNumber"
                                     value={mobileNumber}
                                     onChange={handleMobileNumber}
+                                    onKeyDown={ props.handleCustomerDetailsEnterKeyPress}
                                     className=" border print:border-none px-2 py-1 rounded focus:outline-none"
                                 />
                             </div>
