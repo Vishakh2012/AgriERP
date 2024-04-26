@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
-import taxSchema from "../taxSchema/taxSchema.mjs"
-import FPO from "../fpoSchema/fpoSchema.mjs"
+import taxSchema from "../taxSchema/taxSchema.mjs";
+import FPO from "../fpoSchema/fpoSchema.mjs";
 
 const productSchema = new Schema({
   category: {
@@ -39,14 +39,4 @@ const productSchema = new Schema({
 });
 
 productSchema.index({ fpoId: 1, itemCode: -1 }, { unique: true });
-productSchema.index({ fpoId: 1, HSN: -1 }, { unique: true });
-export default productSchema
-
-
-
-
-
-
-
-
-
+export default productSchema;
