@@ -38,7 +38,7 @@ const FarmerTable = () => {
         <div className='w-full'>
             <div className='md:ml-4 w-full h-screen'>
                 <Header text='Farmer Details' />
-                <DemoPage displayData={initialFarmerDetails} buttonText='Add Farmer' buttonRoute='/farmer/form'/>
+                <DemoPage displayData={initialFarmerDetails} buttonText='Add Farmer' buttonRoute='/farmers/forms'/>
             </div>
         </div>
     )

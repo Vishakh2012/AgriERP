@@ -88,7 +88,7 @@ const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleK
         <div>
         <InputComponent
           label="Phone Number"
-          type="number"
+          type="tel"
           name="phoneNumber"
           value={formData.phoneNumber}
           onClick={onClick}
