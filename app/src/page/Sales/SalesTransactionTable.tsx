@@ -8,7 +8,7 @@ import CustomerDetailsAndGST from "@/components/CustomerDetailsAndGST/CustomerDe
 import { Button } from "@/components/ui/button";
 
 
-const productDetails = [
+const staffDetails = [
     {
         itemCode: '',
         itemName: '',
@@ -53,7 +53,7 @@ interface Data {
 
 const SalesTransactionTable = () => {
     const [gstType, setGstType] = useState<string>('No GST')
-    const { handleInputChange, handleEnterKeyPress, handleCustomerDetailsEnterKeyPress, currentRowIndex, rows } = useRowHandler(productDetails, productData, gstType)
+    const { handleInputChange, handleEnterKeyPress, currentRowIndex, rows } = useRowHandler(staffDetails, productData, gstType)
 
     const { grandTotal, totalPrice, totalDiscount } = usePriceCalc(rows)
     useEffect(() => {
@@ -81,30 +81,28 @@ const SalesTransactionTable = () => {
             reader.readAsBinaryString(file);
         }
     };
-    const sendCSVToBackend = async (csvData: any) => {
-        try {
-            // Send the CSV data to the backend
-            const response = await fetch('your_backend_url', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'text/csv', // Set the content type to text/csv
-                },
-                body: csvData,
-            });
-    
-            if (response.ok) {
+    const sendCSVToBackend = (csvData) => {
+        // Send the CSV data to the backend
+        fetch('your_backend_url', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'text/csv', // Set the content type to text/csv
+            },
+            body: csvData,
+        })
+            .then(() => {
                 console.log('CSV data sent to backend successfully');
-            } else {
-                throw new Error('Failed to send CSV data to the backend');
-            }
-        } catch (error) {
-            console.error('There was an error sending CSV data to the backend:', error);
-        }
+            })
+            .catch(error => {
+                console.error('There was an error sending CSV data to the backend:', error);
+            });
     };
     const handleGSTChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setGstType(e.target.value)
     }
-
+    const handlePrintAndRequestSending = () => {
+         window.print()
+    }
     return (
         <div className="overflow-x-auto flex-grow bg-white w-11/12 print:w-screen rounded-md print:h-screen">
             <div className="hidden print:flex print:top-0 w-full print:justify-center">
@@ -112,8 +110,8 @@ const SalesTransactionTable = () => {
             </div>
 
             <div className="print:h-7/10 print:py-0">
-                <CustomerDetailsAndGST handleGSTChange={handleGSTChange} handleImport={handleImport} gstType={gstType} handleCustomerDetailsEnterKeyPress={handleCustomerDetailsEnterKeyPress}/>
-                <TableInvoice gstType={gstType} Details={productDetails} rows={rows} productData={productData} handleEnterKeyPress={handleEnterKeyPress} handleInputChange={handleInputChange} currentRowIndex={currentRowIndex.current} />
+                <CustomerDetailsAndGST handleGSTChange={handleGSTChange} handleImport={handleImport} gstType={gstType} />
+                <TableInvoice gstType={gstType} Details={staffDetails} rows={rows} productData={productData} handleEnterKeyPress={handleEnterKeyPress} handleInputChange={handleInputChange} currentRowIndex={currentRowIndex.current} />
                 {/* Fill remaining space */}
                 <div className=" flex flex-col float-end">
 
@@ -133,7 +131,7 @@ const SalesTransactionTable = () => {
                             <input type="text" id="totalPrice" value={grandTotal} disabled className="border-none px-2 py-1 rounded focus:outline-none mr-auto" />
                         </div>
                     </div>
-                    <Button className="bg-blue-700" onClick={() => window.print()}>Print Bill</Button>
+                    <Button className="bg-blue-700" onClick={handlePrintAndRequestSending}>Print Bill</Button>
                 </div>
             </div>
         </div>
