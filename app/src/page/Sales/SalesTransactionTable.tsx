@@ -53,7 +53,7 @@ interface Data {
 
 const SalesTransactionTable = () => {
     const [gstType, setGstType] = useState<string>('No GST')
-    const { handleInputChange, handleEnterKeyPress, currentRowIndex, rows } = useRowHandler(staffDetails, productData, gstType)
+    const { handleInputChange, handleEnterKeyPress, handleCustomerDetailsEnterKeyPress ,currentRowIndex, rows } = useRowHandler(staffDetails, productData, gstType)
 
     const { grandTotal, totalPrice, totalDiscount } = usePriceCalc(rows)
     useEffect(() => {
@@ -110,7 +110,7 @@ const SalesTransactionTable = () => {
             </div>
 
             <div className="print:h-7/10 print:py-0">
-                <CustomerDetailsAndGST handleGSTChange={handleGSTChange} handleImport={handleImport} gstType={gstType} />
+                <CustomerDetailsAndGST handleGSTChange={handleGSTChange} handleImport={handleImport} gstType={gstType} handleCustomerDetailsEnterKeyPress={handleCustomerDetailsEnterKeyPress} />
                 <TableInvoice gstType={gstType} Details={staffDetails} rows={rows} productData={productData} handleEnterKeyPress={handleEnterKeyPress} handleInputChange={handleInputChange} currentRowIndex={currentRowIndex.current} />
                 {/* Fill remaining space */}
                 <div className=" flex flex-col float-end">
