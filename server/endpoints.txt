@@ -1,0 +1,477 @@
+signup
+-----------------
+route :- http://localhost:5050/api/user/signup
+request type : POST
+header : NO
+body : {userName, password, email, fpoName}
+
+response:
+201(created) - user created
+400(bad request) - user already exist with the email 
+500(internal server error) - user cannot be created or username is taken
+
+//an email will be send to provded email id for verification
+
+
+signin
+--------------------
+route : http://localhost:5050/api/user/signin
+request type : POST
+header : NO
+body : {userName, password}
+
+response:
+404 : message : cannot find user /  fpo
+401 : user is not verified check the email for verification
+200 : successfully loggedin {accesstoken : "asjdhasj", refreshToken : "adkjhasjhdasda"}
+500 : unable to login, internal server error
+
+logout
+----------
+route : http://localhost:5050/user/logout
+headers : {x-access-token : "klajdkjasdkjaj"}
+body : No
+
+response:
+200 : successfully loggedout
+500 : internal server error
+
+FPO ROUTE
+--------------------------
+get_current fpo
+---------------
+route : http://localhost:5050/api/fpo/get
+request : GET
+header : x-access-token
+body : NO
+
+response:
+404 : fpo not found
+500 : internal server error
+200 : current fpo details -> json
+
+update current fpo
+------------------
+route : http://localhost:5050/api/fpo/update
+request : PUT
+header : x-access-token
+body : {regYear, district, state, balance} // fields to be updated
+
+response
+--------
+404 : cannot find fpo
+200 : {message : "fpo updated" , data : updatedfpo }
+500 : internal server error
+
+
+FARMER ROUTES
+----------------------------------------------------------
+create farmer
+-------------
+route : http://localhost:5050/api/farmer/add
+request : POST
+header : x-access-token
+body : {
+  "farmerId": "FAR4",
+  "name": "name",
+  "gender": "male",
+  "address": {
+    "addressLine1": "123 Main Street",
+    "addressLine2": "Apt 101",
+    "district": "Example District",
+    "city": "Example City",
+    "postOffice": "Example Post Office",
+    "pinNumber": 123456
+  },
+  "mobile": "9947087919",
+  "state": "kerala",
+  "block": "example Block",
+  "dob": "2003-01-01",
+  "fathersName": "John Doe Sr.",
+  "farmerType": "Smallholder",
+  "landType": "Agricultural",
+  "landArea": 10,
+  "balance": 5000,
+  "category": "General",
+  "userType": "shareholder",
+  "equityAmount": 10000,
+  "equityShares": 100,
+  "totalAmount": 15000,
+  "farmerProduct": "Example Product",
+  "DateOfJoining": "2024-04-19T00:00:00.000Z"
+}
+
+
+respose
+--------
+201(farmer created) : {data : created_farmer}
+400(bad request) : cannot create farmer
+500 : internal server error
+
+update farmer
+-------------
+route : http://localhost:5050/api/farmer/update/{farmerId}
+request : PUT
+header : x-access-token
+body : 
+{
+  "name": "name",
+  "gender": "male",
+  "address": {
+    "addressLine1": "123 Main Street",
+    "addressLine2": "Apt 101",
+    "district": "Example District",
+    "city": "Example City",
+    "postOffice": "Example Post Office",
+    "pinNumber": 123456
+  },
+  "mobile": "9947087919",
+  "state": "kerala",
+  "block": "example Block",
+  "dob": "2003-01-01",
+  "fathersName": "John Doe Sr.",
+  "farmerType": "Smallholder",
+  "landType": "Agricultural",
+  "landArea": 10,
+  "balance": 5000,
+  "category": "General",
+  "userType": "shareholder",
+  "equityAmount": 10000,
+  "equityShares": 100,
+  "totalAmount": 15000,
+  "farmerProduct": "Example Product",
+  "DateOfJoining": "2024-04-19T00:00:00.000Z"
+} //can update any of thsese fields
+ 
+
+getfarmer
+---------
+http://localhost:5050/api/farmer/get/optional({farmer_id})
+request : GET
+header : x-access-token
+body : NO
+
+response:
+404 : farmer not found (if farmerId is provided)
+200 : farmerId ? farmer_doc : [farmer_doc] //get one or get all
+500 : internal server error
+
+delete farmer
+------------
+http://localhost:5050/api/farmer/delete/{farmerId}
+request : DELETE
+header : x-access-token
+body : NO
+
+response:
+200 : farmer deleted
+404 : farmer not found
+500 : internal server error
+
+PRODUCT ROUTES
+---------------------
+get_porducts
+-------------
+route : http://localhost:5050/api/products/get/{item_code}
+request : GET
+header : x-access-token
+body : NO
+
+response:
+404 : product not found
+500 : internal server error
+200 : item_code ?  product_doc : [product_doc]
+
+
+update_products
+---------------
+route : http://localhost:5050/api/products/update/{item_code}
+request : PUT
+header : x-access-token
+body : {
+  "category": "Fruits",
+  "name": "ORANGE",
+  "HSN": "123",
+  "itemCode": "ITEM02",
+  "price": 50,
+  "currentStock": 200,
+  "unit": "kg"
+} 
+
+response:
+404 : cannot find product
+500 : internal server error
+200 : {data : updated_product}
+
+
+delete_products
+---------------
+route : http://localhost:5050/api/products/delete/{item_code}
+request : DELETE
+header : x-access-token
+body ; NO
+
+response:
+404 : product not found
+200 : product deleted
+500 : internal server error
+
+add products
+-------------
+route : http://localhost:5050/api/products/add
+request : POST
+header : x-access-token
+body : {
+  "category": "Fruits",
+  "name": "ORANGE",
+  "HSN": "123",
+  "itemCode": "ITEM02",
+  "price": 50,
+  "currentStock": 200,
+  "unit": "kg"
+}
+
+response:
+201 : {data : created_product}
+404 : no tax is found for the product
+400(bad request) : validate the fields
+500 : internal server error
+
+STAFF ROUTES
+-----------------------------------
+create staff
+-----------
+route : http://localhost:5050/api/staffs/add
+request : POST
+header : x-access-token
+body : {
+  "staffId": "STAFF02",
+  "name": "ebin jose",
+  "bloodGroup": "A+",
+  "designation": "Manager",
+  "address": {
+    "addressLine1": "123 Main Street",
+    "addressLine2": "Apt 101",
+    "district": "Example District",
+    "city": "Example City",
+    "postOffice": "Example Post Office",
+    "pinNumber": 123456
+  },
+  "phone": "9947301978",
+  "email": "sumeshs0202@gmail.com",
+  "dateOfJoining": "2024-04-20T00:00:00Z",
+  "basicSalary": 50000,
+  "accountNumber": "1234567890123456",
+  "IFSC": "ABCD0123456"
+}
+
+
+response:
+201 : {data : created_staff}
+400(bad request) : validate the fields
+500 : internal server error
+
+
+
+delete staff
+------------
+route : http://localhost:5050/api/staffs/delete/{staffId}
+request : DELETE
+header : x-access-token
+body ; NO
+
+response:
+404 : staff not found
+200 : staff deleted
+500 : internal server error
+
+update staff
+-----------
+route : http://localhost:5050/api/staffs/update/{staffId}
+request : PUT
+header : x-access-token
+body : {
+  "name": "ebin jose",
+  "bloodGroup": "A+",
+  "designation": "Manager",
+  "address": {
+    "addressLine1": "123 Main Street",
+    "addressLine2": "Apt 101",
+    "district": "Example District",
+    "city": "Example City",
+    "postOffice": "Example Post Office",
+    "pinNumber": 123456
+  },
+  "phone": "9947301978",
+  "email": "sumeshs0202@gmail.com",
+  "dateOfJoining": "2024-04-20T00:00:00Z",
+  "basicSalary": 50000,
+  "accountNumber": "1234567890123456",
+  "IFSC": "ABCD0123456"
+}
+
+response:
+404 : cannot find staff
+500 : internal server error
+200 : {data : updated_staff}
+
+
+get staff
+---------
+route : http://localhost:5050/api/staffs/get/{staffId}
+header : x-access-token
+body : NO
+
+response:
+404 : staff not found
+500 : internal server error
+200 : staffId ?  staff_doc : [staff_doc]
+
+-------------PURCHASE ROUTES--------------
+getPurhcase
+------------
+route : http://localhost:5050/api/purchase/get/{billNo}
+request : GET
+header : x-access-token
+body : NO
+
+response:
+404 : purchase not found
+500 : internal server error
+200 : billNo ?  purchase_doc : [purchase_doc]
+
+newPurchase
+-----------
+route : http://localhost:5050/api/purchase/add
+request : POST
+header : x-access-token
+body : {
+  "billNumber": "PB12346711111",
+  "farmerId": "F002",
+  "GSTIN": "GST123456",
+  "purchaseDetails": [
+    {
+      "name": "Product 3",
+      "itemCode": "P4567",
+      "HSN": "HSN001",
+      "rate": 15,
+      "discount": 0,
+      "quantity": 30
+    }
+  ],
+  "totalAmount": 700,
+  "purchaseDate": "2024-04-21T10:00:00Z"
+}
+
+respose:
+404 : {message  : farmer is not part of fpo}
+400 : {message : bad request}
+404 : {message : taxNot found, product}
+500 : internal server error
+201 : {purhcase, products}
+
+
+------------SALES-----------------
+get_sales
+---------
+route : route : http://localhost:5050/api/sales/get/{billNo}
+request : GET
+header : x-access-token
+body : NO
+
+response:
+404 : sales not found
+500 : internal server error
+200 : billNo ?  sales_doc : [sales_doc]
+
+new_sales 
+---------
+route : route : http://localhost:5050/api/sales/add
+request : POST
+header : x-access-token
+body : {
+  "saleDate": "2024-04-25T12:00:00.000Z",
+  "customerType": "REGULAR",
+  "billNo": "UNIQUE123466ty",
+  "itemSold": [
+    {
+      "itemCode": "ITEM02",
+      "itemName": "ORANGE",
+      "HSN": "123",
+      "quantity": 2,
+      "discount": 5
+    }
+  ],
+  "totalAmountWithoutDiscount": 100,
+  "finalAmount": 95
+}
+500 : internal server error
+400(bad request) :  validate the data
+404 : product not found
+201 : {sales}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

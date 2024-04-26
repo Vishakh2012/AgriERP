@@ -1,17 +1,20 @@
+# Use Node.js base image
 FROM node:20-alpine
 
-WORKDIR ./server
+# Set the working directory in the container
+WORKDIR /app
 
-COPY . .
+# Copy package.json and package-lock.json
+COPY package*.json ./
 
+# Install dependencies
 RUN npm install
 
+# Copy the rest of the application code
+COPY . .
+
+# Expose the port your app runs on
 EXPOSE 5050
 
-#ensure to run the test before running the server
-#CMD ["npm", "run", "test"] 
-
-#run for testing front and backend together
-
-CMD [ "node","index.mjs" ] 
-
+# Command to run the application
+CMD ["node", "index.mjs"]
