@@ -11,7 +11,7 @@ export default async function updateFpoContoller(req, res, next) {
     );
 
     if (!updatedFpo) {
-      return res.status(404).send({ message: "Cannot find a FPO" });
+      return res.status(400).send({ message: "Cannot create fpo" });
     } else {
       return res
         .status(200)
