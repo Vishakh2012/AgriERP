@@ -165,7 +165,7 @@ const FpoFormsCombined = () => {
   };
 
   return (
-    <div className="m-6">
+    <div className=" sm:max-w-[1200px] w-11/12 my-12">
       <div className="flex justify-center gap-1">
         <Button
           className="rounded-none"

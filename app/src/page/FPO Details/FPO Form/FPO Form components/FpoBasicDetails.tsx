@@ -85,18 +85,18 @@ const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleK
           />
         </div>
         <div>
-          <InputComponent
-            label="Phone Number"
-            type="number"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onClick={onClick}
-            disabled={disabled}
-            onChange={handleChange}
-            placeholder="Phone Number"
-            required
-            onKeyDown={handleKeyPress}
-          />
+        <InputComponent
+          label="Phone Number"
+          type="tel"
+          name="phoneNumber"
+          value={formData.phoneNumber}
+          onClick={onClick}
+          disabled={disabled}
+          onChange={handleChange}
+          placeholder='Phone Number'
+          required
+          onKeyDown={handleKeyPress}
+        />
         </div>
       </div>
       <div>

@@ -225,9 +225,9 @@ const productDetails = [
 const Product_Display = () => {
     return (
         <div className='w-full'>
-            <div className='md:ml-4 print:m-0 w-[100%-4rem] h-screen'>
+            <div className='md:ml-4 print:m-0 w-full h-screen'>
                 <Header text='Product Details' />
-                    <DemoPage buttonText='Add Product' buttonRoute='add route' displayData={productDetails}/>  
+                    <DemoPage buttonText='Add Product' buttonRoute='/products/forms' displayData={productDetails}/>  
             </div>
         </div>
     )
