@@ -1,5 +1,5 @@
 import Header from "@/components/Header/Header";
-import ProductTable from './ProductTable';
+import SalesTransactionTable from './SalesTransactionTable';
 import DemoPage from "./TableShow/table-trial";
 
 interface Data {
@@ -14,8 +14,7 @@ const Sales_Form = () => {
                 <Header text='Add New Sales' />
             </div>
             <div className=' md:ml-4 mt-4 print:m-0 print:p-0'>
-            <ProductTable />
-            {/*<DemoPage displayData={staffDetails} buttonText="hello" buttonRoute="hi"/>*/}
+            <SalesTransactionTable />
             </div>
             </div>
   )
