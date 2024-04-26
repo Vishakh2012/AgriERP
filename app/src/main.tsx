@@ -19,10 +19,10 @@ import Sales_Form from './page/Sales/Sales_Form';
 import Confirmation from './page/Farmers/AddNewFarmer/Confirmation';
 import StaffForms from './page/Staff_Details/AddNewStaff/StaffForms';
 import FpoForm from './page/FPO Details/FPO Form/FpoForm';
-import FarmerTable from './page/Farmers/FarmerTable';
+import FarmerTable from '@/page/Farmers/Farmer_Display';
 import ProductForms from './page/Product_Display/AddNewProduct/ProductForms';
 import FpoDisplay from './page/FPO Details/FPO Display/FpoDisplay';
-import StakeHolders from './page/StakeHolders/StakeHolders';
+import StakeHolders from './page/StakeHolders/StakeHolderDisplay';
 
 
 
@@ -139,6 +139,20 @@ const router = createBrowserRouter([
             },
             {
                 path:'/fpo/edit',
+                element:<FpoForm/>
+            }
+        ]
+    },
+    {
+        path: '/purchase',
+        element:<Sidebar/>,
+        children:[
+            {
+                path:'/purchase',
+                element:<Purchase_Display/>
+            },
+            {
+                path:'/purchase/form',
                 element:<FpoForm/>
             }
         ]

@@ -133,20 +133,6 @@ export const columns: ColumnDef<Farmer>[] = [
 
     },
 
-    {
-        accessorKey: "shareholder",
-        header: ({ column }) => {
-            return (
-                <Button
-                    variant="ghost"
-                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-                >
-                    is shareholder
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
-                </Button>
-            )
-        },
-    },
         {
         accessorKey: "landType",
             header: ({ column }) => {

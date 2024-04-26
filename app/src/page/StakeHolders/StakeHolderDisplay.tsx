@@ -1,10 +1,6 @@
 import Header from '@/components/Header/Header'
-//import TableShow from '@/components/TableShow/TableShow'
-//import TableTools from '@/components/TableTools/TableTools'
-import useFilter from '@/hooks/useFilter'
-import usePagination from '@/hooks/usePagination'
-import useSort from '@/hooks/useSort'
 import { useState } from 'react'
+import DemoPage from './TableShow/table-trial'
 
 
 const StakeHolders = () => {
@@ -43,13 +39,8 @@ const StakeHolders = () => {
     return (
         <div className='w-full'>
             <div className='md:ml-4 w-full h-full'>
-                <Header text='Farmer Details' />
-                {
-                    //  <TableTools filterCriteria={filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={farmerDetails} buttonText='Add New StakeHolder' buttonRoute='/farmers/forms'/>
-                }
-                {
-                    //                    <TableShow  pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={farmerDetails} PAGE_SIZE={5} edit={true} delete={true} />
-                }
+                <Header text='Shareholder Details' />
+                <DemoPage displayData={initialFarmerDetails} buttonRoute='/stakeholder/forms' buttonText='add shareholder'/>
             </div>
         </div>
     )
