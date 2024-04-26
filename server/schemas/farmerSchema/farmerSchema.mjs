@@ -1,35 +1,35 @@
 import mongoose from "mongoose";
-import FPO from "../fpoSchema/fpoSchema.mjs"
+import FPO from "../fpoSchema/fpoSchema.mjs";
 // Address schema
 const addressSchema = new mongoose.Schema(
-    {
-        addressLine1: {
-            type: String,
-            required: true,
-        },
-        addressLine2: {
-            type: String,
-            required: true,
-        },
-        district: {
-            type: String,
-            required: true,
-        },
-        city: {
-            type: String,
-            required: true,
-        },
-        postOffice: {
-            type: String,
-        },
-        pinNumber: {
-            type: Number,
-            required: true,
-            min: 0,
-            max: 999999,
-        },
+  {
+    addressLine1: {
+      type: String,
+      required: true,
     },
-    { _id: false }
+    addressLine2: {
+      type: String,
+      required: true,
+    },
+    district: {
+      type: String,
+      required: true,
+    },
+    city: {
+      type: String,
+      required: true,
+    },
+    postOffice: {
+      type: String,
+    },
+    pinNumber: {
+      type: Number,
+      required: true,
+      min: 0,
+      max: 999999,
+    },
+  },
+  { _id: false }
 );
 
 const farmerSchema = mongoose.Schema({
@@ -54,7 +54,6 @@ const farmerSchema = mongoose.Schema({
   },
   address: {
     type: addressSchema,
-    required: true,
   },
   mobile: {
     type: String,
@@ -114,4 +113,4 @@ const farmerSchema = mongoose.Schema({
   },
 });
 farmerSchema.index({ farmerId: 1, fpoId: 1 }, { unique: true });
-export default farmerSchema
+export default farmerSchema;

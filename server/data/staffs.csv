@@ -1,0 +1,11 @@
+staffId,name,bloodGroup,designation,phone,email,dateOfJoining,basicSalary,accountNumber,IFSC
+S001,John Doe,A+,Manager,1234567890,johndoe@example.com,2024-04-27,50000,0123456789012345,IFSC1234567
+S002,Jane Doe,B-,Supervisor,2345678901,janedoe@example.com,2024-04-27,45000,1234567890123456,IFSC2345678
+S003,Alice Smith,O+,Coordinator,3456789012,alicesmith@example.com,2024-04-27,40000,2345678901234567,IFSC3456789
+S004,Michael Johnson,AB+,Assistant,4567890123,michaeljohnson@example.com,2024-04-28,48000,3456789012345678,IFSC4567890
+S005,Emily Brown,O-,Executive,5678901234,emilybrown@example.com,2024-04-28,42000,4567890123456789,IFSC5678901
+S006,David Wilson,B+,Manager,6789012345,davidwilson@example.com,2024-04-29,55000,5678901234567890,IFSC6789012
+S007,Sarah Taylor,A-,Supervisor,7890123456,sarahtaylor@example.com,2024-04-29,47000,6789012345678901,IFSC7890123
+S008,Matthew Martinez,AB-,Coordinator,8901234567,matthewmartinez@example.com,2024-04-30,42000,7890123456789012,IFSC8901234
+S009,Olivia Anderson,B-,Assistant,9012345678,oliviaanderson@example.com,2024-04-30,48000,8901234567890123,IFSC9012345
+S010,Emma Garcia,O+,Executive,0123456789,emmagarcia@example.com,2024-05-01,43000,9012345678901234,IFSC0123456

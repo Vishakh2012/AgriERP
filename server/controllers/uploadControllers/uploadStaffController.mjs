@@ -1,9 +1,10 @@
 import fs from "fs";
 import csv from "csv-parser";
-import taxModel from "../../models/taxModel/taxModel.mjs";
+import staffModel from "../../models/staffModel/staffModel.mjs";
 
-export default async function csvUploadController(req, res, next) {
+export default async function uploadStaffController(req, res, next) {
   try {
+    const fpoId = req.user.fpoId;
     const mapping = req.body;
     console.log(mapping);
     const file = req.file;
@@ -23,16 +24,17 @@ export default async function csvUploadController(req, res, next) {
               objMap[mappedkey] = row[key];
             }
           });
+          objMap[fpoId] = fpoId;
           results.push(objMap);
         })
         .on("end", async () => {
           console.log(results);
           try {
-            const tax = await taxModel.insertMany(results);
-            if (tax) {
+            const staff = await staffModel.insertMany(results);
+            if (staff) {
               return res
                 .status(201)
-                .send({ message: "Imported data successfully", data: tax });
+                .send({ message: "Imported data successfully", data: staff });
             } else {
               return res
                 .status(400)
@@ -48,16 +50,17 @@ export default async function csvUploadController(req, res, next) {
       fs.createReadStream(file.path)
         .pipe(csv())
         .on("data", (row) => {
+          row.fpoId = fpoId;
           results.push(row);
         })
         .on("end", async () => {
           console.log(results);
           try {
-            const tax = await taxModel.insertMany(results);
-            if (tax) {
+            const staff = await staffModel.insertMany(results);
+            if (staff) {
               return res
                 .status(201)
-                .send({ message: "Imported data successfully", data: tax });
+                .send({ message: "Imported data successfully", data: staff });
             } else {
               return res
                 .status(400)
