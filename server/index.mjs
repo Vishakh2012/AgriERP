@@ -29,7 +29,7 @@ import getPurchaseRoute from "./routes/puchaseRoutes/getPurchaseRoute.mjs";
 import newPurchaseRoute from "./routes/puchaseRoutes/newPurchaseRoute.mjs";
 import newSalesRoute from "./routes/salesRoutes/newSalesRoute.mjs";
 import getSalesRoute from "./routes/salesRoutes/getSalesRoute.mjs";
-import csvUploadRoutes from "./routes/uploadRoutes/csvUploadRoutes.mjs";
+import uploadStaffRoute from "./routes/uploadRoutes/uploadStaffRoute.mjs";
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -83,11 +83,23 @@ app.use("/api/sales/add", verifyAccessToken, newSalesRoute);
 app.use("/api/sales/get", verifyAccessToken, getSalesRoute);
 
 //upload file route
+// app.use(
+//   "/api/csv/farmer/upload",
+//   verifyAccessToken,
+//   multer_.single("csv"),
+//   csvUploadRoutes
+// );
+// app.use(
+//   "/api/csv/staff/upload",
+//   verifyAccessToken,
+//   multer_.single("csv"),
+//   csvUploadRoutes
+// );
 app.use(
-  "/api/csv/upload",
+  "/api/csv/staff/upload",
   verifyAccessToken,
   multer_.single("csv"),
-  csvUploadRoutes
+  uploadStaffRoute
 );
 
 // CORS setup
