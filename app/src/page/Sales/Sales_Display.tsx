@@ -3,6 +3,7 @@ import Header from '@/components/Header/Header';
 import usePagination from '@/hooks/usePagination';
 import useSort from '@/hooks/useSort';
 import useFilter from '@/hooks/useFilter';
+import DemoPage from './TableShow/table-trial';
 
 
 interface Data {
@@ -41,6 +42,7 @@ const SalesDisplay = () => {
         <div className='w-full'>
             <div className='w-full md:ml-4'>
                 <Header text='Staff Details' />
+                <DemoPage data={data} buttonRoute='add new sales' buttonText = 'add new sales' /> 
             </div>
         </div>
     )

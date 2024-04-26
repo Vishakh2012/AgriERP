@@ -1,4 +1,4 @@
-import { Table, TableHeader, TableRow, TableBody, TableHead } from "../ui/table"
+import { Table, TableHeader, TableRow, TableBody, TableHead, TableCell } from "../ui/table"
 import { ChangeEvent, useState } from "react"
 
 interface Data {
@@ -18,13 +18,13 @@ interface InvoiceInfo {
 const TableInvoice: React.FC<InvoiceInfo> = (props) => {
     const renderRows = () => {
         return props.rows.map((row, index: number) => (
-            <tr key={index}>
-                <td className="border px-4 py-2">{index + 1}</td>
+            <TableRow key={index}>
+                <TableCell className="py-2 print:hidden w-[80px] text-wrap pl-2">{index + 1}</TableCell>
                 {Object.keys(props.Details[0]).map((key) => (
-                    (props.gstType === "No gst" && key !== "SGST" && key !== "CGST" && key !== "IGST") ||
-                    (props.gstType === "Gst" && key !== "IGST") ||
-                    props.gstType === "Igst" ? (
-                        <td key={key} className="border px-4 py-2">
+                    (props.gstType === "No GST" && key !== "SGST" && key !== "CGST" && key !== "IGST") ||
+                    (props.gstType === "GST" && key !== "IGST") ||
+                    props.gstType === "IGST" ? (
+                        <TableCell key={key} className="pl-2 py-2 text-wrap print:text-wrap">
                             <input
                                 type="text"
                                 value={row[key]}
@@ -32,24 +32,24 @@ const TableInvoice: React.FC<InvoiceInfo> = (props) => {
                                 onChange={(e) => props.handleInputChange(e, key, index)}
                                 onKeyDown={(e) => props.handleEnterKeyPress(e, index)}
                                 autoFocus={index === props.currentRowIndex && key === "productName"}
-                                className="w-full print:w-[18px] focus:outline-none print:text-small"
+                                className="w-full print:text-wrap focus:outline-none print:text-xs"
                             />
-                        </td>
+                        </TableCell>
                     ) : null))}
-            </tr>
+            </TableRow>
         ));
     };
 
     return (
-        <Table className="table border-collapse w-full my-8 print:w-full print:my-0 bg-white">
-            <TableHeader className="sticky top-0 bg-white z-10 print:bg-white print:text-black">
+        <Table className="table border-collapse w-full my-8 print:my-0 bg-white print:w-4/5">
+            <TableHeader className=" top-0 bg-white z-10 print:bg-white print:justify-start">
                 <TableRow>
-                    <TableHead className="text-center font-medium w-auto print:w-[100px]">Serial Number</TableHead>
+                    <TableHead className="text-center text-xs print:hidden">SNo.</TableHead>
                     {Object.keys(props.Details[0]).map((key) => (
-                        (props.gstType === "No gst" && key !== "SGST" && key !== "CGST" && key !== "IGST") ||
-                        (props.gstType === "Gst" && key !== "IGST") ||
-                        props.gstType === "Igst" ? (
-                            <TableHead key={key} className="text-center print:text-right font-medium print:font-medium">{key}</TableHead>
+                        (props.gstType === "No GST" && key !== "SGST" && key !== "CGST" && key !== "IGST") ||
+                        (props.gstType === "GST" && key !== "IGST") ||
+                        props.gstType === "IGST" ? (
+                            <TableHead key={key} className="text-start print:text-left print:w-[100px] font-medium print:text-xs print:justify-start">{key}</TableHead>
                         ) : null
                     ))}
                 </TableRow>

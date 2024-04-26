@@ -6,6 +6,7 @@ import usePriceCalc from "@/hooks/usePriceCalc";
 import useRowHandler from "@/hooks/useAutoFillInvoice";
 import CustomerDetailsAndGST from "@/components/CustomerDetailsAndGST/CustomerDetailsAndGST";
 
+
 const staffDetails = [
     {
         itemCode: '',
@@ -50,7 +51,7 @@ interface Data {
 }
 
 const ProductTable = () => {
-    const [gstType, setGstType] = useState<string>('')
+    const [gstType, setGstType] = useState<string>('No GST')
     const { handleInputChange, handleEnterKeyPress, currentRowIndex, rows } = useRowHandler(staffDetails, productData, gstType)
 
     const { grandTotal, totalPrice, totalDiscount } = usePriceCalc(rows)
@@ -100,26 +101,33 @@ const ProductTable = () => {
     }
 
     return (
-        <div className="overflow-x-auto flex-grow bg-white w-11/12 print:w-5/6 rounded-md">
-
-            <CustomerDetailsAndGST handleGSTChange={handleGSTChange} handleImport={handleImport} gstType={gstType} />
-            <TableInvoice gstType={gstType} Details={staffDetails} rows={rows} productData={productData} handleEnterKeyPress={handleEnterKeyPress} handleInputChange={handleInputChange} currentRowIndex={currentRowIndex.current} />
-            {/* Fill remaining space */}
-
-            <div className="p-4 bg-white border-t flex flex-col md:flex-row md:justify-end">
-                <div className="md:flex md:items-center">
-                    <label className="mr-2">Total Price:</label>
-                    <input type="text" id="totalPrice" value={totalPrice} disabled className="border-none px-2 py-1 rounded focus:outline-none" />
-                </div>
-                <div className="mt-4 md:mt-0 md:ml-4">
-                    <label className="mr-2">Total Discount:</label>
-                    <input type="text" id="totalDiscount" value={totalDiscount} disabled className="border-none px-2 py-1 rounded focus:outline-none" />
-                </div>
+        <div className="overflow-x-auto flex-grow bg-white w-11/12 print:w-screen rounded-md print:h-screen">
+            <div className="hidden print:flex print:top-0 w-full print:justify-center">
+                <img src="/header.png" alt="image" style={{ width: '100vw', maxHeight: '30vh' }} />
             </div>
-            <div className="p-4 bg-white border-t flex justify-end ">
-                <div>
-                    <label htmlFor="totalPrice">Grand Total</label>
-                    <input type="text" id="totalPrice" value={grandTotal} disabled className="border-none px-2 py-1 rounded focus:outline-none ml-2" />
+
+            <div className="print:h-7/10 print:py-0">
+                <CustomerDetailsAndGST handleGSTChange={handleGSTChange} handleImport={handleImport} gstType={gstType} />
+                <TableInvoice gstType={gstType} Details={staffDetails} rows={rows} productData={productData} handleEnterKeyPress={handleEnterKeyPress} handleInputChange={handleInputChange} currentRowIndex={currentRowIndex.current} />
+                {/* Fill remaining space */}
+                <div className=" flex flex-col float-end">
+
+                <div className="p-4 bg-white border-t flex flex-col md:justify-end float-end">
+                <div className="md:flex  flex-row md:items-center">
+                <label className="print:text-sm">Total Price:</label>
+                <input type="text" id="totalPrice" value={totalPrice} disabled className="border-none px-2 py-1 rounded focus:outline-none" />
+                </div>
+                <div className="mt-4 md:mt-0 md-flex">
+                <label className="mr-2 print:text-sm">Total Discount:</label>
+                <input type="text" id="totalDiscount" value={totalDiscount} disabled className="border-none px-2 py-1 rounded focus:outline-none" />
+                </div>
+                </div>
+                <div className="p-4 bg-white border-t flex ">
+                <div className="md:flex items-center">
+                <label className='print:text-sm' htmlFor="totalPrice">Grand Total</label>
+                <input type="text" id="totalPrice" value={grandTotal} disabled className="border-none px-2 py-1 rounded focus:outline-none mr-auto" />
+                </div>
+                </div>
                 </div>
             </div>
         </div>
