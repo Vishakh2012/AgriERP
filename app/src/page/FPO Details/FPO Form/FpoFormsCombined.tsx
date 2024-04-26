@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { SetStateAction, useEffect, useState } from 'react'
+import { ChangeEvent, SetStateAction, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import FpoBasicDetails from './FPO Form components/FpoBasicDetails';
 import FpoAddress from './FPO Form components/FpoAddress';
@@ -38,7 +38,8 @@ const FpoFormsCombined = () => {
           block: '',
           dateOfFormation: '',
           fpoCeo: '',
-          fpoRegNo: ''
+          fpoRegNo: '',
+          headerImage:null as File | null
         };
         for (const key in data) {
           formDataWithDefaults[key as keyof typeof formData] = data[key] || '';
@@ -69,7 +70,8 @@ const FpoFormsCombined = () => {
       block:'',
       dateOfFormation:'',
       fpoCeo:'',
-      fpoRegNo:''
+      fpoRegNo:'',
+      headerImage:null as File | null
     });
     //For setting the values
     const handleChange = (e: { target: { name: any; value: any; }; }) => {
@@ -133,7 +135,7 @@ const FpoFormsCombined = () => {
         const form = e.target.form;
         const index = Array.prototype.indexOf.call(form, e.target);
         const nextElement = form.elements[index + 1];
-        if (nextElement && nextElement.name !== 'cropsProduced') {
+        if (nextElement) {
           nextElement.focus();
         }
       }
@@ -153,6 +155,31 @@ const FpoFormsCombined = () => {
     const handleButtonClick = (component: SetStateAction<string>) => {
       setActiveComponent(component);
     };
+
+    const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+      const file = e.target.files?.[0];  // Get the selected file
+      if (file) {
+        // Create a new image element to read the dimensions
+        const img = new Image();
+        img.onload = () => {
+          // Check if the image dimensions exceed the limit
+          const maxWidth = 2000;
+          const maxHeight = 2000;
+          if (img.width > maxWidth || img.height > maxHeight) {
+            alert(`Image dimensions exceed the limit. Maximum dimensions allowed are ${maxWidth}x${maxHeight}.`);
+            return;
+          }
+    
+          // Update the formData state with the selected file
+          setFormData(prevData => ({
+            ...prevData,
+            headerImage: file
+          }));
+        };
+    
+        img.src = URL.createObjectURL(file); // Set the image source to the selected file
+      }
+    }
   
   
     return (
@@ -165,7 +192,7 @@ const FpoFormsCombined = () => {
       <form onSubmit={handleSubmit} className='grid gap-5 p-4'>
         {activeComponent === 'basic' &&
         <>
-        <FpoBasicDetails formData={formData} handleChange={handleChange} handleKeyPress={handleKeyPress}/>
+        <FpoBasicDetails formData={formData} handleChange={handleChange} handleKeyPress={handleKeyPress} onFileChange={handleFileChange}/>
         <Button type="button" onClick={handleNextButtonClick} className="mt-3 w-full sm:w-auto justify-self-center">
             Next
           </Button>

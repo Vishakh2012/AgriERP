@@ -1,5 +1,6 @@
 import { Table, TableHeader, TableRow, TableBody, TableHead, TableCell } from "../ui/table"
 import { ChangeEvent, useState } from "react"
+import React from "react"
 
 interface Data {
     [key: string]: string
@@ -10,7 +11,7 @@ interface InvoiceInfo {
     gstType: string,
     rows: Data[],
     productData: Data[],
-    handleEnterKeyPress: (e: KeyboardEvent<HTMLInputElement>, rowIndex: number) => void,
+    handleEnterKeyPress: (e: React.KeyboardEvent<HTMLInputElement>, rowIndex: number) => void,
     handleInputChange: (e: ChangeEvent<HTMLInputElement>,fieldName:string, rowIndex: number) => void,
     currentRowIndex: number
 }// React component imports remain the same
@@ -31,7 +32,6 @@ const TableInvoice: React.FC<InvoiceInfo> = (props) => {
                                 name={key}
                                 onChange={(e) => props.handleInputChange(e, key, index)}
                                 onKeyDown={(e) => props.handleEnterKeyPress(e, index)}
-                                autoFocus={index === props.currentRowIndex && key === "productName"}
                                 className="w-full print:text-wrap focus:outline-none print:text-xs"
                             />
                         </TableCell>

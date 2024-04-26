@@ -1,4 +1,5 @@
 import InputComponent from '@/components/Input/Input'
+import { ChangeEvent } from 'react';
 
 interface Formdetails{
   formData:any,
@@ -6,9 +7,10 @@ interface Formdetails{
   handleKeyPress?:any,
   onClick?:any
   disabled?:boolean
+  onFileChange?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleKeyPress ,onClick,disabled }) => {
+const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleKeyPress ,onClick,disabled,onFileChange }) => {
   return (
     <>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -97,6 +99,17 @@ const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleK
           onKeyDown={handleKeyPress}
         />
         </div>
+      </div>
+      <div>
+      <InputComponent
+            label="Upload Image"
+            type="file"
+            accept="image/*" // Accept only image files
+            name="headerImage"
+            onChange={onFileChange} // Call onFileChange when file is selected
+            disabled={disabled}
+            required
+          />
       </div>
       
         </>
