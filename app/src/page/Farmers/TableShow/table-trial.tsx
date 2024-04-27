@@ -1,5 +1,5 @@
 import {  columns } from "./columns"
-import React from "react"
+import React, { useEffect } from "react"
 import { DataTable } from "./data-table"
  
 interface Data {
@@ -9,10 +9,35 @@ interface Data {
 interface propsTable {
     buttonText: string
     buttonRoute: string
-    displayData: Data []
 }
-const DemoPage: React.FC<propsTable> = ({buttonText, buttonRoute, displayData}) =>  {
-  const [data, setData] = React.useState<Data[]>(displayData);
+
+const DemoPage: React.FC<propsTable> = ({buttonText, buttonRoute}) =>  {
+  const [data, setData] = React.useState<Data[]>([]);
+
+  
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const accessToken = localStorage.getItem('accessToken')
+            const response = await fetch('http://localhost:5050/api/farmer/get', {
+                headers: {
+                    'x-access-token': accessToken ? accessToken : ''
+                }
+            }
+            );
+            const jsonData = await response.json();
+            console.log(Array.isArray(jsonData.data))
+            console.log("farmer details revieved",jsonData)
+
+            setData(jsonData.data);
+            console.log("farmerdetailsdisplayed", data)
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
   const handleDelete = async (rowData: Data) => {
     const updatedData = data.filter(item => item !== rowData);  //Remove this when api is successfully connected

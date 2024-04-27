@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import FarmerFormsCombined from './AddNewFarmer/FormsCombined'
 import DemoPage from './TableShow/table-trial'
 
-const initialFarmerDetails = [
+const initialFarmerDetailsDisplayed = [
     {
         name: "vish",
         email: "d",
@@ -14,7 +14,7 @@ const initialFarmerDetails = [
         bankAccountHolderName: "",
         ifscCode: "",
         bankAccountNumber: "",
-        shareholder: "",
+        shareHolder: "",
         landType: "",
         farmerType: "",
         category: "",
@@ -22,46 +22,51 @@ const initialFarmerDetails = [
     },
 ]
 
+/*
+    DateOfJoining: "2024-04-27T05:24:22.606Z"
+__v: 0
+_id: "662c8c0922b709109b707bd0"
+addressLine1: "Mullaparambu"
+addressLine2: "Poochackal P.O"
+bankAccouHolderName: ""
+bankAccountNumber: ""
+block: ""
+city: ""
+cropsProduced: ""
+district: "alappuzha"
+dob: null
+email: ""
+farmerId: "3zpd2wmyllvhnpy2m"
+farmerType: ""
+fatherName: ""
+firstName: "Rejeena"
+fpoId: "662bce93919f225cd80a9b92"
+gender: ""
+ifscCode: ""
+landArea: null
+landType: ""
+lastName: "Salim"
+middleName: ""
+numberOfShares: 1
+phoneNumber: ""
+pincode: null
+postOffice: ""
+shareAmount: null
+shareHolder: "yes"
+state: "kerala"
+userType: "shareholder"
+
+*/
+
 
 
 const FarmerTable = () => {
-    const [farmerDetails, setFarmerDetails] = useState(initialFarmerDetails)
-    useEffect(() => {
-        fetchData();
-
-    }, []);
-
-    const fetchData = async () => {
-        try {
-            const accessToken = localStorage.getItem('accessToken')
-            const response = await fetch('http://localhost:5050/api/farmer/get', {
-                headers: {
-                    'x-access-token': accessToken ? accessToken : ''
-                }
-            }
-            );
-            const jsonData = await response.json();
-            setFarmerDetails(jsonData);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
-
-
-    const handleDelete = (indexToDelete: number) => {
-        // Create a copy of the farmerDetails array
-        const updatedFarmerDetails = [...farmerDetails];
-        // Remove the item at the specified index
-        updatedFarmerDetails.splice(indexToDelete, 1);
-        // Update the state with the new array
-        setFarmerDetails(updatedFarmerDetails);
-    };
 
     return (
         <div className='w-full'>
             <div className='md:ml-4 w-full h-screen'>
                 <Header text='Farmer Details' />
-                <DemoPage displayData={farmerDetails} buttonText='Add Farmer' buttonRoute='/farmer/form' />
+                <DemoPage buttonText='Add Farmer' buttonRoute='/farmer/form' />
             </div>
         </div>
     )

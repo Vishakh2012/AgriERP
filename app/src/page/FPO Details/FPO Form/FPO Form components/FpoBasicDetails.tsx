@@ -101,7 +101,7 @@ const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleK
       </div>
       <div>
       <InputComponent
-            label="Upload Image"
+            label="Upload FPO Header"
             type="file"
             accept="image/*" // Accept only image files
             name="headerImage"

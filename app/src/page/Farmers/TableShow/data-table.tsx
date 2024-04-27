@@ -51,7 +51,23 @@ export function DataTable<TData, TValue>({
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [Filters, setFilters] = React.useState("")
     const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({})
+        React.useState<VisibilityState>({ 
+           middleName: false,
+           postOffice: false,
+           block:false,
+            city:false,
+            pincode:false,
+            email:false,
+            aadhaar:false,
+           ifscCode:false,
+           bankAccountHolderName:false,
+           numberOfShares:false,
+           shareAmount:false,
+           landType:false,
+           farmerType:false,
+           category:false,
+           cropsProduced:false,
+    })
     const table = useReactTable({
         data,
         columns,
@@ -173,7 +189,6 @@ export function DataTable<TData, TValue>({
                         <TableBody>
                             {table.getRowModel().rows?.length ? (
                                 table.getRowModel().rows.map((row) => {
-                                    console.log(typeof (row.getValue("email")))
                                     return (
                                         <TableRow
                                             key={row.id}
@@ -181,7 +196,7 @@ export function DataTable<TData, TValue>({
                                         >
                                             <TableCell className="flex flex-row">
 
-                                                <EditDialogBox formComponent={<FarmerFormsCombined mode="edit" />} selectedRowData={{ email: row.getValue("email") }} />
+                                                <EditDialogBox formComponent={<FarmerFormsCombined mode="edit" />} selectedRowData={row.original} />
                                                 <AlertDialogBox onDelete={() => onDelete(row.original)}/>
                                             </TableCell>
                                             {row.getVisibleCells().map((cell) => {
