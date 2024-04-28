@@ -1,7 +1,7 @@
 import FPO from "../fpoSchema/fpoSchema.mjs";
-import mongoose, { Schema } from "mongoose";
+import mongoose from "mongoose";
 
-const itemPurchaseDetails = new Schema(
+const itemPurchaseDetails = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -33,7 +33,7 @@ const itemPurchaseDetails = new Schema(
   { _id: false }
 );
 
-const purchaseSchema = new Schema({
+const purchaseSchema = new mongoose.Schema({
   fpoId: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -66,4 +66,4 @@ const purchaseSchema = new Schema({
   },
 });
 
-export default { purchaseSchema, itemPurchaseDetails };
+export default purchaseSchema;
