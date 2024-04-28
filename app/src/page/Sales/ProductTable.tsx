@@ -662,7 +662,7 @@ const handleInputChange = (e, fieldName, rowIndex) => {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if ((e.key === "p" || e.key === "P")) {
-        e.preventDefault(); // Prevent default behavior of the key press event
+        // Prevent default behavior of the key press event
         handleGenerateBillClick();
       }
     };
