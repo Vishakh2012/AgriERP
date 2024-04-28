@@ -67,7 +67,6 @@ const useRowHandler = (Details: data[], productData: data[], gstType: string) =>
         const newRow = initialRowState();
         setRows([...rows, newRow]);
         setCurrentRowIndex(rows.length);
-        console.log(rows)
     };
 
 
@@ -133,7 +132,8 @@ const useRowHandler = (Details: data[], productData: data[], gstType: string) =>
         }
     }
 
-    return { handleInputChange, handleEnterKeyPress,handleCustomerDetailsEnterKeyPress, currentRowIndex, rows }
+    return { handleInputChange, handleEnterKeyPress,handleCustomerDetailsEnterKeyPress,
+        currentRowIndex, rows, setRows, initialRowState }
 
 }
 

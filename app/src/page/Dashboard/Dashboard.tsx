@@ -11,6 +11,28 @@ import DashBoardCardGroup from './DashboardShortCards';
 const Dashboard = () => {
     const [barchartData, setBarChartData] = useState(sample);
 
+        useEffect(() => {
+        fetchProduct();
+    }, []);
+
+    const fetchProduct = async () => {
+        try {
+            const accessToken = localStorage.getItem('accessToken')
+            const response = await fetch('http://localhost:5050/api/products/get', {
+                headers: {
+                    'x-access-token': accessToken ? accessToken : ''
+                }
+            }
+            );
+            const jsonData = await response.json();
+                const prodData = JSON.stringify(jsonData)
+            localStorage.setItem("product", prodData);
+            
+            console.log(JSON.parse(localStorage.getItem("product")).data)
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
     useEffect(() => {
         fetchData();

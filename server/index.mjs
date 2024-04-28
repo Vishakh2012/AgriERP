@@ -3,7 +3,7 @@ import cors from "cors";
 import "express-async-errors";
 import { connectDB } from "./db/connection.mjs";
 import multer from "multer";
-const multer_ = multer({ dest: "/uploads" });
+const multer_ = multer({ dest: "./uploads" });
 
 const upload = multer({
   storage: multer.memoryStorage(),

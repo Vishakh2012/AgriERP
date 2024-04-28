@@ -34,7 +34,7 @@ interface rowInfo {
     useEffect(() => {
         calculateGrandTotal(rows);
     }, [rows]);
-    return {grandTotal, totalPrice, totalDiscount}
+    return {grandTotal, totalPrice, totalDiscount, setTotalDiscount, setGrandTotal, setTotalPrice}
 }
  
  export default usePriceCalc
