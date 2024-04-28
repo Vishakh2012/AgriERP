@@ -41,8 +41,9 @@ import newSalesRoute from "./routes/salesRoutes/newSalesRoute.mjs";
 import getSalesRoute from "./routes/salesRoutes/getSalesRoute.mjs";
 import uploadStaffRoute from "./routes/uploadRoutes/uploadStaffRoute.mjs";
 import uploadFarmerRoute from "./routes/uploadRoutes/uploadFarmerRoute.mjs";
-import uploadPurchaseRoute from "./routes/uploadRoutes/uploadPurchaseRoute.mjs";
 import uploadProductRoute from "./routes/uploadExcelRoutes/uploadProductRoute.mjs";
+import uploadExcelPurchaseRoute from "./routes/uploadExcelRoutes/uploadPurchaseRoute.mjs";
+import getShareHolderRoute from "./routes/shareHolderRoutes/getShareHolderRoute.mjs";
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -95,6 +96,9 @@ app.use("/api/puchase/add", verifyAccessToken, newPurchaseRoute);
 app.use("/api/sales/add", verifyAccessToken, newSalesRoute);
 app.use("/api/sales/get", verifyAccessToken, getSalesRoute);
 
+//shareholder routes
+app.use("/api/shareholder/get", verifyAccessToken, getShareHolderRoute);
+
 //upload file route
 // app.use(
 //   "/api/csv/farmer/upload",
@@ -114,12 +118,6 @@ app.use(
   multer_.single("csv"),
   uploadStaffRoute
 );
-app.use(
-  "/api/csv/purchase/upload",
-  verifyAccessToken,
-  multer_.single("csv"),
-  uploadPurchaseRoute
-);
 
 //excel upload Routes
 app.use(
@@ -127,6 +125,13 @@ app.use(
   verifyAccessToken,
   upload.single("excel"),
   uploadProductRoute
+);
+
+app.use(
+  "/api/excel/purchase/upload",
+  verifyAccessToken,
+  upload.single("excel"),
+  uploadExcelPurchaseRoute
 );
 
 // CORS setup
