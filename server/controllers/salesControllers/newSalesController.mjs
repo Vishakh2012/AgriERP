@@ -43,7 +43,7 @@ export default async function newSalesController(req, res, next) {
     return res.status(201).send({ sales: savedSales });
   } catch (error) {
     console.error("Error creating sales:", error);
-      console.log(req)
+      console.log(req.body)
     return res.status(500).send({ message: "Internal server error" });
   }
 }

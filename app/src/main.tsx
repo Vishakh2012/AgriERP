@@ -20,6 +20,7 @@ import FarmerTable from "@/page/Farmers/Farmer_Display";
 import ProductForms from "./page/Product_Display/AddNewProduct/ProductForms";
 import FpoDisplay from "./page/FPO_Details/FPO_Display/FpoDisplay";
 import StakeHolders from "./page/StakeHolders/StakeHolderDisplay";
+import Purchase_Form from "./page/Purchase_Display/Purchase_Form";
 
 const router = createBrowserRouter([
   {
@@ -146,7 +147,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/purchase/form",
-        element: <FpoForm />,
+        element: <Purchase_Form />,
       },
     ],
   },
