@@ -1,25 +1,28 @@
-import { useState, useEffect, ChangeEvent } from "react"
-interface data {
-    [key: string]: string
+import { useState, useMemo, ChangeEvent } from "react";
+
+interface Data {
+    [key: string]: string;
 }
-const useFilter = (details: data[]) => {
-    const [filterCriteria, setFilterCriteria] = useState<string>('')
-    const [filteredData, setFilteredData] = useState(details)
-    const handleFilterChange = (e) => {
-        const { value } = e.target;
-        setFilterCriteria(value);
+
+const useFilter = (details: Data[]) => {
+    const [filterCriteria, setFilterCriteria] = useState<string>('');
+
+    const handleFilterChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setFilterCriteria(e.target.value);
     };
-    useEffect( () => {
-    setFilteredData(details.filter(invoice => {
-        return Object.values(invoice).some(value =>
-            value.toString().toLowerCase().includes(filterCriteria.toLowerCase())
-        )
-    }))
-    
-    }),[filterCriteria]
 
-    return { filterCriteria, filteredData, handleFilterChange }
+    // useMemo to calculate filtered data only when details or filterCriteria changes
+    const filteredData = useMemo(() => {
+        return details.filter(invoice => {
+            // For each invoice, check if any value matches the filter criteria
+            return Object.values(invoice).some(value =>
+                value.toLowerCase().includes(filterCriteria.toLowerCase())
+            );
+        });
+    }, [details, filterCriteria]); // Dependencies include both details and filterCriteria
+
+    return { filterCriteria, filteredData, handleFilterChange };
 }
 
-export default useFilter
+export default useFilter;
 

@@ -1,12 +1,16 @@
-import  { SetStateAction, useState } from 'react';
+import  { SetStateAction, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom'
 import StaffPersonal from './Form Components/StaffPersonal';
 import StaffAddress from './Form Components/StaffAddress';
 import StaffAccount from './Form Components/StaffAccount';
 
+interface StaffFormProps {
+  mode: 'add' | 'edit';
+  selectedRowData?: any; // Data of the staff member to edit
+}
 
-const StaffFormsCombined = () => {
+const StaffFormsCombined: React.FC<StaffFormProps> = ({ mode, selectedRowData }) => {
 
   const [activeComponent, setActiveComponent] = useState("personal");
   const navigate = useNavigate();
@@ -33,6 +37,13 @@ const StaffFormsCombined = () => {
     salary:'',
     bloodGroup:''
   });
+
+  useEffect(() => {
+    if (selectedRowData) {
+      const formDataWithDefaults = { ...selectedRowData };
+      setFormData(formDataWithDefaults);
+    }
+  }, [selectedRowData]);
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
@@ -68,10 +79,12 @@ const StaffFormsCombined = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
+        const accessToken = localStorage.getItem('accessToken');
+        const url = mode === 'add' ? 'http://localhost:5050/api/posts' : 'http://localhost:5050/api/posts'; // Adjust the URL for adding and editing
+        const method = mode === 'add' ? 'POST' : 'PUT';
         console.log(formData)
-        const accessToken = localStorage.getItem('accessToken')
-        const response = await fetch('http://localhost:5050/api/posts', {
-          method: 'POST',
+        const response = await fetch(url, {
+          method: method,
           headers: {
             'Content-Type': 'application/json',
             'x-access-token': accessToken ? accessToken : '',
@@ -121,13 +134,13 @@ const StaffFormsCombined = () => {
 
 
   return (
-    <div className='m-6'>
-      <div className="flex justify-center gap-1">
+    <div className=' w-full'>
+      <div className="flex justify-center gap-1 my-6">
         <Button className="rounded-none" onClick={() => handleButtonClick("personal")}>Personal</Button>
         <Button className="rounded-none" onClick={() => handleButtonClick("address")}>Address</Button>
         <Button className="rounded-none" onClick={() => handleButtonClick("account")}>Account</Button>
       </div>
-    <form onSubmit={handleSubmit} className='grid gap-5 p-4'>
+    <form onSubmit={handleSubmit} className='grid gap-5 w-full'>
       {activeComponent === 'personal' &&
       <>
       <StaffPersonal formData={formData} handleChange={handleChange} handleKeyPress={handleKeyPress}/>

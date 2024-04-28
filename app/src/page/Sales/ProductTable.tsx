@@ -837,3 +837,4 @@ const handleInputChange = (e, fieldName, rowIndex) => {
 };
 
 export default ProductTable;
+

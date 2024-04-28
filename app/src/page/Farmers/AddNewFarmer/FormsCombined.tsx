@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import FarmerAddress from "./Form Components/FarmerAddress";
@@ -6,7 +6,12 @@ import FarmerShareholder from "./Form Components/FarmerShareholder";
 import FarmerLandInfo from "./Form Components/FarmerLandInfo";
 import FarmerPersonal from "./Form Components/FarmerPersonal";
 
-const Forms = () => {
+interface FarmerFormProps {
+  mode: 'add' | 'edit';
+  selectedRowData?: any; // Data of the staff member to edit
+}
+
+const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData }) => {
   const navigate = useNavigate();
   const [activeComponent, setActiveComponent] = useState("personal");
   const [formData, setFormData] = useState({
@@ -22,7 +27,7 @@ const Forms = () => {
     state: "",
     pincode: "",
     landArea: "",
-    cropsProduced: [],
+    cropsProduced: mode === 'edit' && selectedRowData ? selectedRowData.cropsProduced : [],
     block: "",
     district: "",
     bankAccountHolderName: "",
@@ -39,6 +44,13 @@ const Forms = () => {
     category: "",
     fatherName: "",
   });
+
+  useEffect(() => {
+    if (selectedRowData) {
+      const formDataWithDefaults = { ...selectedRowData };
+      setFormData(formDataWithDefaults);
+    }
+  }, [selectedRowData]);
 
   const handleChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
@@ -87,8 +99,10 @@ const Forms = () => {
       try {
         console.log(formData);
         const accessToken = localStorage.getItem("accessToken");
-        const response = await fetch("http://localhost:5050/api/posts", {
-          method: "POST",
+        const url = mode === 'add' ? 'http://localhost:5050/api/posts' : 'http://localhost:5050/api/posts'; // Adjust the URL for adding and editing
+        const method = mode === 'add' ? 'POST' : 'PUT';
+        const response = await fetch(url, {
+          method: method,
           headers: {
             "Content-Type": "application/json",
             "x-access-token": accessToken ? accessToken : "",
@@ -144,7 +158,7 @@ const Forms = () => {
   };
 
   return (
-    <div className=" w-11/12 my-12">
+    <div className=" sm:max-w-[1200px] w-11/12 my-12">
       <div className="flex justify-center mb-12 w-full gap-1">
         <Button className="rounded-none" onClick={() => handleButtonClick("personal")}>Personal</Button>
         <Button className="rounded-none" onClick={() => handleButtonClick("address")}>Address</Button>
@@ -206,4 +220,4 @@ const Forms = () => {
   );
 };
 
-export default Forms;
+export default FarmerFormsCombined;

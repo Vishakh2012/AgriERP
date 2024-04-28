@@ -37,7 +37,7 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress, handleCropChan
             value={formData.farmerType}
             onChange={handleChange}
             required
-            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select</option>
             <option value="Small Farmer">Small Farmer</option>
@@ -56,7 +56,7 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress, handleCropChan
             value={formData.landType}
             onChange={handleChange}
             required
-            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select</option>
             <option value="Owned">Owned</option>
@@ -80,9 +80,9 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress, handleCropChan
         <label htmlFor="cropsProduced" className="block text-sm font-medium text-gray-700">Crops Produced</label>
           <Select
             name="cropsProduced"
-            value={formData.cropsProduced.map(crop => ({ label: crop, value: crop }))}
+            value={(formData.cropsProduced || []).map(crop => ({ label: crop, value: crop }))}
             onChange={handleCropChange}
-            options={products.map(crop => ({ label: crop.name, value: crop.name }))}
+            options={(products || []).map(crop => ({ label: crop.name, value: crop.name }))}
             isMulti
             placeholder="Select Crops"
             required

@@ -1,18 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
+import { useState, useEffect } from 'react';
 import Header from '@/components/Header/Header'
-import useFilter from '@/hooks/useFilter';
-import useSort from '@/hooks/useSort';
-import usePagination from '@/hooks/usePagination';
-import TableTools from '@/components/TableTools/TableTools';
-import TableShow from '@/components/TableShow/TableShow';
+import DemoPage from './TableShow/table-trial';
 
 
 interface Data {
@@ -21,7 +9,7 @@ interface Data {
 
 
 const Purchase_Display = () => {
-    const [data, setData] = useState<Data[]>([{hi: "hello"}]);
+    const [data, setData] = useState<Data[]>([]);
     useEffect(() => {
         fetchData();
     }, []);
@@ -43,15 +31,11 @@ const Purchase_Display = () => {
         }
     };
 
-       const { filterCriteria, filteredData, handleFilterChange } =  useFilter(data)
-    const {handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn} = useSort(filterCriteria, filteredData)
-    const {pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE} = usePagination(sortedData) 
  return (
     <div className='w-full'>
       <div className='w-full md:ml-4'>
-      <Header text='Staff Details'/>
-    <TableTools filterCriteria= {filterCriteria} handleColumnSort={handleColumnSort} handleFilterChange={handleFilterChange} handleSortOptionChange={handleSortOptionChange} sortColumn={sortColumn} sortOption={sortOption} Details={data}/>
-    <TableShow pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage} handlePageChange={handlePageChange} Details={data} PAGE_SIZE={PAGE_SIZE}/>
+      <Header text='Purchase Details'/>
+      <DemoPage displayData={data} buttonText='add purchase' buttonRoute='/purchase/form'/>
     </div>
     </div>
 )

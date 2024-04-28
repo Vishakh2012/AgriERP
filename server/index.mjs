@@ -1,58 +1,160 @@
 import express from "express";
 import cors from "cors";
-import "./loadEnvironment.mjs";
 import "express-async-errors";
-import sales from "./routes/salesRoutes/sales.mjs"
-import purchase from "./routes/purachaseRoutes/purchase.mjs"
-import auth from "./routes/authenticationRoutes/authRoutes.mjs"
-import staff from "./routes/staffRoutes/staff.mjs"
-import product from "./routes/productRoutes/product.mjs"
-import farmer from "./routes/farmerRoutes/farmer.mjs"
-import authJwt from "./middleware/authJwt.mjs";
-import fpo from "./routes/fpoRoutes/fpo.mjs";
-import dashboard from "./routes/dashboardRoutes/graphRoutes.mjs"
+import { connectDB } from "./db/connection.mjs";
+import multer from "multer";
+const multer_ = multer({ dest: "/uploads" });
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: function (req, file, cb) {
+    if (!file.originalname.match(/\.(xls|xlsx)$/)) {
+      return cb(new Error("Only Excel files are allowed!"), false);
+    }
+    cb(null, true);
+  },
+});
+
+//route imports
+import signupRoute from "./routes/authenticationRoutes/signupRoute.mjs";
+import updateFpoRoute from "./routes/fpoRoutes/updateFpoRoute.mjs";
+import getFpoRoute from "./routes/fpoRoutes/getFpoRoute.mjs";
+import emailVerificationRoute from "./routes/authenticationRoutes/emailVerificationRoute.mjs";
+import signinRoute from "./routes/authenticationRoutes/signinRoute.mjs";
+import verifyAccessToken from "./middlewares/verifyAccesToken.mjs";
+import logoutRoute from "./routes/authenticationRoutes/logoutRoute.mjs";
+import getFarmerRoute from "./routes/farmerRoutes/getFarmerRoute.mjs";
+import updateFarmerRoute from "./routes/farmerRoutes/updateFarmerRoute.mjs";
+import newFarmerRoute from "./routes/farmerRoutes/newFarmerRoute.mjs";
+import deleteFarmerRoute from "./routes/farmerRoutes/deleteFarmerRoute.mjs";
+import getProductRoute from "./routes/productRoutes/getProductsRoute.mjs";
+import updateProductRoute from "./routes/productRoutes/updateProductRoute.mjs";
+import deleteProductRoute from "./routes/productRoutes/deleteProductRoute.mjs";
+import newProductRoute from "./routes/productRoutes/newProductRoute.mjs";
+import getStaffRoute from "./routes/staffRoutes/getStaffRoute.mjs";
+import deleteStaffRoute from "./routes/staffRoutes/deleteStaffRoute.mjs";
+import newStaffRoute from "./routes/staffRoutes/newStaffRoute.mjs";
+import updateStaffRoute from "./routes/staffRoutes/updateStaffRoute.mjs";
+import getPurchaseRoute from "./routes/puchaseRoutes/getPurchaseRoute.mjs";
+import newPurchaseRoute from "./routes/puchaseRoutes/newPurchaseRoute.mjs";
+import newSalesRoute from "./routes/salesRoutes/newSalesRoute.mjs";
+import getSalesRoute from "./routes/salesRoutes/getSalesRoute.mjs";
+import uploadStaffRoute from "./routes/uploadRoutes/uploadStaffRoute.mjs";
+import uploadFarmerRoute from "./routes/uploadRoutes/uploadFarmerRoute.mjs";
+import uploadProductRoute from "./routes/uploadExcelRoutes/uploadProductRoute.mjs";
+import uploadExcelPurchaseRoute from "./routes/uploadExcelRoutes/uploadPurchaseRoute.mjs";
+import getShareHolderRoute from "./routes/shareHolderRoutes/getShareHolderRoute.mjs";
+
 const PORT = process.env.PORT || 5050;
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 app.use(express.json());
+// Connect to MongoDB
+connectDB();
 
-// Load the /posts routes
-app.use("/api/user", auth);
-
-app.use(/^\/api\/(?!user(?:\/|$)).*$/, [authJwt.verifyToken]);
-
-app.use("/api/sales", sales);
-app.use("/api/purchase", purchase);
-app.use("/api/staff", staff);
-app.use("/api/product", product);
-app.use("/api/farmer", farmer);
-app.use("/api/fpo", fpo);
-app.use("/api/dashboard", dashboard);
-
-app.use((req, res, next) => {
-    res.header(
-        "Access-Control-Allow-Headers",
-        "x-access-token, Origin, Content-Type, Accept"
-    );
-
-    if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-        return res.status(200).json({});
-    }
-
-    next();
+//routes
+//testing
+app.get("/test", (req, res) => {
+  res.status(200).send("hellow working.....");
 });
 
+//authentication routes
+app.use("/api/user", signupRoute);
+app.use("/users", emailVerificationRoute);
+app.use("/api/user", signinRoute);
+app.use("/api/user", verifyAccessToken, logoutRoute);
+
+//fporoutes
+app.use("/api/fpo/update", verifyAccessToken, updateFpoRoute);
+app.use("/api/fpo/get", verifyAccessToken, getFpoRoute);
+
+//farmer route
+app.use("/api/farmer/get", verifyAccessToken, getFarmerRoute);
+app.use("/api/farmer/update", verifyAccessToken, updateFarmerRoute);
+app.use("/api/farmer/add", verifyAccessToken, newFarmerRoute);
+app.use("/api/farmer/delete", verifyAccessToken, deleteFarmerRoute);
+
+//product routes
+app.use("/api/products/get", verifyAccessToken, getProductRoute);
+app.use("/api/products/update", verifyAccessToken, updateProductRoute);
+app.use("/api/products/delete", verifyAccessToken, deleteProductRoute);
+app.use("/api/products/add", verifyAccessToken, newProductRoute);
+
+//satff routes
+app.use("/api/staffs/get", verifyAccessToken, getStaffRoute);
+app.use("/api/staffs/delete", verifyAccessToken, deleteStaffRoute);
+app.use("/api/staffs/update", verifyAccessToken, updateStaffRoute);
+app.use("/api/staffs/add", verifyAccessToken, newStaffRoute);
+
+//puchase route
+app.use("/api/purchase/get", verifyAccessToken, getPurchaseRoute);
+app.use("/api/puchase/add", verifyAccessToken, newPurchaseRoute);
+
+//sales route
+app.use("/api/sales/add", verifyAccessToken, newSalesRoute);
+app.use("/api/sales/get", verifyAccessToken, getSalesRoute);
+
+//shareholder routes
+app.use("/api/shareholder/get", verifyAccessToken, getShareHolderRoute);
+
+//upload file route
+// app.use(
+//   "/api/csv/farmer/upload",
+//   verifyAccessToken,
+//   multer_.single("csv"),
+//   csvUploadRoutes
+// );
+app.use(
+  "/api/csv/farmer/upload",
+  verifyAccessToken,
+  multer_.single("csv"),
+  uploadFarmerRoute
+);
+app.use(
+  "/api/csv/staff/upload",
+  verifyAccessToken,
+  multer_.single("csv"),
+  uploadStaffRoute
+);
+
+//excel upload Routes
+app.use(
+  "/api/excel/product/upload",
+  verifyAccessToken,
+  upload.single("excel"),
+  uploadProductRoute
+);
+
+app.use(
+  "/api/excel/purchase/upload",
+  verifyAccessToken,
+  upload.single("excel"),
+  uploadExcelPurchaseRoute
+);
+
+// CORS setup
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Headers",
+    "x-access-token, Origin, Content-Type, Accept"
+  );
+
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+    return res.status(200).json({});
+  }
+
+  next();
+});
 
 // Global error handling
 app.use((err, req, res, next) => {
-    res.status(500).send("Uh oh! An unexpected error occured.")
-})
+  res.status(500).send("Uh oh! An unexpected error occurred.");
+});
 
-
-// start the Express server
+// Start the Express server
 app.listen(PORT, () => {
-    console.log(`Server is running on port: ${PORT}`);
+  console.log(`Server is running on port: ${PORT}`);
 });

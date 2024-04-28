@@ -1,0 +1,78 @@
+# User Signup Endpoint
+POST http://localhost:5050/api/user/signup
+Content-Type: application/json
+
+{
+  "userName": "exampleUser",
+  "email": "example@example.com",
+  "password": "examplePassword",
+  "fpoName": "exampleFPO"
+}
+
+# User Signin Endpoint
+POST http://localhost:5050/api/user/signin
+Content-Type: application/json
+
+{
+  "userName": "exampleUser",
+  "password": "examplePassword"
+}
+
+# Logout Endpoint
+POST http://localhost:5050/user/logout
+x-access-token: <your_access_token_here>
+
+# Get Current FPO Endpoint
+GET http://localhost:5050/api/fpo/get
+x-access-token: <your_access_token_here>
+
+# Update Current FPO Endpoint
+PUT http://localhost:5050/api/fpo/update
+x-access-token: <your_access_token_here>
+Content-Type: application/json
+
+{
+  "regYear": "2024",
+  "district": "Example District",
+  "state": "Example State",
+  "balance": 5000
+}
+
+# Create Farmer Endpoint
+POST http://localhost:5050/api/farmer/add
+x-access-token: <your_access_token_here>
+Content-Type: application/json
+
+{
+  "farmerId": "FAR123",
+  "name": "Example Farmer",
+  "gender": "Male",
+  "address": {
+    "addressLine1": "123 Main Street",
+    "addressLine2": "Apt 101",
+    "district": "Example District",
+    "city": "Example City",
+    "postOffice": "Example Post Office",
+    "pinNumber": 123456
+  },
+  "mobile": "1234567890",
+  "state": "Example State",
+  "block": "Example Block",
+  "dob": "2000-01-01",
+  "fathersName": "Example Father",
+  "farmerType": "Smallholder",
+  "landType": "Agricultural",
+  "landArea": 10,
+  "balance": 5000,
+  "category": "General",
+  "userType": "shareholder",
+  "equityAmount": 10000,
+  "equityShares": 100,
+  "totalAmount": 15000,
+  "farmerProduct": "Example Product",
+  "DateOfJoining": "2024-04-19T00:00:00.000Z"
+}
+
+# Get Products Endpoint
+GET http://localhost:5050/api/products/get
+x-access-token: <your_access_token_here>

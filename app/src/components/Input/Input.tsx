@@ -9,10 +9,15 @@ interface InputElements {
   placeholder: string;
   required?: boolean;
   disabled?: boolean;
+  accept?:string
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void
 }
 
 const InputComponent: React.FC<InputElements> = (props) => {
+
+  
+
   return (
     <div>
       <label htmlFor={props.name} className="block text-sm font-medium text-gray-700">
@@ -28,7 +33,9 @@ const InputComponent: React.FC<InputElements> = (props) => {
         required={props.required}
         disabled={props.disabled} 
         onKeyDown={props.onKeyDown}
-        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+        onClick={props.onClick}
+        accept={props.accept}
+        className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md "
       />
     </div>
   );
