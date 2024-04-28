@@ -61,6 +61,7 @@ const ProductFormsCombined: React.FC<ProductFormProps> = ({ mode, selectedRowDat
           if (!response.ok) {
             throw new Error("Failed to submit form");
           }
+          window.location.reload()
           navigate("/products");
           console.log("Form submitted successfully");
         } catch (error: any) {

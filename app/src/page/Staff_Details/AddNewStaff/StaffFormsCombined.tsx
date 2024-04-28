@@ -21,7 +21,6 @@ const StaffFormsCombined: React.FC<StaffFormProps> = ({ mode, selectedRowData })
     email: '',
     phoneNumber: '',
     gender:'',
-    aadhaar:'',
     addressLine1: '',
     addressLine2: '',
     state: '',
@@ -32,10 +31,11 @@ const StaffFormsCombined: React.FC<StaffFormProps> = ({ mode, selectedRowData })
     bankAccountNumber: '',
     city:'',
     postOffice:'',
-    dob:'',
-    dateOfJoin:'',
+    dateOfJoin:new Date(),
     salary:'',
-    bloodGroup:''
+    bloodGroup:'',
+    designation:'',
+    staffId:''
   });
 
   useEffect(() => {
@@ -83,6 +83,7 @@ const StaffFormsCombined: React.FC<StaffFormProps> = ({ mode, selectedRowData })
         if (!response.ok) {
           throw new Error('Failed to submit form');
         }
+        window.location.reload()
         navigate('/staff/forms/success');
         console.log('Form submitted successfully');
       } catch (error:any) {

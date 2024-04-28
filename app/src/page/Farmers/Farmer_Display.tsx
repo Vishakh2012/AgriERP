@@ -1,6 +1,4 @@
 import Header from '@/components/Header/Header'
-import { useState, useEffect } from 'react'
-import FarmerFormsCombined from './AddNewFarmer/FormsCombined'
 import DemoPage from './TableShow/table-trial'
 
 const initialFarmerDetailsDisplayed = [
