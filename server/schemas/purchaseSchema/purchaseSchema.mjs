@@ -46,7 +46,6 @@ const purchaseSchema = new mongoose.Schema({
   },
   farmerId: {
     type: String,
-    required: true,
   },
   GSTIN: {
     type: String,
@@ -64,6 +63,14 @@ const purchaseSchema = new mongoose.Schema({
     default: Date.now(),
     required: true,
   },
+  discount: {
+    type: Number,
+    default: 0,
+  },
+  finalAmount: {
+    type: Number,
+  },
 });
+purchaseSchema.index({ fpoId: 1, billNumber: -1 }, { unique: true });
 
 export default purchaseSchema;

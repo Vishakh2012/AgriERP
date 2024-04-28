@@ -1,16 +1,17 @@
-import puchaseModel from "../../models/puchaseModel/puchaseModel.mjs";
+import salesModel from "../../models/salesModel/salesModel.mjs";
 import xlsx from "xlsx";
-export default async function uploadPurchase(req, res, next) {
+export default async function uploadSalesController(req, res, next) {
   try {
     if (!req.file) {
       return res.status(400).send({ message: "No file uploaded" });
     }
     const mapping = {
-      billNo: "billNumber",
-      purchaseDate: "purchaseDate",
+      billNumber: "billNo",
+      saleDate: "saleDate",
       discount: "discount",
       finalAmount: "finalAmount",
-      totalAmount: "totalAmount",
+      mop: "mop",
+      totalAmount: "totalAmountWithoutDiscount",
     };
     const workbook = xlsx.read(req.file.buffer, { type: "buffer" });
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
@@ -31,11 +32,11 @@ export default async function uploadPurchase(req, res, next) {
     console.log(mappedData);
     // Upload products
     try {
-      const purchase = await puchaseModel.insertMany(mappedData);
-      if (purchase) {
+      const sales = await salesModel.insertMany(mappedData);
+      if (sales) {
         return res
           .status(201)
-          .send({ message: "Purchase are uploaded successfully" });
+          .send({ message: "sales are uploaded successfully" });
       }
     } catch (e) {
       return res.status(400).send({ message: e.message });

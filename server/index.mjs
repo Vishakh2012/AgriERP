@@ -44,6 +44,7 @@ import uploadFarmerRoute from "./routes/uploadRoutes/uploadFarmerRoute.mjs";
 import uploadProductRoute from "./routes/uploadExcelRoutes/uploadProductRoute.mjs";
 import uploadExcelPurchaseRoute from "./routes/uploadExcelRoutes/uploadPurchaseRoute.mjs";
 import getShareHolderRoute from "./routes/shareHolderRoutes/getShareHolderRoute.mjs";
+import uploadSaleRoute from "./routes/uploadExcelRoutes/uploadSaleRoute.mjs";
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -132,6 +133,13 @@ app.use(
   verifyAccessToken,
   upload.single("excel"),
   uploadExcelPurchaseRoute
+);
+
+app.use(
+  "/api/excel/sales/upload",
+  verifyAccessToken,
+  upload.single("excel"),
+  uploadSaleRoute
 );
 
 // CORS setup

@@ -43,10 +43,12 @@ const salesTransactionSchema = new mongoose.Schema({
     enum: ["REGULAR", "FARMER", "MERCHANT"],
     default: "REGULAR",
   },
+  mop: {
+    type: String,
+  },
   billNo: {
     type: String,
     required: true,
-    unique: true,
   },
   itemSold: {
     type: [itemSoldDetails],
@@ -54,12 +56,15 @@ const salesTransactionSchema = new mongoose.Schema({
   },
   totalAmountWithoutDiscount: {
     type: Number,
-    required: true,
   },
   finalAmount: {
     type: Number,
     required: true,
   },
+  discount: {
+    type: String,
+  },
 });
 
+salesTransactionSchema.index({ fpoId: 1, billNo: -1 }, { unique: true });
 export default salesTransactionSchema;
