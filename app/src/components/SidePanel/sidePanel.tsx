@@ -14,6 +14,7 @@ const Sidebar = () => {
             <div className="w-[320px] bg-white text-black hidden md:flex top-0 pr-4 h-screen flex-shrink-0 print:hidden">
                 <div className="fixed">
                     <aside className="sticky top-0 w-[320px] print:hidden bg-white text-black hidden sm:block pr-4 h-screen flex-shrink-0">
+                    <img src="./agrierpLogo.png" alt = 'logo' style={{width:'200px'}}/>
                         <div className="">
                             <ul className='mt-14'>
                                 <li className="mb-7"><SidePanelButton text="Dashboard" url='/home' icon={<FaHome />} /></li>
