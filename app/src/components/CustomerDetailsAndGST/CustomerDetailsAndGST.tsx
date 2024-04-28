@@ -4,7 +4,7 @@ interface propsForHeader{
     handleImport: (e: ChangeEvent<HTMLInputElement>) => void,
     handleGSTChange: (e: ChangeEvent<HTMLSelectElement> ) => void
     handleCustomerDetailsEnterKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void
-    billNo: number
+    billNo: string
     customerName: string
     mobileNumber: string
     handleCustomerName:(e: ChangeEvent<HTMLInputElement>) => void

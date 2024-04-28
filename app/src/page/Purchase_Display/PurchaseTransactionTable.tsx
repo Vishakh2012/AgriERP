@@ -1,5 +1,4 @@
 import { useState, useEffect, ChangeEvent } from "react";
-import salesBillData from "./salesBillData";
 import * as XLSX from 'xlsx';
 import TableInvoice from "@/components/TableInvoice/TableInvoice";
 import usePriceCalc from "@/hooks/usePriceCalc";
@@ -78,7 +77,7 @@ const getSelectedRows= (arrayOfObjects: SelectedRow[]) => {
         finalAmount: obj.finalAmount || ''
     }));
 }
-const SalesTransactionTable = () => {
+const PurchaseTransactionTable = () => {
     const [gstType, setGstType] = useState<string>('No GST')
     const [ productData  , setProductData ] = useState(getSelectedRows(JSON.parse(localStorage.getItem("product")).data))
     const { handleInputChange, handleEnterKeyPress, handleCustomerDetailsEnterKeyPress,
@@ -241,7 +240,7 @@ const handleKeyDown = (e: KeyboardEvent) => {
     );
 };
 
-export default SalesTransactionTable;
+export default PurchaseTransactionTable;
 
 
 

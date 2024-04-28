@@ -35,12 +35,22 @@ const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
           value={formData.lastName}
           onChange={handleChange}
           placeholder="Last Name"
-          required
           onKeyDown={handleKeyPress}
         />
         </div>
       </div>
       <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div>
+        <InputComponent
+          label="Farmer Id"
+          type="text"
+          name="farmerId"
+          value={formData.farmerId}
+          onChange={handleChange}
+          placeholder="Farmer Id"
+          onKeyDown={handleKeyPress}
+        />
+        </div>
       <div>
           <label htmlFor="gender" className="block text-sm font-medium text-gray-700">Gender</label>
           <select
@@ -48,13 +58,12 @@ const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
             name="gender"
             value={formData.gender}
             onChange={handleChange}
-            required
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Others">Others</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Others</option>
           </select>
         </div>
       <div>
@@ -65,7 +74,6 @@ const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
             value={formData.dob}
             onChange={handleChange}
             placeholder="Date Of Birth"
-            required
             onKeyDown={handleKeyPress}
           />
         </div>
@@ -77,7 +85,6 @@ const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
           value={formData.email}
           onChange={handleChange}
           placeholder="Email"
-          required
           onKeyDown={handleKeyPress}
         />
         </div>
@@ -89,7 +96,6 @@ const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
           value={formData.phoneNumber}
           onChange={handleChange}
           placeholder="Phone Number"
-          required
           onKeyDown={handleKeyPress}
         />
         </div>
@@ -100,7 +106,6 @@ const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
             name="category"
             value={formData.category}
             onChange={handleChange}
-            required
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select category</option>
@@ -119,7 +124,6 @@ const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
             value={formData.aadhaar}
             onChange={handleChange}
             placeholder="Aadhaar Number"
-            required
             onKeyDown={handleKeyPress}
           />
         </div>
@@ -132,7 +136,6 @@ const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
             value={formData.fatherName}
             onChange={handleChange}
             placeholder="Name Of Father"
-            required
             onKeyDown={handleKeyPress}
           />
         </div>
@@ -144,7 +147,6 @@ const FarmerPersonal = ({ formData, handleChange, handleKeyPress }) => {
             value={formData.dateOfJoin}
             onChange={handleChange}
             placeholder="Date Of Joining"
-            required
             onKeyDown={handleKeyPress}
           />
         </div>

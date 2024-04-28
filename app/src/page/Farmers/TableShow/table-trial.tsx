@@ -29,11 +29,8 @@ const DemoPage: React.FC<propsTable> = ({buttonText, buttonRoute}) =>  {
             }
             );
             const jsonData = await response.json();
-            console.log(Array.isArray(jsonData.data))
-            console.log("farmer details revieved",jsonData)
 
             setData(jsonData.data);
-            console.log("farmerdetailsdisplayed", data)
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -43,14 +40,18 @@ const DemoPage: React.FC<propsTable> = ({buttonText, buttonRoute}) =>  {
     const updatedData = data.filter(item => item !== rowData);  //Remove this when api is successfully connected
     setData(updatedData);
     try {
+        const token = localStorage.getItem('accessToken')
+        const id = rowData.farmerId
+        console.log(id)
         // Make API call to delete data from the backend
-        const response = await fetch('/deleteData', {
-            method: 'POST',
+        const response = await fetch(`http://localhost:5050/api/farmer/delete/${id}`, {
+            method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ id: rowData.id }) 
+                'Content-Type': 'application/json',
+                'x-access-token': token ? token : "",
+            }
         });
+        console.log(response)
 
         if (response.ok) {
             const updatedData = data.filter(item => item !== rowData);

@@ -1,5 +1,5 @@
 import { Staff, columns } from "./columns"
-import React from "react"
+import React, { useEffect } from "react"
 import { DataTable } from "./data-table"
  
 const staffDetails = [
@@ -160,17 +160,44 @@ interface propsTable {
 const DemoPage: React.FC<propsTable> = ({buttonText, buttonRoute, displayData}) =>  {
     const [data, setData] = React.useState<Data[]>(displayData);
 
+  
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = async () => {
+        try {
+            const accessToken = localStorage.getItem('accessToken')
+            const response = await fetch('http://localhost:5050/api/staffs/get', {
+                headers: {
+                    'x-access-token': accessToken ? accessToken : ''
+                }
+            }
+            );
+            const jsonData = await response.json();
+            console.log(Array.isArray(jsonData.data))
+            console.log("staff details revieved",jsonData)
+
+            setData(jsonData.data);
+            console.log("staffdetailsdisplayed", data)
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
   const handleDelete = async (rowData: Data) => {
     const updatedData = data.filter(item => item !== rowData);  //Remove this when api is successfully connected
     setData(updatedData);
     try {
+        const accessToken = localStorage.getItem('accessToken')
+        const id = rowData.staffId
         // Make API call to delete data from the backend
-        const response = await fetch('/deleteData', {
-            method: 'POST',
+        const response = await fetch(`http://localhost:5050/api/staffs/delete/${id}`, {
+            method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'x-access-token': accessToken ? accessToken : "",
             },
-            body: JSON.stringify({ id: rowData.id }) 
         });
 
         if (response.ok) {

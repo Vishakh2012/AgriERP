@@ -12,7 +12,19 @@ const FpoAccount:React.FC<Formdetails> = (props) => {
   return (
     <>
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-     
+    <div>
+        <InputComponent
+          label="Price of One Share"
+          type="text"
+          name="shareAmount"
+          value={props.formData.shareAmount}
+          onChange={props.handleChange}
+          disabled={props.disabled}
+          onClick={props.onClick}
+          placeholder="Bank Account Number"
+          onKeyDown={props.handleKeyPress}
+        />
+        </div> 
     <div>
         <InputComponent
           label="Bank Branch Name"
@@ -23,8 +35,6 @@ const FpoAccount:React.FC<Formdetails> = (props) => {
           disabled={props.disabled}
           placeholder="Bank Branch Name"
           onClick={props.onClick}
-
-          required
           onKeyDown={props.handleKeyPress}
         />
         </div>
@@ -38,12 +48,10 @@ const FpoAccount:React.FC<Formdetails> = (props) => {
           onClick={props.onClick}
           disabled={props.disabled}
           placeholder="IFSC Code"
-          required
           onKeyDown={props.handleKeyPress}
         />
         </div>
-      </div>
-      <div className='grid grid-cols-1'>
+     
         <div>
         <InputComponent
           label="Bank Account Number"
@@ -54,12 +62,10 @@ const FpoAccount:React.FC<Formdetails> = (props) => {
           disabled={props.disabled}
           onClick={props.onClick}
           placeholder="Bank Account Number"
-          required
           onKeyDown={props.handleKeyPress}
         />
         </div>
       </div>
-      
         </>
   )
 }
