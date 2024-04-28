@@ -19,7 +19,7 @@ export default async function uploadFarmerController(req, res, next) {
         .on("data", (row) => {
           const objMap = {};
           Object.keys(row).forEach((key) => {
-            const mappedkey = mapping[key].trim();
+            const mappedkey = mapping[key]?.trim();
             if (mappedkey) {
               objMap[mappedkey] = row[key];
             }
@@ -51,6 +51,10 @@ export default async function uploadFarmerController(req, res, next) {
         .pipe(csv())
         .on("data", (row) => {
           row.fpoId = fpoId;
+          const randomPart = Math.random().toString(36).substr(2, 9);
+          const timestampPart = new Date().getTime().toString(36);
+          const uniqueId = randomPart + timestampPart;
+          row.farmerId = uniqueId;
           results.push(row);
         })
         .on("end", async () => {

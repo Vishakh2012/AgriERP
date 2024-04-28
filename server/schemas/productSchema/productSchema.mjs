@@ -29,11 +29,14 @@ const productSchema = new Schema({
   currentStock: {
     type: Number,
     min: 0,
-    updatedDate: Date,
-    unit: {
-      type: String,
-      enum: ["kg", "l", "g", "ml", "mtr", "units"],
-    },
+  },
+  updatedDate: {
+    type: Date,
+    default: Date.now(),
+  },
+  unit: {
+    type: String,
+    enum: ["kg", "l", "g", "ml", "mtr", "units"],
   },
   tax: [taxSchema],
 });

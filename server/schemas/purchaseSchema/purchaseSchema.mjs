@@ -66,4 +66,4 @@ const purchaseSchema = new Schema({
   },
 });
 
-export default purchaseSchema
+export default { purchaseSchema, itemPurchaseDetails };

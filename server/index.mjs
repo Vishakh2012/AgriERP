@@ -31,6 +31,7 @@ import newSalesRoute from "./routes/salesRoutes/newSalesRoute.mjs";
 import getSalesRoute from "./routes/salesRoutes/getSalesRoute.mjs";
 import uploadStaffRoute from "./routes/uploadRoutes/uploadStaffRoute.mjs";
 import uploadFarmerRoute from "./routes/uploadRoutes/uploadFarmerRoute.mjs";
+import uploadPurchaseRoute from "./routes/uploadRoutes/uploadPurchaseRoute.mjs";
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -101,6 +102,12 @@ app.use(
   verifyAccessToken,
   multer_.single("csv"),
   uploadStaffRoute
+);
+app.use(
+  "api/csv/purchase/upload",
+  verifyAccessToken,
+  multer_.single("csv"),
+  uploadPurchaseRoute
 );
 
 // CORS setup
