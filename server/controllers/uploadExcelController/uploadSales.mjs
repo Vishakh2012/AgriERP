@@ -22,7 +22,12 @@ export default async function uploadSalesController(req, res, next) {
       const mappedRow = {};
       for (const excelField of Object.keys(row)) {
         const schemaField = mapping[excelField];
-        if (schemaField) {
+        if (schemaField === "saleDate") {
+          // Convert Excel date to JavaScript Date object
+          const excelDate = row[excelField];
+          const jsDate = excelDateToJSDate(excelDate);
+          mappedRow[schemaField] = jsDate;
+        } else if (schemaField) {
           mappedRow[schemaField] = row[excelField];
         }
       }
@@ -45,4 +50,12 @@ export default async function uploadSalesController(req, res, next) {
     console.error(e);
     return res.status(500).send({ message: "Internal server error" });
   }
+}
+
+function excelDateToJSDate(excelDate) {
+  const excelReferenceDate = new Date("1899-12-30");
+  const millisecondsInDay = 24 * 60 * 60 * 1000;
+  const milliseconds = excelDate * millisecondsInDay;
+  const jsDate = new Date(excelReferenceDate.getTime() + milliseconds);
+  return jsDate;
 }

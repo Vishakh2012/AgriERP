@@ -3,13 +3,6 @@ import FPO from "../fpoSchema/fpoSchema.mjs";
 
 const itemSoldDetails = new mongoose.Schema(
   {
-    customerName: {
-      type: String,
-      required: true,
-    },
-    mobileNumber: {
-      type: String,
-    },
     itemCode: {
       type: String,
       required: true,
@@ -40,6 +33,12 @@ const salesTransactionSchema = new mongoose.Schema({
     ref: "FPO",
     required: true,
   },
+  customerName: {
+    type: String,
+  },
+  mobileNumber: {
+    type: String,
+  },
   saleDate: {
     type: Date,
     default: Date.now(),
@@ -61,7 +60,6 @@ const salesTransactionSchema = new mongoose.Schema({
   },
   totalAmountWithoutDiscount: {
     type: Number,
-    required: true,
   },
   totalDiscount: {
     type: Number,

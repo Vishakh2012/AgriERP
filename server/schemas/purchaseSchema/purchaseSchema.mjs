@@ -41,8 +41,6 @@ const purchaseSchema = new mongoose.Schema({
   },
   billNumber: {
     type: String,
-    required: true,
-    unique: true,
   },
   farmerId: {
     type: String,
@@ -56,7 +54,6 @@ const purchaseSchema = new mongoose.Schema({
   },
   totalAmount: {
     type: Number,
-    required: true,
   },
   purchaseDate: {
     type: Date,

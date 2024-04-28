@@ -45,6 +45,7 @@ import uploadProductRoute from "./routes/uploadExcelRoutes/uploadProductRoute.mj
 import uploadExcelPurchaseRoute from "./routes/uploadExcelRoutes/uploadPurchaseRoute.mjs";
 import getShareHolderRoute from "./routes/shareHolderRoutes/getShareHolderRoute.mjs";
 import uploadSaleRoute from "./routes/uploadExcelRoutes/uploadSaleRoute.mjs";
+import graphRoutes from "./routes/dashBoardRoutes/graphRoutes.mjs";
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -99,6 +100,9 @@ app.use("/api/sales/get", verifyAccessToken, getSalesRoute);
 
 //shareholder routes
 app.use("/api/shareholder/get", verifyAccessToken, getShareHolderRoute);
+
+//graph route
+app.use("/api/graph/get", verifyAccessToken, graphRoutes);
 
 //upload file route
 // app.use(
