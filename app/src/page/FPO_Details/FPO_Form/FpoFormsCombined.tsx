@@ -2,10 +2,8 @@ import { Button } from "@/components/ui/button";
 import { SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FpoBasicDetails from "./FPO Form components/FpoBasicDetails";
-//import FpoAddress from "./FPO Form components/FpoAddress";
-//import FpoAccount from "./FPO Form components/FpoAccount";
-import FpoAddress from "@/page/FPO_Details/FPO_Form/FPO Form components/FpoAddress";
-import FpoAccount from "@/page/FPO_Details/FPO_Form/FPO Form components/FpoAccount";
+import FpoAddress from "./FPO Form components/FpoAddress";
+import FpoAccount from "./FPO Form components/FpoAccount";
 
 const FpoFormsCombined = () => {
   useEffect(() => {
@@ -27,6 +25,7 @@ const FpoFormsCombined = () => {
         throw new Error("Failed to fetch data");
       }
       const data = await response.json();
+
       // Replace null values with empty strings
       const formDataWithDefaults: typeof formData = {
         name: "",
@@ -167,7 +166,7 @@ const FpoFormsCombined = () => {
   };
 
   return (
-    <div className=" sm:max-w-[1200px] w-11/12 my-12">
+    <div className="m-6">
       <div className="flex justify-center gap-1">
         <Button
           className="rounded-none"

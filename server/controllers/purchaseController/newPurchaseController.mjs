@@ -23,6 +23,7 @@ export default async function newPurchaseController(req, res, next) {
     if (!farmer) {
       return res.status(404).send({ message: "Farmer is not part of the FPO" });
     }
+    //may be removed later
 
     // Create a new purchase document
     const purchase = new purchaseModel({
@@ -43,7 +44,10 @@ export default async function newPurchaseController(req, res, next) {
       const { itemCode, name, quantity, rate, HSN } = purchaseDetail;
 
       // Update product stock
-      let product = await productModel.findOne({ fpoId: fpoId, HSN: HSN });
+      let product = await productModel.findOne({
+        fpoId: fpoId,
+        itemCode: itemCode,
+      });
       // If product was created, set additional fields
       if (!product) {
         console.log("creating product");
