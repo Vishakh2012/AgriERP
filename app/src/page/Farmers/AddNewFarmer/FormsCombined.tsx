@@ -35,7 +35,7 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
     ifscCode: "",
     bankAccountNumber: "",
     numberOfShares: 0,
-    shareholder: "",
+    shareHolder: "",
     city: "",
     postOffice: "",
     landType: "",
