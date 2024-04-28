@@ -132,7 +132,8 @@ const useRowHandler = (Details: data[], productData: data[], gstType: string) =>
         }
     }
 
-    return { handleInputChange, handleEnterKeyPress,handleCustomerDetailsEnterKeyPress, currentRowIndex, rows }
+    return { handleInputChange, handleEnterKeyPress,handleCustomerDetailsEnterKeyPress,
+        currentRowIndex, rows, setRows, initialRowState }
 
 }
 

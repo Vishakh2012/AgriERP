@@ -38,7 +38,6 @@ const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleK
             onChange={handleChange}
             disabled={disabled}
             placeholder="FPO Registration Number"
-            required
             onKeyDown={handleKeyPress}
           />
         </div>
@@ -52,7 +51,6 @@ const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleK
             onChange={handleChange}
             disabled={disabled}
             placeholder="CEO"
-            required
             onKeyDown={handleKeyPress}
           />
         </div>
@@ -66,7 +64,6 @@ const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleK
             onChange={handleChange}
             disabled={disabled}
             placeholder="Date of Formation"
-            required
             onKeyDown={handleKeyPress}
           />
         </div>
@@ -80,7 +77,6 @@ const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleK
             disabled={disabled}
             onChange={handleChange}
             placeholder="Email"
-            required
             onKeyDown={handleKeyPress}
           />
         </div>
@@ -94,7 +90,6 @@ const FpoBasicDetails:React.FC<Formdetails> = ({ formData, handleChange, handleK
           disabled={disabled}
           onChange={handleChange}
           placeholder='Phone Number'
-          required
           onKeyDown={handleKeyPress}
         />
         </div>

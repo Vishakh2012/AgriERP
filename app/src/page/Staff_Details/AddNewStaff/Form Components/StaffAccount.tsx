@@ -14,7 +14,6 @@ const StaffAccount = ({ formData, handleChange, handleKeyPress }) => {
           value={formData.bankAccountHolderName}
           onChange={handleChange}
           placeholder="Bank Account Holder Name"
-          required
           onKeyDown={handleKeyPress}
         />
         </div>
@@ -26,7 +25,6 @@ const StaffAccount = ({ formData, handleChange, handleKeyPress }) => {
           value={formData.ifscCode}
           onChange={handleChange}
           placeholder="IFSC Code"
-          required
           onKeyDown={handleKeyPress}
         />
         </div>
@@ -39,7 +37,6 @@ const StaffAccount = ({ formData, handleChange, handleKeyPress }) => {
           value={formData.bankAccountNumber}
           onChange={handleChange}
           placeholder="Bank Account Number"
-          required
           onKeyDown={handleKeyPress}
         />
         </div>
@@ -51,7 +48,6 @@ const StaffAccount = ({ formData, handleChange, handleKeyPress }) => {
           value={formData.salary}
           onChange={handleChange}
           placeholder="salary"
-          required
           onKeyDown={handleKeyPress}
         />
         </div>

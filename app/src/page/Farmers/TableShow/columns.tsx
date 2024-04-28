@@ -2,7 +2,8 @@ import { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 export type Farmer = {
-    fpoId: string
+    farmerId: string,
+    fpoId: string,
     firstName: string,
     middleName: string,
     lastName: string,
@@ -35,6 +36,18 @@ export type Farmer = {
 
 export const columns: ColumnDef<Farmer>[] = [
     // Column for fpoId
+    {
+        accessorKey: "farmerId",
+        header: () => {
+            return (
+                <Button
+                    variant="ghost"
+                >
+                    Farmer Id
+                </Button>
+            )
+        },
+    },
     {
         accessorKey: "firstName",
         header: ({ column }) => {

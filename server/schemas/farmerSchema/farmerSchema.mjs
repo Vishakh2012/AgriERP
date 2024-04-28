@@ -50,10 +50,10 @@ const farmerSchema = mongoose.Schema({
     type: String,
   },
   landArea: {
-    type: Number,
+    type: String,
   },
   balance: {
-    type: Number,
+    type: String,
   },
   category: {
     type: String,
@@ -71,14 +71,14 @@ const farmerSchema = mongoose.Schema({
     type: Number,
   },
   cropsProduced: {
-    type: String,
+    type: [String],
   },
-  DateOfJoining: {
+  dateOfJoin: {
     type: Date,
     default: Date.now(),
     required: true,
   },
-  bankAccouHolderName: {
+  bankAccountHolderName: {
     type: String,
   },
   ifscCode: {

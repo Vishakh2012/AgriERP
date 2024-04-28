@@ -12,7 +12,7 @@ import {
 const GraphDropdown = ({ onDataFetched }) => {
     const fetchData = async (timePeriod) => {
         try {
-            const response = await fetch('http://localhost:5050/api/dashboard/bargraphInfo/Example_FPO/${timePeriod}', {
+            const response = await fetch(`http://localhost:5050/api/dashboard/bargraphInfo/Example_FPO/${timePeriod}`, {
                 method: 'GET',
                 headers: {
                     'x-access-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MDNiYTc0YmE1NTkyNTgwY2Y2YTVkZiIsImlhdCI6MTcxMjEyMDgxOSwiZXhwIjoxNzEyMjA3MjE5fQ.cPkVFqzL9qTLPN7NREo6KwavycPXEGd34KvOWpuWPfQ'

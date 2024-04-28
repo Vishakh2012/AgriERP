@@ -58,20 +58,7 @@ const StaffFormsCombined: React.FC<StaffFormProps> = ({ mode, selectedRowData })
   const validateForm = () => {
     return (
       formData.firstName !== '' &&
-      formData.lastName !== '' &&
-      formData.email !== '' &&
-      formData.phoneNumber !== '' &&
-      formData.addressLine1 !== '' &&
-      formData.aadhaar !== '' &&
-      formData.district !== '' &&
-      formData.gender !== '' &&
-      formData.bankAccountHolderName !=='' &&
-      formData.bankAccountNumber !== '' &&
-      formData.ifscCode !== '' &&
-      formData.state !== '' &&
-      formData.pincode !== '' &&
-      formData.dateOfJoin!=='' &&
-      formData.dob!==''
+      formData.addressLine1 !== '' 
     );
   };
 
@@ -80,7 +67,8 @@ const StaffFormsCombined: React.FC<StaffFormProps> = ({ mode, selectedRowData })
     if (validateForm()) {
       try {
         const accessToken = localStorage.getItem('accessToken');
-        const url = mode === 'add' ? 'http://localhost:5050/api/posts' : 'http://localhost:5050/api/posts'; // Adjust the URL for adding and editing
+        const id = mode==='edit'?selectedRowData.staffId:''
+        const url = mode === 'add' ? 'http://localhost:5050/api/staffs/add' : `http://localhost:5050/api/staffs/update/${id}`; // Adjust the URL for adding and editing
         const method = mode === 'add' ? 'POST' : 'PUT';
         console.log(formData)
         const response = await fetch(url, {

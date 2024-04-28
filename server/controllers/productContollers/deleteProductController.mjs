@@ -4,6 +4,7 @@ export default async function deleteProductController(req, res, next) {
   try {
     const item = req.params.item;
     const fpoId = req.user.fpoId;
+    console.log(item)
     const product_doc = await Product.deleteOne({
       itemCode: item,
       fpoId: fpoId,

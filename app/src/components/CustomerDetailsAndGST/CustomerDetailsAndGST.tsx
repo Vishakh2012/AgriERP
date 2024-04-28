@@ -1,14 +1,34 @@
-import useBillInfo from "@/hooks/useBillInfo"
 import { ChangeEvent } from "react"
 interface propsForHeader{
     gstType: string,
     handleImport: (e: ChangeEvent<HTMLInputElement>) => void,
     handleGSTChange: (e: ChangeEvent<HTMLSelectElement> ) => void
     handleCustomerDetailsEnterKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void
+    billNo: string
+    customerName: string
+    mobileNumber: string
+    handleCustomerName:(e: ChangeEvent<HTMLInputElement>) => void
+    handleMobileNumber: (e: ChangeEvent<HTMLInputElement>) => void
 }
 const CustomerDetailsAndGST: React.FC<propsForHeader> = (props) => {
+    // const handleCustomerNameKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    //     if (e.key === " ") {
+    //         e.preventDefault();
+    //         const input = e.target as HTMLInputElement;
+    //         const start = input.selectionStart;
+    //         const end = input.selectionEnd;
+    //         const value = input.value;
+    //         // Insert space at cursor position
+    //         input.value = value.substring(0, start) + " " + value.substring(end);
+    //         // Move cursor position after the inserted space
+    //         input.setSelectionRange(start + 1, start + 1);
+    //         // Trigger handleCustomerName function to update state
+    //         props.handleCustomerName(e as ChangeEvent<HTMLInputElement>);
+    //     } else {
+    //         props.handleCustomerDetailsEnterKeyPress(e);
+    //     }
+    // };
 
-    const { billNo, customerName, mobileNumber, handleCustomerName, handleMobileNumber } = useBillInfo()
     return(
 
             <div className="flex flex-col h-full">
@@ -21,9 +41,9 @@ const CustomerDetailsAndGST: React.FC<propsForHeader> = (props) => {
                                     type="text"
                                     id="customerName"
                                     name="customerName"
-                                    value={customerName}
-                                    onChange={handleCustomerName}
-                                    onKeyDown={ props.handleCustomerDetailsEnterKeyPress}
+                                    value={ props.customerName }
+                                    onChange={ props.handleCustomerName }
+                                    onKeyDown={handleCustomerNameKeyDown} // Modified this line
                                     autoFocus
                                     className=" border print:border-none px-2 py-1 rounded focus:outline-none"
                                 />
@@ -34,15 +54,15 @@ const CustomerDetailsAndGST: React.FC<propsForHeader> = (props) => {
                                     type="text"
                                     id="mobileNumber"
                                     name="mobileNumber"
-                                    value={mobileNumber}
-                                    onChange={handleMobileNumber}
+                                    value={ props.mobileNumber }
+                                    onChange={ props.handleMobileNumber }
                                     onKeyDown={ props.handleCustomerDetailsEnterKeyPress}
                                     className=" border print:border-none px-2 py-1 rounded focus:outline-none"
                                 />
                             </div>
                             <div className="flex flex-col mb-4 md:mb-0 md:ml-4 print:ml-0 print:flex-row">
                                 <label htmlFor="billNo" className="mb-2">Bill No:</label>
-                                <input type="text" id="billNo" value={billNo} disabled className=" border print:border-none px-2 py-1 rounded focus:outline-none" />
+                                <input type="text" id="billNo" value={props.billNo} disabled className=" border print:border-none px-2 py-1 rounded focus:outline-none" />
                             </div>
                         </div>
                         <div className="flex flex-col md:flex-row md:items-center md:justify-end print:mr-auto">

@@ -46,7 +46,6 @@ const FarmerAddress= ({ formData, handleChange, handleKeyPress }) => {
           value={formData.district}
           onChange={handleChange}
           placeholder="District"
-          required
           onKeyDown={handleKeyPress}
         />
       </div>
@@ -58,7 +57,6 @@ const FarmerAddress= ({ formData, handleChange, handleKeyPress }) => {
           value={formData.city}
           onChange={handleChange}
           placeholder="City"
-          required
           onKeyDown={handleKeyPress}
         />
       </div>
@@ -70,7 +68,6 @@ const FarmerAddress= ({ formData, handleChange, handleKeyPress }) => {
           value={formData.block}
           onChange={handleChange}
           placeholder="Block"
-          required
           onKeyDown={handleKeyPress}
         />
       </div>
@@ -82,7 +79,6 @@ const FarmerAddress= ({ formData, handleChange, handleKeyPress }) => {
           value={formData.postOffice}
           onChange={handleChange}
           placeholder="Post Office"
-          required
           onKeyDown={handleKeyPress}
         />
       </div>
@@ -94,7 +90,6 @@ const FarmerAddress= ({ formData, handleChange, handleKeyPress }) => {
           value={formData.pincode}
           onChange={handleChange}
           placeholder="Pincode"
-          required
           onKeyDown={handleKeyPress}
         />
       </div>

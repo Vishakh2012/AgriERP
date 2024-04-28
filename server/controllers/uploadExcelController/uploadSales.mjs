@@ -8,7 +8,7 @@ export default async function uploadSalesController(req, res, next) {
     const mapping = {
       billNumber: "billNo",
       saleDate: "saleDate",
-      discount: "discount",
+      discount: "totalDiscount",
       finalAmount: "finalAmount",
       mop: "mop",
       totalAmount: "totalAmountWithoutDiscount",

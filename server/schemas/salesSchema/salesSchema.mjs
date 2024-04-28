@@ -3,6 +3,13 @@ import FPO from "../fpoSchema/fpoSchema.mjs";
 
 const itemSoldDetails = new mongoose.Schema(
   {
+    customerName: {
+      type: String,
+      required: true,
+    },
+    mobileNumber: {
+      type: String,
+    },
     itemCode: {
       type: String,
       required: true,
@@ -43,12 +50,10 @@ const salesTransactionSchema = new mongoose.Schema({
     enum: ["REGULAR", "FARMER", "MERCHANT"],
     default: "REGULAR",
   },
-  mop: {
-    type: String,
-  },
   billNo: {
     type: String,
     required: true,
+    unique: true,
   },
   itemSold: {
     type: [itemSoldDetails],
@@ -56,13 +61,17 @@ const salesTransactionSchema = new mongoose.Schema({
   },
   totalAmountWithoutDiscount: {
     type: Number,
+    required: true,
+  },
+  totalDiscount: {
+    type: Number,
+  },
+  mop: {
+    type: String,
   },
   finalAmount: {
     type: Number,
     required: true,
-  },
-  discount: {
-    type: String,
   },
 });
 

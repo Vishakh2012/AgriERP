@@ -13,15 +13,16 @@ const ProductFormsCombined: React.FC<ProductFormProps> = ({ mode, selectedRowDat
     const navigate = useNavigate();
     const [activeComponent, setActiveComponent] = useState("basic");
     const [formData, setFormData] = useState({
-      productName: "",
-      price: 0,
-      cgst: 0,
-      sgst: 0,
-      igst: 0,
+      name: "",
+      price: '',
+      CGST: '',
+      SGST: '',
+      IGST: '',
       category: "",
-      hsn: 0,
+      HSN: '',
       unit: "",
-      currentStock: 0
+      currentStock: '',
+      itemCode:''
     });
   
     useEffect(() => {
@@ -38,24 +39,15 @@ const ProductFormsCombined: React.FC<ProductFormProps> = ({ mode, selectedRowDat
         [name]: value,
       }));
     };
-  
-    const validateForm = () => {
-      return (
-        formData.productName !== "" &&
-        formData.productCategory !== "" &&
-        formData.unit !== "" &&
-        formData.hsnNumber !== 0 &&
-        formData.price > 0 
-      );
-    };
+
   
     const handleSubmit = async (e: { preventDefault: () => void }) => {
       e.preventDefault();
-      if (validateForm()) {
         try {
           console.log(formData);
           const accessToken = localStorage.getItem("accessToken");
-          const url = mode === 'add' ? 'http://localhost:5050/api/posts' : 'http://localhost:5050/api/posts'; // Adjust the URL for adding and editing
+          const item_code = mode==='edit'? selectedRowData.itemCode:''
+          const url = mode === 'add' ? 'http://localhost:5050/api/products/add' : `http://localhost:5050/api/products/update/${item_code}`; // Adjust the URL for adding and editing
           const method = mode === 'add' ? 'POST' : 'PUT';
           const response = await fetch(url, {
             method: method,
@@ -65,19 +57,18 @@ const ProductFormsCombined: React.FC<ProductFormProps> = ({ mode, selectedRowDat
             },
             body: JSON.stringify(formData),
           });
-  
+          console.log(response)
           if (!response.ok) {
             throw new Error("Failed to submit form");
           }
-          navigate("/farmers/forms/success");
+          navigate("/products");
           console.log("Form submitted successfully");
         } catch (error: any) {
           console.error("Error submitting form:", error.message);
         }
-      } else {
-        alert("Please fill in all required fields.");
+      
       }
-    };
+    
   
     const handleKeyPress = (e: {
       key: string;

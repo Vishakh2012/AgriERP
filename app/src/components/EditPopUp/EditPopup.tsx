@@ -12,7 +12,7 @@ interface DialogboxContent{
 }
 
 export const EditDialogBox:React.FC<DialogboxContent>= (props) => {
-    console.log(props?.selectedRowData)
+ 
   return (
     <Dialog>
       <DialogTrigger asChild>
