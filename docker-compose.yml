@@ -19,21 +19,10 @@ services:
     build: ./server
     ports: 
       - "5050:5050"
-    depends_on: 
-      - mongo
     networks: 
       - app-networks
     volumes:
       - web-root:/server/public
-
-  mongo:
-    image: mongo:7.0.8
-    networks:
-      - app-networks
-    volumes:
-      - data-volume:/data/db
-    ports:
-      - 27017:27017
 
 networks:
   app-networks:

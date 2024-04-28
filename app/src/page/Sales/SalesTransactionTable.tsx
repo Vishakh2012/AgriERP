@@ -7,7 +7,6 @@ import useRowHandler from "@/hooks/useAutoFillInvoice";
 import CustomerDetailsAndGST from "@/components/CustomerDetailsAndGST/CustomerDetailsAndGST";
 import { Button } from "@/components/ui/button";
 
-
 const productDetails = [
     {
         itemCode: '',
@@ -134,7 +133,7 @@ const SalesTransactionTable = () => {
                             <input type="text" id="totalPrice" value={grandTotal} disabled className="border-none px-2 py-1 rounded focus:outline-none mr-auto" />
                         </div>
                     </div>
-                    <Button className="bg-blue-700" onClick={handlePrintAndRequestSending}>Print Bill</Button>
+                    <Button className="bg-blue-700 print:hidden" onClick={handlePrintAndRequestSending}>Print Bill</Button>
                 </div>
             </div>
         </div>

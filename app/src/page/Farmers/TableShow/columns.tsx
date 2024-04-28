@@ -19,7 +19,6 @@ export type Farmer = {
     phoneNumber: string,
     gender: string,
     aadhaar: string,
-    address: string,
     bankAccountHolderName: string,
     ifscCode: string,
     bankAccountNumber: string,
