@@ -19,6 +19,7 @@
         "@syncfusion/ej2-react-dropdowns": "^25.1.37",
         "@tanstack/react-table": "^8.16.0",
         "@types/react-table": "^7.7.20",
+        "axios": "^1.6.8",
         "class-variance-authority": "^0.7.0",
         "clsx": "^2.1.0",
         "cmdk": "^1.0.0",
