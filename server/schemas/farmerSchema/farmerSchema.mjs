@@ -1,36 +1,6 @@
 import mongoose from "mongoose";
-import FPO from "../fpoSchema/fpoSchema.mjs"
+import FPO from "../fpoSchema/fpoSchema.mjs";
 // Address schema
-const addressSchema = new mongoose.Schema(
-    {
-        addressLine1: {
-            type: String,
-            required: true,
-        },
-        addressLine2: {
-            type: String,
-            required: true,
-        },
-        district: {
-            type: String,
-            required: true,
-        },
-        city: {
-            type: String,
-            required: true,
-        },
-        postOffice: {
-            type: String,
-        },
-        pinNumber: {
-            type: Number,
-            required: true,
-            min: 0,
-            max: 999999,
-        },
-    },
-    { _id: false }
-);
 
 const farmerSchema = mongoose.Schema({
   farmerId: {
@@ -43,22 +13,25 @@ const farmerSchema = mongoose.Schema({
     required: true,
     ref: "FPO",
   },
-  name: {
+  firstName: {
     type: String,
     required: true,
+  },
+  middleName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
   },
   gender: {
     type: String,
-    enum: ["male", "female", "other"],
-    required: true,
+    enum: ["male", "female", "other", ""],
   },
-  address: {
-    type: addressSchema,
-    required: true,
-  },
-  mobile: {
+  phoneNumber: {
     type: String,
-    required: true,
+  },
+  email: {
+    type: String,
   },
   state: {
     type: String,
@@ -69,10 +42,6 @@ const farmerSchema = mongoose.Schema({
   },
   dob: {
     type: Date,
-    required: true,
-  },
-  fathersName: {
-    type: String,
   },
   farmerType: {
     type: String,
@@ -89,22 +58,19 @@ const farmerSchema = mongoose.Schema({
   category: {
     type: String,
   },
-  userType: {
+  shareHolder: {
     type: String,
-    enum: ["shareholder", "farmer"],
-    required: true,
-    default: "shareholder",
   },
-  equityAmount: {
+  shareAmount: {
     type: Number,
   },
-  equityShares: {
+  numberOfShares: {
     type: Number,
   },
   totalAmount: {
     type: Number,
   },
-  farmerProduct: {
+  cropsProduced: {
     type: String,
   },
   DateOfJoining: {
@@ -112,6 +78,40 @@ const farmerSchema = mongoose.Schema({
     default: Date.now(),
     required: true,
   },
+  bankAccouHolderName: {
+    type: String,
+  },
+  ifscCode: {
+    type: String,
+  },
+  bankAccountNumber: {
+    type: String,
+  },
+  //address details
+  addressLine1: {
+    type: String,
+    required: true,
+  },
+  addressLine2: {
+    type: String,
+  },
+  district: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  postOffice: {
+    type: String,
+  },
+  pincode: {
+    type: Number,
+    min: 0,
+    max: 999999,
+  },
+  fatherName: {
+    type: String,
+  },
 });
 farmerSchema.index({ farmerId: 1, fpoId: 1 }, { unique: true });
-export default farmerSchema
+export default farmerSchema;

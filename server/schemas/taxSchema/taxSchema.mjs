@@ -2,7 +2,6 @@ import { Schema } from "mongoose";
 const taxSchema = new Schema({
   HSN: {
     type: String,
-    unique: true,
   },
   CGST: {
     type: Number,

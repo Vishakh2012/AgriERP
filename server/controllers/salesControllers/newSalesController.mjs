@@ -12,23 +12,23 @@ export default async function newSalesController(req, res, next) {
     }
 
     //then save sales Schems
-    const savedSales = await sales.save();
     await Promise.all(
       itemSold.map(async (item) => {
         const { HSN, itemCode, quantity } = item;
         const product = await productModel.findOne({
-          HSN: HSN,
+          itemCode: itemCode,
           fpoId: fpoId,
         });
         if (!product) {
           return res
             .status(404)
-            .send({ message: `product of id : ${HSN} not found` });
+            .send({ message: `product of id : ${itemCode} not found` });
         }
         product.currentStock -= quantity;
         product.save();
       })
     );
+    const savedSales = await sales.save();
 
     return res.status(201).send({ sales: savedSales });
   } catch (error) {

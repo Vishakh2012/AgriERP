@@ -4,6 +4,7 @@ import Token from "../../models/tokenModel/tokenModel.mjs";
 import refreshToken from "../../models/refreshTokenModel/refreshTokenModel.mjs";
 import FPO from "../../models/fpoModel/fpoModel.mjs";
 import createJsonWebToken from "../../services/createJsonWebToken.mjs";
+import sendMail from "../../services/sendMail.mjs";
 import jwt from "jsonwebtoken";
 
 export default async function loginController(req, res, next) {
