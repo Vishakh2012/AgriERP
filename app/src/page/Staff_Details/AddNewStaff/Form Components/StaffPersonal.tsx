@@ -76,17 +76,6 @@ const StaffPersonal = ({ formData, handleChange, handleKeyPress }) => {
             <option value="AB-">AB-</option>
           </select>
         </div>
-      <div>
-          <InputComponent
-            label='Date Of Birth'
-            type="date"
-            name="dob"
-            value={formData.dob}
-            onChange={handleChange}
-            placeholder="Date Of Birth"
-            onKeyDown={handleKeyPress}
-          />
-        </div>
         <div>
         <InputComponent
           label="Email"
@@ -111,16 +100,26 @@ const StaffPersonal = ({ formData, handleChange, handleKeyPress }) => {
         </div>
         <div>
           <InputComponent
-            label='Aadhaar Number'
+            label='Designation'
             type="text"
-            name="aadhaar"
-            value={formData.aadhaar}
+            name="designation"
+            value={formData.designation}
             onChange={handleChange}
-            placeholder="Aadhaar Number"
+            placeholder="Designation"
             onKeyDown={handleKeyPress}
           />
         </div>
-       
+        <div>
+          <InputComponent
+            label='Staff Id'
+            type="text"
+            name="staffId"
+            value={formData.staffId}
+            onChange={handleChange}
+            placeholder="Staff Id"
+            onKeyDown={handleKeyPress}
+          />
+        </div>
         <div>
           <InputComponent
             label='Date Of Joining'
@@ -132,6 +131,7 @@ const StaffPersonal = ({ formData, handleChange, handleKeyPress }) => {
             onKeyDown={handleKeyPress}
           />
         </div>
+        
     </div>
     </div>
   )

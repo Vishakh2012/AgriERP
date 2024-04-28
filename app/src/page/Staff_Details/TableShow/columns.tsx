@@ -3,12 +3,14 @@ import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 import { Button } from "@/components/ui/button"
 export type Staff = {
     staffId: string,
-    name: string,
+    firstName: string,
+    lastName:string,
+    middleName:string,
     bloodGroup: string,
     designation: string,
     phone: string,
     email: string,
-    dateOfJoining:string,
+    dateOfJoin:string,
     basicSalary: string,
     accountNumber: string,
     address: string
@@ -20,7 +22,7 @@ export const columns: ColumnDef<Staff>[] = [
         header: "Id"
     },
         {
-        accessorKey:"name",
+        accessorKey:"firstName",
     header: ({ column }) => {
       return (
         <Button
@@ -48,7 +50,7 @@ export const columns: ColumnDef<Staff>[] = [
     },
     }, 
         {
-        accessorKey:"phone",
+        accessorKey:"phoneNumber",
     header: ({ column }) => {
       return (
         <Button

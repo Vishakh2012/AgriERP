@@ -11,6 +11,10 @@ const addressSchema = new Schema({
     type: String,
     required: true,
   },
+  state: {
+    type: String,
+    required: true,
+  },
   district: {
     type: String,
     required: true,
@@ -20,7 +24,7 @@ const addressSchema = new Schema({
     required: true,
   },
   postOffice: String,
-  pinNumber: {
+  pinCode: {
     type: Number,
     required: true,
     min: 0,
@@ -38,9 +42,18 @@ const staffSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "FPO",
   },
-  name: {
+  firstName: {
     type: String,
     required: true,
+  },
+  gender: {
+    type: String,
+  },
+  middleName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
   },
   bloodGroup: {
     type: String,
@@ -48,11 +61,10 @@ const staffSchema = new Schema({
   },
   designation: String,
   address: addressSchema,
-  phone: {
+  phoneNumber: {
     type: String,
     minlength: 10,
     maxlength: 10,
-    unique: true,
   },
   email: {
     type: String,
@@ -61,15 +73,15 @@ const staffSchema = new Schema({
       message: (props) => `${props.value} is not a valid email`,
     },
     required: [true, "User Email required"],
-    unique: true,
   },
-  dateOfJoining: {
+  dateOfJoin: {
     type: Date,
     default: Date.now,
   },
-  basicSalary: Number,
-  accountNumber: String,
-  IFSC: String,
+  salary: Number,
+  bankAccountNumber: String,
+  bankAccountHolderName: String,
+  ifscCode: String,
 });
 
 staffSchema.index({staffId : 1, fpoId : 1}, {unique : true})
