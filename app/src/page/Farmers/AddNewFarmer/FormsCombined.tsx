@@ -15,6 +15,7 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
   const navigate = useNavigate();
   const [activeComponent, setActiveComponent] = useState("personal");
   const [formData, setFormData] = useState({
+    farmerId: '',
     firstName: "",
     middleName: "",
     lastName: "",
@@ -39,8 +40,8 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
     postOffice: "",
     landType: "",
     farmerType: "",
-    dob: "",
-    dateOfJoin: "",
+    dob: new Date(),
+    dateOfJoin: new Date(),
     category: "",
     fatherName: "",
   });
@@ -78,8 +79,9 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (validateForm()) {
+      console.log(formData)
+
       try {
-        console.log(selectedRowData);
         const accessToken = localStorage.getItem("accessToken");
         const id = mode==='edit'?selectedRowData.farmerId:''
         const url = mode === 'add' ? 'http://localhost:5050/api/farmer/add' : `http://localhost:5050/api/farmer/update/${id}`; // Adjust the URL for adding and editing
@@ -97,7 +99,7 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
           throw new Error("Failed to submit form");
         }
         console.log(formData)
-        navigate("/farmers/forms/success");
+        navigate("/farmers");
         console.log("Form submitted successfully");
       } catch (error: any) {
         console.error("Error submitting form:", error.message);
