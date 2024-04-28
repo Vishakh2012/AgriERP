@@ -67,6 +67,7 @@ const useRowHandler = (Details: data[], productData: data[], gstType: string) =>
         const newRow = initialRowState();
         setRows([...rows, newRow]);
         setCurrentRowIndex(rows.length);
+        console.log(rows)
     };
 
 

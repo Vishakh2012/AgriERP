@@ -50,8 +50,24 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>& { onDelete: (rowData: TData) => void }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [Filters, setFilters] = React.useState("")
-    const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({})
+        const [columnVisibility, setColumnVisibility] =
+        React.useState<VisibilityState>({ 
+           middleName: false,
+           postOffice: false,
+           block:false,
+            city:false,
+            pincode:false,
+            email:false,
+            aadhaar:false,
+           ifscCode:false,
+           bankAccountHolderName:false,
+           numberOfShares:false,
+           shareAmount:false,
+           landType:false,
+           farmerType:false,
+           category:false,
+           cropsProduced:false,
+    })
     const table = useReactTable({
         data,
         columns,

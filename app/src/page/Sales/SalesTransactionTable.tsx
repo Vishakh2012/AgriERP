@@ -6,6 +6,7 @@ import usePriceCalc from "@/hooks/usePriceCalc";
 import useRowHandler from "@/hooks/useAutoFillInvoice";
 import CustomerDetailsAndGST from "@/components/CustomerDetailsAndGST/CustomerDetailsAndGST";
 import { Button } from "@/components/ui/button";
+import useBillInfo from "@/hooks/useBillInfo";
 
 const productDetails = [
     {
@@ -46,17 +47,61 @@ const productData = [
     // Add more sample product details as needed
 ];
 
-interface Data {
-    [key: string]: string
-}
 
 const SalesTransactionTable = () => {
     const [gstType, setGstType] = useState<string>('No GST')
     const { handleInputChange, handleEnterKeyPress, handleCustomerDetailsEnterKeyPress, currentRowIndex, rows } = useRowHandler(productDetails, productData, gstType)
     const { grandTotal, totalPrice, totalDiscount } = usePriceCalc(rows)
+    const { billNo, customerName, mobileNumber, handleMobileNumber, handleCustomerName } = useBillInfo()
+    const sendRequest = async () => {
+        try {
+            const saleTransaction = {
+                billNo: billNo.toString(),
+                itemSold: rows,
+                totalAmountWithoutDiscount: totalPrice,
+                totalDiscount: totalDiscount,
+                finalAmount: grandTotal
+            }
+            const stringifiedTransaction = JSON.stringify(saleTransaction)
+            console.log(stringifiedTransaction)
+            const accessToken = localStorage.getItem('accessToken')
+            const response = await fetch('http://localhost:5050/api/sales/add', {
+                method: "POST",
+                headers: {
+                      'Content-Type': 'application/json',
+                    'x-access-token': accessToken ? accessToken : ''
+                },
+                body: JSON.stringify(saleTransaction)
+            }
+
+            );
+            console.log(response)
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+
+    }
+    const handlePrintAndRequestSending = async () => {
+        window.print()
+         await sendRequest()
+    }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.ctrlKey && e.key === "p") {
+            e.preventDefault();
+            handlePrintAndRequestSending()
+        }
+
+    };
+
     useEffect(() => {
         salesBillData.length = 0;
         console.log("Bill data has been reset to null");
+        document.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+        };
     }, []);
 
     const handleImport = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,7 +134,7 @@ const SalesTransactionTable = () => {
                 },
                 body: csvData,
             });
-    
+
             if (response.ok) {
                 console.log('CSV data sent to backend successfully');
             } else {
@@ -102,9 +147,6 @@ const SalesTransactionTable = () => {
     const handleGSTChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setGstType(e.target.value)
     }
-    const handlePrintAndRequestSending = () => {
-         window.print()
-    }
     return (
         <div className="overflow-x-auto flex-grow bg-white w-11/12 print:w-screen rounded-md print:h-screen">
             <div className="hidden print:flex print:top-0 w-full print:justify-center">
@@ -112,9 +154,27 @@ const SalesTransactionTable = () => {
             </div>
 
             <div className="print:h-7/10 print:py-0">
-                <CustomerDetailsAndGST handleGSTChange={handleGSTChange} handleImport={handleImport} gstType={gstType} handleCustomerDetailsEnterKeyPress={handleCustomerDetailsEnterKeyPress}/>
-                <TableInvoice gstType={gstType} Details={productDetails} rows={rows} productData={productData} handleEnterKeyPress={handleEnterKeyPress} handleInputChange={handleInputChange} currentRowIndex={currentRowIndex.current} />
-                {/* Fill remaining space */}
+                <CustomerDetailsAndGST
+                    handleGSTChange={handleGSTChange}
+                    handleImport={handleImport}
+                    gstType={gstType}
+                    handleCustomerDetailsEnterKeyPress={handleCustomerDetailsEnterKeyPress}
+                    billNo={billNo}
+                    customerName={customerName}
+                    handleCustomerName={handleCustomerName}
+                    mobileNumber={mobileNumber}
+                    handleMobileNumber={handleMobileNumber}
+                />
+
+                <TableInvoice gstType={gstType}
+                    Details={productDetails}
+                    rows={rows}
+                    productData={productData}
+                    handleEnterKeyPress={handleEnterKeyPress}
+                    handleInputChange={handleInputChange}
+                    currentRowIndex={currentRowIndex.current}
+                />
+
                 <div className=" flex flex-col float-end">
 
                     <div className="p-4 bg-white border-t flex flex-col md:justify-end float-end">
