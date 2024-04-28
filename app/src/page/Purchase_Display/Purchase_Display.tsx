@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header/Header'
-import useFilter from '@/hooks/useFilter';
-import useSort from '@/hooks/useSort';
-import usePagination from '@/hooks/usePagination';
+import DemoPage from './TableShow/table-trial';
 
 
 interface Data {
@@ -11,7 +9,7 @@ interface Data {
 
 
 const Purchase_Display = () => {
-    const [data, setData] = useState<Data[]>([{hi: "hello"}]);
+    const [data, setData] = useState<Data[]>([]);
     useEffect(() => {
         fetchData();
     }, []);
@@ -36,7 +34,8 @@ const Purchase_Display = () => {
  return (
     <div className='w-full'>
       <div className='w-full md:ml-4'>
-      <Header text='Staff Details'/>
+      <Header text='Purchase Details'/>
+      <DemoPage displayData={data} buttonText='add purchase' buttonRoute='/purchase/form'/>
     </div>
     </div>
 )

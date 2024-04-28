@@ -9,7 +9,7 @@ import {
 import Pagination from "@/components/Pagination/Pagination";
 import { IoMdClose } from "react-icons/io";
 import { ReactElement, useEffect, useState } from "react";
-import { AlertDialogBox } from "@/components/DeletionAlert/DeletionAlert";
+import { AlertDialogDemo } from "@/components/DeletionAlert/DeletionAlert";
 import { EditDialogBox } from "@/components/EditPopUp/EditPopup";
 
 interface Data {
@@ -63,7 +63,7 @@ const TableShow: React.FC<TableContents> = (props) => {
     const handleDelete = async (index: number) => {
         // Remove the row from the paginatedData
         const newData = props.paginatedData.filter((_, i) => i !== index);
-        {props.onDelete && props.onDelete(index)}; // Call onDelete to handle client-side state update
+        props.onDelete(index); // Call onDelete to handle client-side state update
     
         try {
             const response = await fetch(`/api/deleteRow/${props.resourceId}/${index}`, {
@@ -129,7 +129,7 @@ const TableShow: React.FC<TableContents> = (props) => {
                                             <EditDialogBox formComponent={props.formComponent} selectedRowData={staff}/>
                                         )}
                                         {props.delete && (
-                    <AlertDialogBox onDelete={() => handleDelete((props.currentPage - 1) * props.PAGE_SIZE + index)} />
+                    <AlertDialogDemo onDelete={() => handleDelete((props.currentPage - 1) * props.PAGE_SIZE + index)} />
                   )}
                                     </TableCell>
                                 {/* Render the Serial Number cell only in the table body */}

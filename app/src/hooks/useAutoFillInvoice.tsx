@@ -8,7 +8,6 @@ interface data {
     [key: string]: string
 }
 const useRowHandler = (Details: data[], productData: data[], gstType: string) => {
-
     const currentRowIndex = useRef(0);
 
 
@@ -82,17 +81,15 @@ const useRowHandler = (Details: data[], productData: data[], gstType: string) =>
             const name = e.currentTarget.name;
             const columnNames = Object.keys(Details[0]);
             const isLastColumn = (
-                (gstType === "No gst" && name === "quantity") ||
-                (gstType === "Gst" && name === "CGST")
+                (gstType === "No GST" && name === "quantity") ||
+                (gstType === "GST" && name === "CGST")
             );
             if (isLastColumn) {
-                const rateIndex = columnNames.indexOf("rate");
-                if (rateIndex !== -1) {
-                    const rateInput = document.getElementsByName("rate")[rowIndex];
-                    if (rateInput) {
-                        rateInput.focus();
-                        return;
-                    }
+                const nextColumnName = 'rate';
+                const rateInput = document.getElementsByName(nextColumnName)[rowIndex];
+                if (rateInput) {
+                    rateInput.focus();
+                    return;
                 }
             }
             const currentColumnNameIndex = columnNames.indexOf(name);
@@ -115,10 +112,29 @@ const useRowHandler = (Details: data[], productData: data[], gstType: string) =>
         }
     };
 
+    const handleCustomerDetailsEnterKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            e.preventDefault(); // Prevent the default behavior of the Enter key
+            const fieldName = e.currentTarget.name;
+            if (fieldName === "customerName") {
+                // Move focus to the mobile number input
+                const mobileNumberInput = document.getElementById("mobileNumber");
+                if (mobileNumberInput) {
+                    mobileNumberInput.focus();
+                }
+            } else if (fieldName === "mobileNumber") {
+                // Move focus to the first row item code input
+                const itemCodeInput = document.getElementsByName("itemCode")[0] as HTMLInputElement;
+                if (itemCodeInput) {
+                    itemCodeInput.focus();
+                }
+            }
+        }
+    }
 
-    return { handleInputChange, handleEnterKeyPress, currentRowIndex, rows }
+    return { handleInputChange, handleEnterKeyPress,handleCustomerDetailsEnterKeyPress, currentRowIndex, rows }
+
 }
-
 
 export default useRowHandler
 

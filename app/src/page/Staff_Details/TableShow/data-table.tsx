@@ -99,7 +99,7 @@ export function DataTable<TData, TValue>({
         <div>
             <div className="flex items-center py-8">
 
-                <div className="w-full max-w-[1900px] px-4 mt-14 py-4 flex flex-col md:flex-row bg-white md:items-center shadow-sm md:h-[100px] justify-end sm:justify-between"> {/* Center the content */}
+                <div className="w-full max-w-[1900px] px-4 py-4 flex flex-col md:flex-row bg-white md:items-center shadow-sm md:h-[100px] justify-end sm:justify-between"> {/* Center the content */}
                     <div className='flex flex-col md:flex-row gap-x-2'>
                         <Input
                             placeholder="Search"
@@ -144,7 +144,7 @@ export function DataTable<TData, TValue>({
                     </Link>
                 </div>
                 </div>
-                <div className="rounded-md border">
+                <div className="rounded-md border bg-white">
                     <Table>
                         <TableHeader>
                             {table.getHeaderGroups().map((headerGroup) => (
@@ -176,8 +176,7 @@ export function DataTable<TData, TValue>({
                                             key={row.id}
                                             data-state={row.getIsSelected() && "selected"}
                                         >
-                                            <TableCell>
-
+                                            <TableCell className="flex flex-row">
                                                 <EditDialogBox formComponent={<StaffFormsCombined mode="edit" />} selectedRowData={{ email: row.getValue("email") }} />
                                                 <AlertDialogBox onDelete={() => onDelete(row.original)}/>
                                             </TableCell>

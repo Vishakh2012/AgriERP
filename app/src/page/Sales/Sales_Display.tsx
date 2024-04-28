@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header/Header';
-import usePagination from '@/hooks/usePagination';
-import useSort from '@/hooks/useSort';
-import useFilter from '@/hooks/useFilter';
+import DemoPage from './TableShow/table-trial';
 
 
 interface Data {
@@ -10,9 +8,9 @@ interface Data {
 }
 
 const SalesDisplay = () => {
-    const [data, setData] = useState<Data[]>([{hello: "hi"}]);
+    const [data, setData] = useState<Data[]>([]);
 
-    useEffect(() => {
+   /* useEffect(() => {
         fetchData();
     }, []);
 
@@ -33,14 +31,12 @@ const SalesDisplay = () => {
             console.error('Error fetching data:', error);
         }
 
-    };
-    const { filterCriteria, filteredData, handleFilterChange } = useFilter(data)
-    const { handleSortOptionChange, sortOption, handleColumnSort, sortedData, sortColumn } = useSort(filteredData)
-    const { pageCount, paginatedData, handlePageChange, currentPage, PAGE_SIZE } = usePagination(sortedData)
+    };*/
     return (
-        <div className='w-full'>
-            <div className='w-full md:ml-4'>
-                <Header text='Staff Details' />
+        <div className='w-full sm:w-[100%-320px]'>
+            <div className='w-full  md:ml-4'>
+                <Header text='Sales Details' />
+                <DemoPage displayData={data} buttonRoute='/sales/form' buttonText = 'add new sales' /> 
             </div>
         </div>
     )

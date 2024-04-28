@@ -22,6 +22,7 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+//import StaffFormsCombined from "@/page/Staff_Details/AddNewStaff/StaffFormsCombined"
 
 import { Input } from "@/components/ui/input"
 interface DataTableProps<TData, TValue> {
@@ -36,8 +37,9 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import ProductFormsCombined from "../AddNewProduct/ProductFormsCombined"
+import FarmerFormsCombined from "@/page/Farmers/AddNewFarmer/FormsCombined"
 import { AlertDialogBox } from "@/components/DeletionAlert/DeletionAlert"
+
 
 export function DataTable<TData, TValue>({
     columns,
@@ -100,7 +102,7 @@ export function DataTable<TData, TValue>({
         <div>
             <div className="flex items-center py-8">
 
-                <div className="print:hidden w-full max-w-[1900px] print:px-0 px-4 py-4 flex flex-col md:flex-row bg-white md:items-center shadow-sm md:h-[100px] justify-end sm:justify-between"> {/* Center the content */}
+                <div className="w-full max-w-[1900px] px-4  py-4 flex flex-col md:flex-row bg-white md:items-center shadow-sm md:h-[100px] justify-end sm:justify-between"> {/* Center the content */}
                     <div className='flex flex-col md:flex-row gap-x-2'>
                         <Input
                             placeholder="Search"
@@ -150,7 +152,7 @@ export function DataTable<TData, TValue>({
                         <TableHeader>
                             {table.getHeaderGroups().map((headerGroup) => (
                                 <TableRow key={headerGroup.id}>
-                                    <TableHead className="print:hidden">
+                                    <TableHead>
                                         Action
                                     </TableHead>
                                     {headerGroup.headers.map((header) => {
@@ -171,16 +173,14 @@ export function DataTable<TData, TValue>({
                         <TableBody>
                             {table.getRowModel().rows?.length ? (
                                 table.getRowModel().rows.map((row) => {
+                                    console.log(typeof (row.getValue("email")))
                                     return (
                                         <TableRow
                                             key={row.id}
                                             data-state={row.getIsSelected() && "selected"}
                                         >
-                                            <TableCell className="print:hidden flex flex-row">
-
-                                            <div onClick={() => console.log(row.original)}>
-                                            <EditDialogBox formComponent={<ProductFormsCombined mode="edit" />}selectedRowData={row.original} />
-                                            </div>
+                                            <TableCell className="flex flex-row">
+                                                <EditDialogBox formComponent={<FarmerFormsCombined mode="edit" />} selectedRowData={{ email: row.getValue("email") }} />
                                                 <AlertDialogBox onDelete={() => onDelete(row.original)}/>
                                             </TableCell>
                                             {row.getVisibleCells().map((cell) => {
@@ -203,7 +203,7 @@ export function DataTable<TData, TValue>({
                         </TableBody>
                     </Table>
                 </div>
-                <div className="flex items-center justify-end space-x-2 py-4 print:hidden">
+                <div className="flex items-center justify-end space-x-2 py-4">
                     <Button
                         variant="outline"
                         size="sm"

@@ -152,13 +152,15 @@ const staffDetails = [
 //buttonText='Add New Staff' buttonRoute='/staff/forms'/
 const Staff_Details = ()=> {
  return (
-    <div className='md:ml-4 w-[100%-4rem]'>
+    <div className='w-full'>
+    <div className='md:ml-4 w-full'>
     <Header text='Staff Details'/>
     {/*
     < TableShow formComponent={<EditStaffForms/>} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage}
     handlePageChange={handlePageChange} Details={staffDetails} PAGE_SIZE={PAGE_SIZE} edit={true} delete={true}/>
     */}
    <DemoPage buttonText='Add New Staff' buttonRoute='/staff/forms' displayData={staffDetails} /> 
+    </div>
     </div>
 )
 }

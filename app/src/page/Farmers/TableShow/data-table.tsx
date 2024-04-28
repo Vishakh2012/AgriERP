@@ -22,8 +22,8 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
-import StaffFormsCombined from "@/page/Staff_Details/AddNewStaff/StaffFormsCombined"
-import EditStaffForms from "@/page/Staff_Details/EditStaff/EditStaffForms"
+//import StaffFormsCombined from "@/page/Staff_Details/AddNewStaff/StaffFormsCombined"
+
 import { Input } from "@/components/ui/input"
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -37,17 +37,37 @@ import {
     DropdownMenuContent,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { AlertDialogBox } from "@/components/DeletionAlert/DeletionAlert"
+import FarmerFormsCombined from "../AddNewFarmer/FormsCombined"
+
 
 export function DataTable<TData, TValue>({
     columns,
     data,
     buttonRoute,
-    buttonText
-}: DataTableProps<TData, TValue>) {
+    buttonText,
+    onDelete
+}: DataTableProps<TData, TValue>& { onDelete: (rowData: TData) => void }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [Filters, setFilters] = React.useState("")
     const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({})
+        React.useState<VisibilityState>({ 
+           middleName: false,
+           postOffice: false,
+           block:false,
+            city:false,
+            pincode:false,
+            email:false,
+            aadhaar:false,
+           ifscCode:false,
+           bankAccountHolderName:false,
+           numberOfShares:false,
+           shareAmount:false,
+           landType:false,
+           farmerType:false,
+           category:false,
+           cropsProduced:false,
+    })
     const table = useReactTable({
         data,
         columns,
@@ -98,7 +118,7 @@ export function DataTable<TData, TValue>({
         <div>
             <div className="flex items-center py-8">
 
-                <div className="w-full max-w-[1900px] px-4 mt-14 py-4 flex flex-col md:flex-row bg-white md:items-center shadow-sm md:h-[100px] justify-end sm:justify-between"> {/* Center the content */}
+                <div className="w-full max-w-[1900px] px-4  py-4 flex flex-col md:flex-row bg-white md:items-center shadow-sm md:h-[100px] justify-end sm:justify-between"> {/* Center the content */}
                     <div className='flex flex-col md:flex-row gap-x-2'>
                         <Input
                             placeholder="Search"
@@ -143,7 +163,7 @@ export function DataTable<TData, TValue>({
                     </Link>
                 </div>
                 </div>
-                <div className="rounded-md border">
+                <div className="rounded-md border bg-white">
                     <Table>
                         <TableHeader>
                             {table.getHeaderGroups().map((headerGroup) => (
@@ -169,16 +189,15 @@ export function DataTable<TData, TValue>({
                         <TableBody>
                             {table.getRowModel().rows?.length ? (
                                 table.getRowModel().rows.map((row) => {
-                                    console.log(typeof (row.getValue("email")))
                                     return (
                                         <TableRow
                                             key={row.id}
                                             data-state={row.getIsSelected() && "selected"}
                                         >
-                                            <TableCell>
+                                            <TableCell className="flex flex-row">
 
-                                                <EditDialogBox formComponent={<EditStaffForms />} selectedRowData={{ email: row.getValue("email") }} />
-
+                                                <EditDialogBox formComponent={<FarmerFormsCombined mode="edit" />} selectedRowData={row.original} />
+                                                <AlertDialogBox onDelete={() => onDelete(row.original)}/>
                                             </TableCell>
                                             {row.getVisibleCells().map((cell) => {
 
