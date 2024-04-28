@@ -2,8 +2,10 @@ import { Button } from "@/components/ui/button";
 import { SetStateAction, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FpoBasicDetails from "./FPO Form components/FpoBasicDetails";
-import FpoAddress from "./FPO Form components/FpoAddress";
-import FpoAccount from "./FPO Form components/FpoAccount";
+//import FpoAddress from "./FPO Form components/FpoAddress";
+//import FpoAccount from "./FPO Form components/FpoAccount";
+import FpoAddress from "@/page/FPO_Details/FPO_Form/FPO Form components/FpoAddress";
+import FpoAccount from "@/page/FPO_Details/FPO_Form/FPO Form components/FpoAccount";
 
 const FpoFormsCombined = () => {
   useEffect(() => {

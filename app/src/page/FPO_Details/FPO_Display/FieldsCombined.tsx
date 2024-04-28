@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import FpoBasicDetails from "../FPO Form/FPO Form components/FpoBasicDetails";
-import FpoAddress from "../FPO Form/FPO Form components/FpoAddress";
-import FpoAccount from "../FPO Form/FPO Form components/FpoAccount";
+import FpoBasicDetails from "../FPO_Form/FPO Form components/FpoBasicDetails";
+import FpoAddress from "../FPO_Form/FPO Form components/FpoAddress";
+import FpoAccount from "../FPO_Form/FPO Form components/FpoAccount";
+//import FpoBasicDetails from "../FPO Form/FPO Form components/FpoBasicDetails";
+//import FpoAddress from "../FPO Form/FPO Form components/FpoAddress";
+//import FpoAccount from "../FPO Form/FPO Form components/FpoAccount";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { access } from "fs";
