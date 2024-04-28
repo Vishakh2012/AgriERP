@@ -3,33 +3,43 @@ import salesModel from "../../models/salesModel/salesModel.mjs";
 
 export default async function newSalesController(req, res, next) {
   try {
-    const { HSN, itemCode, itemSold } = req.body;
+    const { itemSold } = req.body;
     const fpoId = req.user.fpoId;
 
     const sales = new salesModel({ fpoId: fpoId, ...req.body });
     if (!sales) {
-      return res.status(400).send({ message: "cannot create sales" });
+      return res.status(400).send({ message: "Cannot create sales" });
     }
 
-    //then save sales Schems
+    // Array to store errors encountered during processing
+    const errors = [];
+
+    // Process each item sold
     await Promise.all(
       itemSold.map(async (item) => {
-        const { HSN, itemCode, quantity } = item;
+        const { itemCode, quantity } = item;
         const product = await productModel.findOne({
           itemCode: itemCode,
           fpoId: fpoId,
         });
         if (!product) {
-          return res
-            .status(404)
-            .send({ message: `product of id : ${itemCode} not found` });
+          errors.push(`Product with ID ${itemCode} not found`);
+          return; // Skip further processing for this item
         }
         product.currentStock -= quantity;
-        product.save();
+        await product.save();
       })
     );
+
+    // Check if any errors occurred during processing
+    if (errors.length > 0) {
+      return res.status(404).send({ errors });
+    }
+
+    // Save the sales
     const savedSales = await sales.save();
 
+    // Send response with saved sales
     return res.status(201).send({ sales: savedSales });
   } catch (error) {
     console.error("Error creating sales:", error);

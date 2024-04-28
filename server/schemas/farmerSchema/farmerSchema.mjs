@@ -87,6 +87,10 @@ const farmerSchema = mongoose.Schema({
   bankAccountNumber: {
     type: String,
   },
+  aadhaar: {
+    type: String,
+    unique: true,
+  },
   //address details
   addressLine1: {
     type: String,
