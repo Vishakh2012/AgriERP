@@ -36,7 +36,6 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress, handleCropChan
             name='farmerType'
             value={formData.farmerType}
             onChange={handleChange}
-            required
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select</option>
@@ -55,7 +54,6 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress, handleCropChan
             name='landType'
             value={formData.landType}
             onChange={handleChange}
-            required
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select</option>
@@ -71,7 +69,6 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress, handleCropChan
           value={formData.landArea}
           onChange={handleChange}
           placeholder="Land Area"
-          required
           onKeyDown={handleKeyPress}
         />
         </div>
@@ -85,7 +82,6 @@ const FarmerLandInfo = ({ formData, handleChange, handleKeyPress, handleCropChan
             options={(products || []).map(crop => ({ label: crop.name, value: crop.name }))}
             isMulti
             placeholder="Select Crops"
-            required
   
           />
           </div>

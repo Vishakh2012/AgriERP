@@ -75,6 +75,7 @@ const FpoFormsCombined = () => {
     regYear: "",
     district: "",
     state: "",
+    shareAmount:""
   });
 
   //For setting the values
@@ -90,15 +91,7 @@ const FpoFormsCombined = () => {
   const validateForm = () => {
     return (
       formData.name !== "" &&
-      formData.email !== "" &&
-      formData.phone !== "" &&
-      formData.addressLine1 !== "" &&
-      formData.district !== "" &&
-      formData.bankAccountNumber !== "" &&
-      formData.IFSC !== "" &&
-      formData.state !== "" &&
-      formData.pinCode !== "" &&
-      formData.regYear !== ""
+      formData.addressLine1 !== ""
     );
   };
 

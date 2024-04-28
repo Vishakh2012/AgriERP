@@ -18,7 +18,7 @@ export const columns: ColumnDef<Product>[] = [
         header: "Item Code"
     },
     {
-        accessorKey: "productName",
+        accessorKey: "name",
         header: ({ column }) => {
             return (
                 <Button

@@ -9,7 +9,6 @@ const addressSchema = new mongoose.Schema(
     },
     addressLine2: {
       type: String,
-      required: true,
     },
     district: {
       type: String,
@@ -17,14 +16,12 @@ const addressSchema = new mongoose.Schema(
     },
     city: {
       type: String,
-      required: true,
     },
     postOffice: {
       type: String,
     },
     pinNumber: {
       type: Number,
-      required: true,
       min: 0,
       max: 999999,
     },

@@ -39,8 +39,8 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
     postOffice: "",
     landType: "",
     farmerType: "",
-    dob: new Date(),
-    dateOfJoin: new Date(),
+    dob: "",
+    dateOfJoin: "",
     category: "",
     fatherName: "",
   });
@@ -71,25 +71,7 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
   const validateForm = () => {
     return (
       formData.firstName !== "" &&
-      formData.lastName !== "" &&
-      formData.email !== "" &&
-      formData.phoneNumber !== "" &&
-      formData.addressLine1 !== "" &&
-      formData.aadhaar !== "" &&
-      formData.block !== "" &&
-      formData.district !== "" &&
-      formData.gender !== "" &&
-      formData.bankAccountHolderName !== "" &&
-      formData.bankAccountNumber !== "" &&
-      formData.ifscCode !== "" &&
-      formData.state !== "" &&
-      formData.pincode !== "" &&
-      formData.landArea !== "" &&
-      formData.shareholder !== "" &&
-      formData.cropsProduced.length > 0 &&
-      formData.category !== "" &&
-      formData.farmerType !== "" &&
-      formData.landType !== ""
+      formData.addressLine1 !== "" 
     );
   };
 
@@ -97,9 +79,10 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
     e.preventDefault();
     if (validateForm()) {
       try {
-        console.log(formData);
+        console.log(selectedRowData);
         const accessToken = localStorage.getItem("accessToken");
-        const url = mode === 'add' ? 'http://localhost:5050/api/posts' : 'http://localhost:5050/api/posts'; // Adjust the URL for adding and editing
+        const id = mode==='edit'?selectedRowData.farmerId:''
+        const url = mode === 'add' ? 'http://localhost:5050/api/farmer/add' : `http://localhost:5050/api/farmer/update/${id}`; // Adjust the URL for adding and editing
         const method = mode === 'add' ? 'POST' : 'PUT';
         const response = await fetch(url, {
           method: method,
@@ -113,6 +96,7 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
         if (!response.ok) {
           throw new Error("Failed to submit form");
         }
+        console.log(formData)
         navigate("/farmers/forms/success");
         console.log("Form submitted successfully");
       } catch (error: any) {

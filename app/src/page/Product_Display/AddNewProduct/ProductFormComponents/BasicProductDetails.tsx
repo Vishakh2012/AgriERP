@@ -14,9 +14,9 @@ const BasicProductDetails: React.FC<BasicPdtForm> = ({ formData, handleChange, h
         <div>
         <InputComponent
           label="Product Name"
-          type="text"
-          name="productName"
-          value={formData.productName}
+          type="string"
+          name="name"
+          value={formData.name}
           onChange={handleChange}
           placeholder="Product Name"
           required
@@ -27,13 +27,24 @@ const BasicProductDetails: React.FC<BasicPdtForm> = ({ formData, handleChange, h
       </div>
       <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-5">
       <div>
+        <InputComponent
+          label="Item Code"
+          type="string"
+          name="itemCode"
+          value={formData.itemCode}
+          onChange={handleChange}
+          placeholder="Item Code"
+          required
+          onKeyDown={handleKeyPress}
+        />
+        </div>
+      <div>
           <label htmlFor="productCategory" className="block text-sm font-medium text-gray-700">Product Category</label>
           <select
             id="category"
             name="category"
             value={formData.category}
             onChange={handleChange}
-            required
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select Category</option>
@@ -46,23 +57,21 @@ const BasicProductDetails: React.FC<BasicPdtForm> = ({ formData, handleChange, h
           <InputComponent
             label='HSN Number'
             type="string"
-            name="hsn"
-            value={formData.hsn}
+            name="HSN"
+            value={formData.HSN}
             onChange={handleChange}
             placeholder="HSN Number"
-            required
             onKeyDown={handleKeyPress}
           />
         </div>
        <div>
         <InputComponent
           label="Price"
-          type="number"
+          type="string"
           name="price"
           value={formData.price}
           onChange={handleChange}
           placeholder="Price"
-          required
           onKeyDown={handleKeyPress}
         />
         </div>
@@ -73,7 +82,6 @@ const BasicProductDetails: React.FC<BasicPdtForm> = ({ formData, handleChange, h
             name="unit"
             value={formData.unit}
             onChange={handleChange}
-            required
             className="mt-1 block w-full pl-3 pr-10 py-2 text-base border border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
           >
             <option value="">Select Unit</option>
@@ -85,12 +93,11 @@ const BasicProductDetails: React.FC<BasicPdtForm> = ({ formData, handleChange, h
         <div>
           <InputComponent
             label='Initial Stock'
-            type="number"
+            type="string"
             name="currentStock"
             value={formData.currentStock}
             onChange={handleChange}
             placeholder="Initial Stock"
-            required
             onKeyDown={handleKeyPress}
           />
         </div>
