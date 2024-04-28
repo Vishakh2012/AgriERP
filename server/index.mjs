@@ -5,6 +5,16 @@ import { connectDB } from "./db/connection.mjs";
 import multer from "multer";
 const multer_ = multer({ dest: "/uploads" });
 
+const upload = multer({
+  storage: multer.memoryStorage(),
+  fileFilter: function (req, file, cb) {
+    if (!file.originalname.match(/\.(xls|xlsx)$/)) {
+      return cb(new Error("Only Excel files are allowed!"), false);
+    }
+    cb(null, true);
+  },
+});
+
 //route imports
 import signupRoute from "./routes/authenticationRoutes/signupRoute.mjs";
 import updateFpoRoute from "./routes/fpoRoutes/updateFpoRoute.mjs";
@@ -31,6 +41,8 @@ import newSalesRoute from "./routes/salesRoutes/newSalesRoute.mjs";
 import getSalesRoute from "./routes/salesRoutes/getSalesRoute.mjs";
 import uploadStaffRoute from "./routes/uploadRoutes/uploadStaffRoute.mjs";
 import uploadFarmerRoute from "./routes/uploadRoutes/uploadFarmerRoute.mjs";
+import uploadPurchaseRoute from "./routes/uploadRoutes/uploadPurchaseRoute.mjs";
+import uploadProductRoute from "./routes/uploadExcelRoutes/uploadProductRoute.mjs";
 
 const PORT = process.env.PORT || 5050;
 const app = express();
@@ -101,6 +113,20 @@ app.use(
   verifyAccessToken,
   multer_.single("csv"),
   uploadStaffRoute
+);
+app.use(
+  "/api/csv/purchase/upload",
+  verifyAccessToken,
+  multer_.single("csv"),
+  uploadPurchaseRoute
+);
+
+//excel upload Routes
+app.use(
+  "/api/excel/product/upload",
+  verifyAccessToken,
+  upload.single("excel"),
+  uploadProductRoute
 );
 
 // CORS setup

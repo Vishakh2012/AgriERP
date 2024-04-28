@@ -56,6 +56,9 @@ const salesTransactionSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+    totalDiscount: {
+        type: Number,
+    },
   finalAmount: {
     type: Number,
     required: true,
