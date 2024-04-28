@@ -15,6 +15,7 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
   const navigate = useNavigate();
   const [activeComponent, setActiveComponent] = useState("personal");
   const [formData, setFormData] = useState({
+    farmerId: '',
     firstName: "",
     middleName: "",
     lastName: "",
@@ -34,7 +35,7 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
     ifscCode: "",
     bankAccountNumber: "",
     numberOfShares: 0,
-    shareholder: "",
+    shareHolder: "",
     city: "",
     postOffice: "",
     landType: "",
@@ -71,35 +72,19 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
   const validateForm = () => {
     return (
       formData.firstName !== "" &&
-      formData.lastName !== "" &&
-      formData.email !== "" &&
-      formData.phoneNumber !== "" &&
-      formData.addressLine1 !== "" &&
-      formData.aadhaar !== "" &&
-      formData.block !== "" &&
-      formData.district !== "" &&
-      formData.gender !== "" &&
-      formData.bankAccountHolderName !== "" &&
-      formData.bankAccountNumber !== "" &&
-      formData.ifscCode !== "" &&
-      formData.state !== "" &&
-      formData.pincode !== "" &&
-      formData.landArea !== "" &&
-      formData.shareholder !== "" &&
-      formData.cropsProduced.length > 0 &&
-      formData.category !== "" &&
-      formData.farmerType !== "" &&
-      formData.landType !== ""
+      formData.addressLine1 !== "" 
     );
   };
 
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (validateForm()) {
+      console.log(formData)
+
       try {
-        console.log(formData);
         const accessToken = localStorage.getItem("accessToken");
-        const url = mode === 'add' ? 'http://localhost:5050/api/posts' : 'http://localhost:5050/api/posts'; // Adjust the URL for adding and editing
+        const id = mode==='edit'?selectedRowData.farmerId:''
+        const url = mode === 'add' ? 'http://localhost:5050/api/farmer/add' : `http://localhost:5050/api/farmer/update/${id}`; // Adjust the URL for adding and editing
         const method = mode === 'add' ? 'POST' : 'PUT';
         const response = await fetch(url, {
           method: method,
@@ -113,7 +98,8 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
         if (!response.ok) {
           throw new Error("Failed to submit form");
         }
-        navigate("/farmers/forms/success");
+        console.log(formData)
+        navigate("/farmers");
         console.log("Form submitted successfully");
       } catch (error: any) {
         console.error("Error submitting form:", error.message);

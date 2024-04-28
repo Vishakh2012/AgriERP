@@ -14,36 +14,33 @@ const TaxProductDetails: React.FC<TaxPdtForm> = ({ formData, handleChange, handl
         <div>
         <InputComponent
           label="CGST"
-          type="number"
-          name="cgst"
-          value={formData.cgst}
+          type="string"
+          name="CGST"
+          value={formData.CGST}
           onChange={handleChange}
           placeholder="CGST"
-          required
           onKeyDown={handleKeyPress}
         />
         </div>
       <div>
           <InputComponent
             label='SGST'
-            type="number"
-            name="sgst"
-            value={formData.sgst}
+            type="string"
+            name="SGST"
+            value={formData.SGST}
             onChange={handleChange}
             placeholder="SGST"
-            required
             onKeyDown={handleKeyPress}
           />
         </div>
        <div>
         <InputComponent
           label="IGST"
-          type="number"
-          name="igst"
-          value={formData.igst}
+          type="string"
+          name="IGST"
+          value={formData.IGST}
           onChange={handleChange}
           placeholder="IGST"
-          required
           onKeyDown={handleKeyPress}
         />
         </div>

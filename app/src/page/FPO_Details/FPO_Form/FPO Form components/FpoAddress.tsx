@@ -62,7 +62,6 @@ const FpoAddress:React.FC<Formdetails> = ({ formData, handleChange, handleKeyPre
         disabled={disabled}
         onChange={handleChange}
         placeholder="District"
-        required
         onKeyDown={handleKeyPress}
       />
     </div>
@@ -76,7 +75,6 @@ const FpoAddress:React.FC<Formdetails> = ({ formData, handleChange, handleKeyPre
         disabled={disabled}
         onChange={handleChange}
         placeholder="City"
-        required
         onKeyDown={handleKeyPress}
       />
     </div>
@@ -90,7 +88,6 @@ const FpoAddress:React.FC<Formdetails> = ({ formData, handleChange, handleKeyPre
         disabled={disabled}
         onChange={handleChange}
         placeholder="Block"
-        required
         onKeyDown={handleKeyPress}
       />
     </div>
@@ -104,7 +101,6 @@ const FpoAddress:React.FC<Formdetails> = ({ formData, handleChange, handleKeyPre
         disabled={disabled}
         onChange={handleChange}
         placeholder="Post Office"
-        required
         onKeyDown={handleKeyPress}
       />
     </div>
@@ -118,7 +114,6 @@ const FpoAddress:React.FC<Formdetails> = ({ formData, handleChange, handleKeyPre
         disabled={disabled}
         onChange={handleChange}
         placeholder="Pincode"
-        required
         onKeyDown={handleKeyPress}
       />
     </div>
