@@ -14,22 +14,32 @@ const DashBoardCardGroup = () => {
 
     useEffect(() => {
         fetchData();
-
     }, []);
-
     const fetchData = async () => {
         try {
-            const accessToken = localStorage.getItem('accessToken')
-            const response = await fetch('http://localhost:5050/api/posts', {
-                headers: {
-                    'x-access-token': accessToken ? accessToken : ''
-                }
+            const token = localStorage.getItem('accessToken');
+            if (!token) {
+                throw new Error('Access token not found in localStorage');
             }
-            );
+        
+            const response = await fetch(`http://localhost:5050/api/graph/get/year`, {
+                method: 'GET',
+                headers: {
+                    'x-access-token': token,
+                }
+            });
+        
+            if (!response.ok) {
+                throw new Error('Failed to fetch data');
+            }
+        
             const jsonData = await response.json();
-            setData(jsonData);
+            console.log(jsonData.data[0][1])
+            setData(jsonData.data)
+            console.log(data[0][1])
+
         } catch (error) {
-            console.error('Error fetching data:', error);
+            console.error("Error fetching data:", error);
         }
     };
 

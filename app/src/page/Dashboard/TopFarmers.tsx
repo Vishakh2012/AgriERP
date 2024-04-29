@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import sample from './productSample.json';
+
 
 const TopFarmers = () => {
-    const [farmerData, setFarmerData] = useState(sample);
+    const [farmerData, setFarmerData] = useState();
 
     useEffect(() => {
         fetchData();
@@ -33,13 +33,13 @@ const TopFarmers = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {farmerData.product && farmerData.quantity && farmerData.revenue && farmerData.product.map((product, index) => (
-                        <TableRow key={product}>
-                            <TableCell className="font-medium">{product}</TableCell>
+                    {/* {farmerData.product && farmerData.quantity && farmerData.revenue && farmerData.product.map((product, index) => ( */}
+                        {/* <TableRow key={product}> */}
+                            {/* <TableCell className="font-medium">{product}</TableCell>
                             <TableCell>{farmerData.quantity[index]}</TableCell>
                             <TableCell>{farmerData.revenue[index]}</TableCell>
-                        </TableRow>
-                    ))}
+                        </TableRow> */}
+                    {/* ))} */}
                 </TableBody>
             </Table>
         </div>

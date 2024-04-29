@@ -7,8 +7,10 @@ import LineChart from '@/components/Graph/LineChart';
 import TopSellingProducts from './TopSellingProducts';
 import TopFarmers from './TopFarmers';
 import DashBoardCardGroup from './DashboardShortCards';
+import shareholder from './shareholder.json'
 
 const Dashboard = () => {
+    const [linechartData,setLinechartData] = useState(shareholder)
     const [barchartData, setBarChartData] = useState(sample);
 
         useEffect(() => {
@@ -88,7 +90,7 @@ const Dashboard = () => {
                         </div>
 
                         <div className='w-full md:w-1/2 bg-white'>
-                            <LineChart graphData={barchartData} />
+                            <LineChart graphData={linechartData} />
                         </div>
 
                     </div>
