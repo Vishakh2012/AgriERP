@@ -98,6 +98,7 @@ const FarmerFormsCombined: React.FC<FarmerFormProps> = ({ mode, selectedRowData 
         if (!response.ok) {
           throw new Error("Failed to submit form");
         }
+        window.location.reload()
         console.log(formData)
         window.location.reload()
         navigate("/farmers");

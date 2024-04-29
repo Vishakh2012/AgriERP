@@ -75,7 +75,7 @@ export function DataTable<TData, TValue>({
         getPaginationRowModel: getPaginationRowModel(),
         initialState: {
             pagination: {
-                pageSize: 5,
+                pageSize: 15,
             },
         },
         onSortingChange: setSorting,
@@ -202,7 +202,7 @@ export function DataTable<TData, TValue>({
                                             {row.getVisibleCells().map((cell) => {
 
                                                 return (
-                                                    <TableCell key={cell.id}>
+                                                    <TableCell  className="px-8" key={cell.id}>
                                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                                     </TableCell>
                                                 )

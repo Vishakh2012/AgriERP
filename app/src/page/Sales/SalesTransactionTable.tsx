@@ -23,29 +23,6 @@ const productDetails = [
     }
 ];
 
-const productData = [
-    {
-        itemCode: '001',
-        itemName: 'Product 1',
-        HSN: '12345',
-        SGST: '5',
-        CGST: '5',
-        IGST: '0',
-        rate: '100',
-        discount: '10',
-    },
-    {
-        itemCode: '002',
-        itemName: 'Product 2',
-        HSN: '67890',
-        SGST: '7.5',
-        CGST: '7.5',
-        IGST: '0',
-        rate: '150',
-        discount: '15',
-    },
-    // Add more sample product details as needed
-];
 interface tax {
     HSN: string,
     CGST: number,
@@ -57,7 +34,7 @@ interface SelectedRow {
     name: string;
     HSN: string;
     quantity: string;
-    tax:tax,
+    tax:tax[],
     price: number;
     discount: string;
     finalAmount: string;
@@ -70,9 +47,9 @@ const getSelectedRows= (arrayOfObjects: SelectedRow[]) => {
         itemName: obj.name || '',
         HSN: obj.HSN || '',
         quantity: obj.quantity || '',
-        SGST: obj.tax.SGST || '',
-        CGST: obj.tax.CGST || '',
-        IGST: obj.tax.IGST || '',
+        SGST: obj.tax[0].SGST,
+        CGST: obj.tax[0].CGST,
+        IGST: obj.tax[0].IGST,
         rate: obj.price || '',
         discount: obj.discount || '',
         finalAmount: obj.finalAmount || ''
@@ -88,6 +65,8 @@ const SalesTransactionTable = () => {
     const sendRequest = async () => {
         try {
             const saleTransaction = {
+                customerName: customerName,
+                mobileNumber
                 billNo: billNo,
                 itemSold: rows,
                 totalAmountWithoutDiscount: totalPrice,

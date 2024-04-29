@@ -62,9 +62,9 @@ const FarmerTable = () => {
 
     return (
         <div className='w-full'>
-            <div className='md:ml-4 w-full h-screen'>
+            <div className='ml-4 w-[100%-4rem] h-screen sm:justify-center'>
                 <Header text='Farmer Details' />
-                <DemoPage buttonText='Add Farmer' buttonRoute='/farmers/forms' />
+                <DemoPage buttonText='Add Farmer' buttonRoute='/farmer/form' />
             </div>
         </div>
     )

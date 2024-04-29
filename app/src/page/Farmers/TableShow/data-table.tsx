@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import * as React from "react"
+ import XLSX from 'xlsx'
 import { Link } from "react-router-dom"
 import {
     ColumnDef,
@@ -47,27 +48,28 @@ export function DataTable<TData, TValue>({
     buttonRoute,
     buttonText,
     onDelete
-}: DataTableProps<TData, TValue>& { onDelete: (rowData: TData) => void }) {
+}: DataTableProps<TData, TValue> & { onDelete: (rowData: TData) => void }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [Filters, setFilters] = React.useState("")
     const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({ 
-           middleName: false,
-           postOffice: false,
-           block:false,
-            city:false,
-            pincode:false,
-            email:false,
-            aadhaar:false,
-           ifscCode:false,
-           bankAccountHolderName:false,
-           numberOfShares:false,
-           shareAmount:false,
-           landType:false,
-           farmerType:false,
-           category:false,
-           cropsProduced:false,
-    })
+        React.useState<VisibilityState>({
+            middleName: false,
+            postOffice: false,
+            block: false,
+            city: false,
+            pincode: false,
+            email: false,
+            aadhaar: false,
+            ifscCode: false,
+            bankAccountHolderName: false,
+            numberOfShares: false,
+            shareAmount: false,
+            landType: false,
+            farmerType: false,
+            category: false,
+            cropsProduced: false,
+        })
+
     const table = useReactTable({
         data,
         columns,
@@ -111,9 +113,7 @@ export function DataTable<TData, TValue>({
     }, [table]);
 
     // Only re-subscribe when currentPage or pageCount changes
-
-
-
+ 
     return (
         <div>
             <div className="flex items-center py-8">
@@ -157,86 +157,87 @@ export function DataTable<TData, TValue>({
                             </DropdownMenuContent>
                         </DropdownMenu>
 
+                        {/*<Button className="bg-blue-700" >Export Excel</Button>*/}
                     </div>
                     <Link to={buttonRoute}>
-                    <Button className='flex px-3 py-1 h-[40px] rounded-md border bg-blue-500 text-white hover:bg-blue-500 hover:text-white ml-auto'>{buttonText}</Button>
+                        <Button className='flex px-3 py-1 h-[40px] rounded-md border bg-blue-500 text-white hover:bg-blue-500 hover:text-white ml-auto'>{buttonText}</Button>
                     </Link>
                 </div>
-                </div>
-                <div className="rounded-md border bg-white">
-                    <Table>
-                        <TableHeader>
-                            {table.getHeaderGroups().map((headerGroup) => (
-                                <TableRow key={headerGroup.id}>
-                                    <TableHead>
-                                        Action
-                                    </TableHead>
-                                    {headerGroup.headers.map((header) => {
-                                        return (
-                                            <TableHead key={header.id}>
-                                                {header.isPlaceholder
-                                                    ? null
-                                                    : flexRender(
-                                                        header.column.columnDef.header,
-                                                        header.getContext()
-                                                    )}
-                                            </TableHead>
-                                        )
-                                    })}
-                                </TableRow>
-                            ))}
-                        </TableHeader>
-                        <TableBody>
-                            {table.getRowModel().rows?.length ? (
-                                table.getRowModel().rows.map((row) => {
-                                    return (
-                                        <TableRow
-                                            key={row.id}
-                                            data-state={row.getIsSelected() && "selected"}
-                                        >
-                                            <TableCell className="flex flex-row">
-
-                                                <EditDialogBox formComponent={<FarmerFormsCombined mode="edit" />} selectedRowData={row.original} />
-                                                <AlertDialogBox onDelete={() => onDelete(row.original)}/>
-                                            </TableCell>
-                                            {row.getVisibleCells().map((cell) => {
-
-                                                return (
-                                                    <TableCell key={cell.id}>
-                                                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                                                    </TableCell>
-                                                )
-                                            })}
-                                        </TableRow>)
-                                })
-                            ) : (
-                                <TableRow>
-                                    <TableCell colSpan={columns.length} className="h-24 text-center">
-                                        No results.
-                                    </TableCell>
-                                </TableRow>
-                            )}
-                        </TableBody>
-                    </Table>
-                </div>
-                <div className="flex items-center justify-end space-x-2 py-4">
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.previousPage()}
-                        disabled={!table.getCanPreviousPage()}
-                    >
-                        Previous
-                    </Button>
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => table.nextPage()}
-                        disabled={!table.getCanNextPage()}
-                    >
-                        Next
-                    </Button>
-                </div>
             </div>
-            )
+            <div className="rounded-md border bg-white">
+                <Table>
+                    <TableHeader>
+                        {table.getHeaderGroups().map((headerGroup) => (
+                            <TableRow key={headerGroup.id}>
+                                <TableHead>
+                                    Action
+                                </TableHead>
+                                {headerGroup.headers.map((header) => {
+                                    return (
+                                        <TableHead key={header.id}>
+                                            {header.isPlaceholder
+                                                ? null
+                                                : flexRender(
+                                                    header.column.columnDef.header,
+                                                    header.getContext()
+                                                )}
+                                        </TableHead>
+                                    )
+                                })}
+                            </TableRow>
+                        ))}
+                    </TableHeader>
+                    <TableBody>
+                        {table.getRowModel().rows?.length ? (
+                            table.getRowModel().rows.map((row) => {
+                                return (
+                                    <TableRow
+                                        key={row.id}
+                                        data-state={row.getIsSelected() && "selected"}
+                                    >
+                                        <TableCell className="flex flex-row">
+
+                                            <EditDialogBox formComponent={<FarmerFormsCombined mode="edit" />} selectedRowData={row.original} />
+                                            <AlertDialogBox onDelete={() => onDelete(row.original)} />
+                                        </TableCell>
+                                        {row.getVisibleCells().map((cell) => {
+
+                                            return (
+                                                <TableCell key={cell.id} className="px-8">
+                                                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                                                </TableCell>
+                                            )
+                                        })}
+                                    </TableRow>)
+                            })
+                        ) : (
+                            <TableRow>
+                                <TableCell colSpan={columns.length} className="h-24 text-center">
+                                    No results.
+                                </TableCell>
+                            </TableRow>
+                        )}
+                    </TableBody>
+                </Table>
+            </div>
+            <div className="flex items-center justify-end space-x-2 py-4">
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                >
+                    Previous
+                </Button>
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                >
+                    Next
+                </Button>
+            </div>
+        </div>
+    )
 }

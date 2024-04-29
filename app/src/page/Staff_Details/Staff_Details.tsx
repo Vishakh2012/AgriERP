@@ -153,7 +153,7 @@ const staffDetails = [
 const Staff_Details = ()=> {
  return (
     <div className='w-full'>
-    <div className='md:ml-4 w-full'>
+    <div className='md:ml-4 w-[100%-4rem]'>
     <Header text='Staff Details'/>
     {/*
     < TableShow formComponent={<EditStaffForms/>} pageCount={pageCount} paginatedData={paginatedData} currentPage={currentPage}

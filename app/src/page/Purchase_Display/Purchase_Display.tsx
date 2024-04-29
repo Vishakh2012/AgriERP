@@ -14,7 +14,7 @@ const Purchase_Display = () => {
         fetchData();
     }, []);
 
-    const fetchData = async () => {
+    const fetchData = async () => { 
         try {
             const response = await fetch('http://localhost:5050/api/purchase/getDetails/Example_FPO',
                 {
@@ -33,7 +33,7 @@ const Purchase_Display = () => {
 
  return (
     <div className='w-full'>
-      <div className='w-full md:ml-4'>
+      <div className='w-[100%-4rem] md:ml-4 justify-center items-center'>
       <Header text='Purchase Details'/>
       <DemoPage displayData={data} buttonText='add purchase' buttonRoute='/purchase/form'/>
     </div>

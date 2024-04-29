@@ -155,10 +155,32 @@ interface Data {
 interface propsTable {
     buttonText: string
     buttonRoute: string
-    displayData: Data[] 
 }
-const DemoPage: React.FC<propsTable> = ({buttonText, buttonRoute, displayData}) =>  {
-    const [data, setData] = React.useState<Data[]>(displayData);
+const DemoPage: React.FC<propsTable> = ({buttonText, buttonRoute}) =>  {
+   
+    const [data, setData] = React.useState<Data[]>([]);
+
+   React.useEffect(() => {
+        fetchData();
+    }, []);
+
+
+        const fetchData = async () => {
+        try {
+            const accessToken = localStorage.getItem('accessToken')
+            const response = await fetch('http://localhost:5050/api/sales/get', {
+                headers: {
+                    'x-access-token': accessToken ? accessToken : ''
+                }
+            }
+            );
+            const jsonData = await response.json();
+
+            setData(jsonData.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
   const handleDelete = async (rowData: Data) => {
     const updatedData = data.filter(item => item !== rowData);  //Remove this when api is successfully connected

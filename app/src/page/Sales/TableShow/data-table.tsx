@@ -29,6 +29,8 @@ interface DataTableProps<TData, TValue> {
     data: TData[]
     buttonRoute: string
     buttonText: string
+    setToggler: any
+    toggler: boolean
 }
 import {
     DropdownMenu,
@@ -43,7 +45,9 @@ export function DataTable<TData, TValue>({
     data,
     buttonRoute,
     buttonText,
-    onDelete
+    onDelete,
+    toggler,
+    setToggler
 }: DataTableProps<TData, TValue>& { onDelete: (rowData: TData) => void }) {
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [Filters, setFilters] = React.useState("")
@@ -146,7 +150,7 @@ export function DataTable<TData, TValue>({
                     </Link>
                 </div>
                 </div>
-                <div className="rounded-md border">
+                <div className="rounded-md border bg-white">
                     <Table>
                         <TableHeader>
                             {table.getHeaderGroups().map((headerGroup) => (

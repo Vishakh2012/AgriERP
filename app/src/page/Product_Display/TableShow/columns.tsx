@@ -7,7 +7,9 @@ export type Product = {
     hsn: string
     itemCode: string
     price: string
-    tax: string
+    SGST: number
+    CGST: number
+    IGST: number
     currentStock: string
 
 }
@@ -18,7 +20,7 @@ export const columns: ColumnDef<Product>[] = [
         header: "Item Code"
     },
     {
-        accessorKey: "name",
+        accessorKey: "productName",
         header: ({ column }) => {
             return (
                 <Button
@@ -76,14 +78,44 @@ export const columns: ColumnDef<Product>[] = [
 
 
     {
-        accessorKey: "tax",
+        accessorKey: "SGST",
         header: ({ column }) => {
             return (
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Tax
+                    SGST
+                    <ArrowUpDown className="ml-2 h-4 w-4 print:hidden" />
+                </Button>
+            )
+        },
+    },
+
+    {
+        accessorKey: "CGST",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    CGST
+                    <ArrowUpDown className="ml-2 h-4 w-4 print:hidden" />
+                </Button>
+            )
+        },
+    },
+
+    {
+        accessorKey: "IGST",
+        header: ({ column }) => {
+            return (
+                <Button
+                    variant="ghost"
+                    onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+                >
+                    IGST
                     <ArrowUpDown className="ml-2 h-4 w-4 print:hidden" />
                 </Button>
             )
