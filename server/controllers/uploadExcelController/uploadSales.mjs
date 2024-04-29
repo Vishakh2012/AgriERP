@@ -1,20 +1,18 @@
-import puchaseModel from "../../models/puchaseModel/puchaseModel.mjs";
+import salesModel from "../../models/salesModel/salesModel.mjs";
 import xlsx from "xlsx";
-
-export default async function uploadPurchase(req, res, next) {
+export default async function uploadSalesController(req, res, next) {
   try {
     if (!req.file) {
       return res.status(400).send({ message: "No file uploaded" });
     }
-
     const mapping = {
-      billNo: "billNumber",
-      purchaseDate: "purchaseDate",
-      discount: "discount",
+      billNumber: "billNo",
+      saleDate: "saleDate",
+      discount: "totalDiscount",
       finalAmount: "finalAmount",
-      totalAmount: "totalAmount",
+      mop: "mop",
+      totalAmount: "totalAmountWithoutDiscount",
     };
-
     const workbook = xlsx.read(req.file.buffer, { type: "buffer" });
     const sheet = workbook.Sheets[workbook.SheetNames[0]];
     const data = xlsx.utils.sheet_to_json(sheet);
@@ -24,15 +22,11 @@ export default async function uploadPurchase(req, res, next) {
       const mappedRow = {};
       for (const excelField of Object.keys(row)) {
         const schemaField = mapping[excelField];
-        if (schemaField === "purchaseDate") {
+        if (schemaField === "saleDate") {
           // Convert Excel date to JavaScript Date object
           const excelDate = row[excelField];
           const jsDate = excelDateToJSDate(excelDate);
-          if (jsDate instanceof Date && !isNaN(jsDate)) {
-            mappedRow[schemaField] = jsDate;
-          } else {
-            throw new Error("Invalid date format in Excel file");
-          }
+          mappedRow[schemaField] = jsDate;
         } else if (schemaField) {
           mappedRow[schemaField] = row[excelField];
         }
@@ -40,26 +34,24 @@ export default async function uploadPurchase(req, res, next) {
       mappedRow.fpoId = req.user.fpoId;
       mappedData.push(mappedRow);
     }
-
-    // Upload mapped purchase data to the database
+    console.log(mappedData);
+    // Upload products
     try {
-      const purchases = await puchaseModel.insertMany(mappedData);
-      if (purchases) {
+      const sales = await salesModel.insertMany(mappedData);
+      if (sales) {
         return res
           .status(201)
-          .send({ message: "Purchases uploaded successfully" });
+          .send({ message: "sales are uploaded successfully" });
       }
-    } catch (error) {
-      console.error("Error uploading purchases:", error);
-      return res.status(400).send({ message: error.message });
+    } catch (e) {
+      return res.status(400).send({ message: e.message });
     }
-  } catch (error) {
-    console.error("Error processing upload:", error);
+  } catch (e) {
+    console.error(e);
     return res.status(500).send({ message: "Internal server error" });
   }
 }
 
-// Function to convert Excel date to JavaScript Date object
 function excelDateToJSDate(excelDate) {
   const excelReferenceDate = new Date("1899-12-30");
   const millisecondsInDay = 24 * 60 * 60 * 1000;
