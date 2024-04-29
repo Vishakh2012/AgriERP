@@ -1,5 +1,5 @@
 import { columns } from "./columns"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { DataTable } from "./data-table"
  
 interface Data {
@@ -10,31 +10,68 @@ interface propsTable {
     buttonText: string
     buttonRoute: string
 }
+interface tax {
+    HSN: string,
+    CGST: number,
+    SGST: number,
+    IGST: number
+}
+
+interface SelectedRow {
+    itemCode: string;
+    name: string;
+    HSN: string;
+    quantity: string;
+    tax:tax[],
+    price: number;
+    discount: string;
+    finalAmount: string;
+    category:string
+}
+
+
+const getSelectedRows= (arrayOfObjects: SelectedRow[]) => {
+    return arrayOfObjects.map(obj  => ({
+        itemCode: obj.itemCode || '', // If itemCode is undefined, set it to an empty string
+        productName: obj.name || '',
+        hsn: obj.HSN || '',
+        quantity: obj.quantity || '',
+        SGST: obj.tax[0].SGST.toString() || '',
+        CGST: obj.tax[0].CGST.toString() || '',
+        IGST: obj.tax[0].IGST.toString() || '',
+        price: obj.price || '',
+        discount: obj.discount || '',
+        finalAmount: obj.finalAmount || '',
+        category:obj.category || ''
+    }));
+}
+
 const DemoPage: React.FC<propsTable> = ({buttonText, buttonRoute}) =>  {
-    const [data, setData] = React.useState<Data[]>([]);
+    const [data, setData] = useState(getSelectedRows(JSON.parse(localStorage.getItem("product")).data))
+
 
   
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = async () => {
-        try {
-            const accessToken = localStorage.getItem('accessToken')
-            const response = await fetch('http://localhost:5050/api/products/get', {
-                headers: {
-                    'x-access-token': accessToken ? accessToken : ''
-                }
-            }
-            );
-            const jsonData = await response.json();
-            console.log(Array.isArray(jsonData.data))
-
-            setData(jsonData.data);
-        } catch (error) {
-            console.error('Error fetching data:', error);
-        }
-    };
+//    useEffect(() => {
+//        fetchData();
+//    }, []);
+//
+//    const fetchData = async () => {
+//        try {
+//            const accessToken = localStorage.getItem('accessToken')
+//            const response = await fetch('http://localhost:5050/api/products/get', {
+//                headers: {
+//                    'x-access-token': accessToken ? accessToken : ''
+//                }
+//            }
+//            );
+//            const jsonData = await response.json();
+//            console.log(Array.isArray(jsonData.data))
+//
+//            setData(jsonData.data);
+//        } catch (error) {
+//            console.error('Error fetching data:', error);
+//        }
+//    };
 
   const handleDelete = async (rowData: Data) => {
     try {

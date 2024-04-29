@@ -47,7 +47,9 @@ export function DataTable<TData, TValue>({
     const [sorting, setSorting] = React.useState<SortingState>([])
     const [Filters, setFilters] = React.useState("")
     const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({})
+        React.useState<VisibilityState>({
+            purchaseDetails: false    
+    })
     const table = useReactTable({
         data,
         columns,
@@ -55,7 +57,7 @@ export function DataTable<TData, TValue>({
         getPaginationRowModel: getPaginationRowModel(),
         initialState: {
             pagination: {
-                pageSize: 5,
+                pageSize: 15,
             },
         },
         onSortingChange: setSorting,
@@ -96,7 +98,7 @@ export function DataTable<TData, TValue>({
 
     return (
         <div>
-            <div className="flex items-center py-8">
+            <div className="flex items-center py-8 justify-center">
 
                 <div className="w-full max-w-[1900px] px-4  py-4 flex flex-col md:flex-row bg-white md:items-center shadow-sm md:h-[100px] justify-end sm:justify-between"> {/* Center the content */}
                     <div className='flex flex-col md:flex-row gap-x-2'>
@@ -148,9 +150,6 @@ export function DataTable<TData, TValue>({
                         <TableHeader>
                             {table.getHeaderGroups().map((headerGroup) => (
                                 <TableRow key={headerGroup.id}>
-                                    <TableHead>
-                                        Action
-                                    </TableHead>
                                     {headerGroup.headers.map((header) => {
                                         return (
                                             <TableHead key={header.id}>
@@ -175,17 +174,10 @@ export function DataTable<TData, TValue>({
                                             key={row.id}
                                             data-state={row.getIsSelected() && "selected"}
                                         >
-                                            <TableCell>
-
-                                            {/*
-                                                <EditDialogBox formComponent={<EditStaffForms />} selectedRowData={{ email: row.getValue("email") }} />
-                                            */}
-
-                                            </TableCell>
                                             {row.getVisibleCells().map((cell) => {
 
                                                 return (
-                                                    <TableCell key={cell.id}>
+                                                    <TableCell className= "px-8" key={cell.id}>
                                                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                                                     </TableCell>
                                                 )
@@ -202,12 +194,13 @@ export function DataTable<TData, TValue>({
                         </TableBody>
                     </Table>
                 </div>
-                <div className="flex items-center justify-end space-x-2 py-4">
+                <div className="px-4 flex items-center justify-end space-x-2 py-4">
                     <Button
                         variant="outline"
                         size="sm"
                         onClick={() => table.previousPage()}
                         disabled={!table.getCanPreviousPage()}
+                
                     >
                         Previous
                     </Button>

@@ -56,7 +56,7 @@ interface SelectedRow {
     name: string;
     HSN: string;
     quantity: string;
-    tax:tax,
+    tax:tax[],
     price: number;
     discount: string;
     finalAmount: string;
@@ -69,9 +69,9 @@ const getSelectedRows= (arrayOfObjects: SelectedRow[]) => {
         itemName: obj.name || '',
         HSN: obj.HSN || '',
         quantity: obj.quantity || '',
-        SGST: obj.tax.SGST || '',
-        CGST: obj.tax.CGST || '',
-        IGST: obj.tax.IGST || '',
+        SGST: obj.tax[0].SGST ,
+        CGST: obj.tax[0].CGST,
+        IGST: obj.tax[0].IGST,
         rate: obj.price || '',
         discount: obj.discount || '',
         finalAmount: obj.finalAmount || ''

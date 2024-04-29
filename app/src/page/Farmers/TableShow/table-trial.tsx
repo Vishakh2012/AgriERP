@@ -1,6 +1,7 @@
 import {  columns } from "./columns"
 import React, { useEffect } from "react"
 import { DataTable } from "./data-table"
+import { Button } from "@/components/ui/button"
  
 interface Data {
     [key: string] : string

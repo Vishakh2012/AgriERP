@@ -90,6 +90,11 @@ export const columns: ColumnDef<Purchase>[] = [
                 </Button>
             )
         },
+        cell: ((row: any) => {
+            const dateString: string = row.getValue("purchaseDate").toString()
+            const actualDate = dateString.slice(0,10)
+            return <div className="">{actualDate}</div>
+        })
     },
     {
         accessorKey: "totalAmount",

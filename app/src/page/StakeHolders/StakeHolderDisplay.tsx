@@ -37,7 +37,7 @@ const StakeHolders = () => {
 
     return (
         <div className='w-full'>
-            <div className='md:ml-4 w-full h-full'>
+            <div className='md:ml-4 sm:w-[100%-4rem] h-full'>
                 <Header text='Shareholder Details' />
                 <DemoPage displayData={initialFarmerDetails} buttonRoute='/farmers/forms' buttonText='Add Shareholder'/>
             </div>
